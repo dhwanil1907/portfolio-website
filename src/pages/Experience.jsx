@@ -1,59 +1,101 @@
 import React from 'react';
-import { Briefcase } from 'lucide-react';
 import { experienceData } from '../data/portfolio';
+import useInView from '../hooks/useInView';
+
+const PILL_COLORS = {
+  'Internship': { bg: '#6366f11a', color: 'var(--accent)', border: '#6366f133' },
+  'Full-time':  { bg: '#10b9811a', color: '#10b981',       border: '#10b98133' },
+};
+
+function ExperienceCard({ exp, index }) {
+  const [ref, visible] = useInView();
+  const pill = PILL_COLORS[exp.type] || PILL_COLORS['Internship'];
+
+  return (
+    <div
+      ref={ref}
+      className={`relative pl-8 fade-up ${visible ? 'visible' : ''}`}
+      style={{ transitionDelay: `${index * 0.1}s` }}
+    >
+      {/* Timeline dot */}
+      <div
+        className="absolute left-0 top-1.5 w-3 h-3 rounded-full z-10"
+        style={{ backgroundColor: 'var(--accent)', border: '2px solid var(--bg-primary)' }}
+      />
+      {/* Timeline line */}
+      <div
+        className="absolute left-1.5 top-5 bottom-0 w-px"
+        style={{ backgroundColor: 'var(--border)' }}
+      />
+
+      <div
+        className="rounded-xl p-6 border mb-8"
+        style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border)' }}
+      >
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
+          <div>
+            <h3 className="text-xl font-semibold" style={{ color: 'var(--text-primary)' }}>
+              {exp.role}
+            </h3>
+            <p className="font-medium mt-0.5" style={{ color: 'var(--accent)' }}>
+              {exp.company}
+            </p>
+            <p className="text-sm mt-1 font-mono-tech" style={{ color: 'var(--text-muted)' }}>
+              {exp.date} · {exp.location}
+            </p>
+          </div>
+          <span
+            className="self-start px-3 py-1 rounded-full text-xs font-semibold font-mono-tech shrink-0"
+            style={{ backgroundColor: pill.bg, color: pill.color, border: `1px solid ${pill.border}` }}
+          >
+            {exp.type}
+          </span>
+        </div>
+
+        {/* Achievement bullets */}
+        <ul className="space-y-3">
+          {exp.bullets.map((bullet, i) => (
+            <li key={i} className="flex items-start gap-3 text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+              <span className="mt-2 w-1 h-1 rounded-full shrink-0" style={{ backgroundColor: 'var(--accent)' }} />
+              {bullet}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
 
 export default function Experience() {
+  const [ref, visible] = useInView();
+
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-      
-      <div className="mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold text-[#EAF2EE] mb-6">Experience</h1>
-        <div className="w-20 h-1 bg-[#6EC99A] rounded-full"></div>
+    <div
+      className="py-24 px-4 sm:px-6 lg:px-8"
+      style={{ borderTop: '1px solid var(--border)' }}
+    >
+      <div className="max-w-3xl mx-auto">
+        {/* Header */}
+        <div ref={ref} className={`mb-16 fade-up ${visible ? 'visible' : ''}`}>
+          <p
+            className="text-xs font-medium uppercase tracking-widest mb-3 font-mono-tech"
+            style={{ color: 'var(--accent)' }}
+          >
+            Experience
+          </p>
+          <h2 className="text-3xl font-bold" style={{ color: 'var(--text-primary)' }}>
+            Where I've worked
+          </h2>
+        </div>
+
+        {/* Timeline */}
+        <div className="relative">
+          {experienceData.map((exp, idx) => (
+            <ExperienceCard key={idx} exp={exp} index={idx} />
+          ))}
+        </div>
       </div>
-
-      <div className="space-y-12">
-        {experienceData.map((exp, idx) => (
-          <div key={idx} className="relative pl-8 md:pl-0">
-            
-            {/* Mobile Timeline Node */}
-            <div className="md:hidden absolute left-0 top-1.5 w-3 h-3 rounded-full bg-[#6EC99A] border-2 border-[#1B1F2E]"></div>
-            {/* Mobile Vertical Line */}
-            {idx !== experienceData.length - 1 && (
-              <div className="md:hidden absolute left-1.5 top-6 bottom-[-3rem] w-px bg-[#3E5C4F]"></div>
-            )}
-
-            <div className="md:flex md:gap-8 bg-[#2A2F40]/40 md:bg-transparent rounded-2xl md:rounded-none border md:border-none border-[#3E5C4F] p-6 md:p-0 mb-4 md:mb-0">
-              
-              <div className="md:w-1/3 mb-4 md:mb-0 shrink-0">
-                <div className="sticky top-28">
-                  <h3 className="text-xl font-bold text-[#EAF2EE]">{exp.role}</h3>
-                  <div className="text-[#6EC99A] font-medium mt-1 mb-2">{exp.company}</div>
-                  <div className="flex flex-col gap-1 text-sm text-[#EAF2EE] opacity-85">
-                    <span className="w-fit">{exp.date}</span>
-                    <span className="mt-1">{exp.location}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="md:w-2/3 md:border-l md:border-[#3E5C4F] md:pl-8 relative pb-8 md:pb-16">
-                {/* Desktop Node */}
-                <div className="hidden md:block absolute -left-[7px] top-1.5 w-3 h-3 rounded-full bg-[#6EC99A] border-2 border-[#1B1F2E]"></div>
-
-                <ul className="space-y-4">
-                  {exp.bullets.map((bullet, i) => (
-                    <li key={i} className="text-[#EAF2EE] opacity-85 description-text flex items-start">
-                      <span className="text-[#6EC99A] mr-3 mt-1.5 text-xs">◆</span>
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-            </div>
-          </div>
-        ))}
-      </div>
-      
     </div>
   );
 }

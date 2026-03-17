@@ -2,11 +2,12 @@ import { Map, BarChart2, Briefcase, TrendingUp, Presentation, Users, Rocket, Dat
 
 export const personalInfo = {
   name: "Dhwanil Ranpura",
-  tagline: "Data Science Student & Builder",
-  description: "Specializing in designing machine learning systems and full-stack data products that solve real-world problems.",
+  tagline: "Data Engineer & ML Practitioner",
+  description: "Pipelines, models, and dashboards built for production.",
   email: "dhwanil.ranpura@sjsu.edu",
   linkedin: "https://linkedin.com/in/dhwanil-ranpura",
   github: "https://github.com/dhwanil1907",
+  resume: "#", // TODO: link resume PDF
   education: {
     university: "San Jose State University",
     degree: "Bachelor of Science in Data Science",
@@ -16,34 +17,34 @@ export const personalInfo = {
 };
 
 export const navLinks = [
-  { name: 'About', path: '#about' },
+  { name: 'Work',       path: '#work' },
+  { name: 'About',      path: '#about' },
   { name: 'Experience', path: '#experience' },
-  { name: 'Leadership', path: '#leadership' },
-  { name: 'Projects', path: '#projects' },
-  { name: 'Awards', path: '#awards' },
-  { name: 'Skills', path: '#skills' },
+  { name: 'Contact',    path: '#contact' },
 ];
 
 export const experienceData = [
   {
     role: "Data Automation Intern",
     company: "Language & Culture Worldwide (LCW)",
+    type: "Internship",
     date: "Sep 2024 — Feb 2025",
     location: "Chicago, IL (Remote)",
     bullets: [
-      "Automated data workflows using Microsoft Power Automate, streamlining recurring operational processes and cutting manual processing time by 30%+.",
-      "Built Power BI dashboards for 10+ initiatives, enabling faster KPI tracking, clearer insights, and more informed stakeholder decisions.",
-      "Analyzed operational KPIs across teams to identify inefficiencies and bottlenecks, increasing engagement by 15%."
+      "Automated data workflows using Microsoft Power Automate, cutting manual processing time by 30%+. // TODO: add volume metric",
+      "Built Power BI dashboards for 10+ initiatives, enabling faster KPI tracking and more informed stakeholder decisions.",
+      "Analyzed operational KPIs across teams to identify inefficiencies, increasing engagement by 15%."
     ]
   },
   {
     role: "Documentation Assistant",
     company: "GovAI Coalition",
+    type: "Internship",
     date: "Dec 2024 — Jan 2025",
     location: "San Jose, CA",
     bullets: [
       "Synthesized insights from national sessions on AI trends, ethical governance, and public sector applications.",
-      "Supported responsible AI adoption by organizing ethical considerations concerning Generative AI Tools."
+      "Supported responsible AI adoption by organizing ethical considerations for Generative AI Tools."
     ]
   }
 ];
@@ -53,26 +54,26 @@ export const leadershipData = [
     organization: "Spartan Analytics",
     location: "San Jose, CA",
     roles: [
-      { title: "President", date: "Dec 2025 — Present", duration: "4 mos" },
+      { title: "President",            date: "Dec 2025 — Present", duration: "4 mos" },
       { title: "Senior Vice President", date: "Jul 2025 — Dec 2025", duration: "6 mos" },
-      { title: "VP of Programs", date: "Dec 2024 — Jul 2025", duration: "8 mos" }
+      { title: "VP of Programs",       date: "Dec 2024 — Jul 2025", duration: "8 mos" }
     ],
     bullets: [
-      "Direct a team of 7 officers, overseeing recruitment strategy and execution to scale club membership by 60% (25 -> 40 paid members).",
-      "Designed and delivered Python and SQL workshops for 30+ students, culminating in a loan default prediction capstone.",
-      "Established an annual data competition, designing problem statements, evaluation criteria, and judging workflows to engage 30+ participants."
+      "Directed 7-officer team, scaling paid membership 60% (25 → 40 members).",
+      "Designed Python and SQL workshops for 30+ students culminating in a loan default prediction capstone.",
+      "Established annual data competition, engaging 30+ participants across problem design and judging."
     ]
   },
   {
     organization: "Responsible Computing Club (RCC) at SJSU",
     location: "San Jose, CA",
     roles: [
-      { title: "Treasurer", date: "Jan 2026 — Present", duration: "3 mos" },
-      { title: "Mozilla Student Ambassador - Finance", date: "Jan 2025 — Dec 2025", duration: "1 yr" }
+      { title: "Treasurer",                        date: "Jan 2026 — Present", duration: "3 mos" },
+      { title: "Mozilla Student Ambassador — Finance", date: "Jan 2025 — Dec 2025", duration: "1 yr" }
     ],
     bullets: [
-      "Managed funding and resource allocation to support club initiatives focusing on responsible tech development.",
-      "Collaborated as a Mozilla Ambassador to promote ethical computing frameworks across campus."
+      "Managed funding and resource allocation for responsible tech development initiatives.",
+      "Collaborated as Mozilla Ambassador to promote ethical computing frameworks across campus."
     ]
   }
 ];
@@ -81,68 +82,58 @@ export const projectsData = [
   {
     title: 'SafeRoute',
     subtitle: 'AI Safety Navigation System',
-    description: 'A full-stack AI web application offering context-aware safety routing based on real-time spatio-temporal crime data. Placed 3rd out of 91 teams in a judged hackathon.',
-    details: [
-      'Built a full-stack AI web application (React frontend, Firebase backend) from conception to shipped product.',
-      'Shipped real-time route alerts via WebSockets, reducing notification latency by 40%.',
-      'Boosted model performance to 87% accuracy with crowdsourced inputs.'
-    ],
+    year: '2025',
+    impact: '87% model accuracy · 3rd of 91 teams · 40% latency reduction', // TODO: add/verify metrics
+    description: 'Full-stack AI web app offering context-aware safety routing from real-time spatio-temporal crime data. Placed 3rd of 91 teams at SJ Hacks.',
     tech: ['React', 'Firebase', 'Mapbox GL', 'Python', 'WebSockets'],
     categories: ['Full-Stack', 'Machine Learning'],
+    gradient: 'from-violet-600 via-purple-500 to-indigo-600',
     github: '#',
     demo: '#'
   },
   {
     title: 'KPI Anomaly Detection System',
     subtitle: 'Automated Insight Generation',
-    description: 'An end-to-end automated platform that replaces manual KPI monitoring with a modular ML pipeline and multi-model anomaly detection backend.',
-    details: [
-      'Analyzes business metrics automatically using unsupervised models (Isolation Forest, One Class SVM, LOF).',
-      'Achieved 78% stability across time splits, identifying 12-14% meaningful anomalies indicating strong unsupervised performance.',
-      'Shipped a Streamlit + FastAPI prototype as the user-facing product for non-technical stakeholders.'
-    ],
+    year: '2024',
+    impact: '78% stability · 12–14% meaningful anomalies flagged', // TODO: add/verify metrics
+    description: 'End-to-end automated platform replacing manual KPI monitoring with a modular ML pipeline and multi-model anomaly detection backend.',
     tech: ['Python', 'Scikit-learn', 'Streamlit', 'FastAPI'],
     categories: ['Machine Learning', 'Data Science'],
+    gradient: 'from-cyan-500 via-teal-500 to-emerald-600',
     github: '#',
     demo: '#'
   },
   {
     title: 'Breast Cancer Relapse Prediction',
     subtitle: 'Genomic Machine Learning',
-    description: 'End-to-end OOP-based machine learning pipeline on the GSE2034 dataset to predict breast cancer relapse from highly-dimensional gene expression data.',
-    details: [
-      'Applied rigorous preprocessing and evaluated multiple models, prioritizing recall and F1-score to handle class imbalance.',
-      'Logistic Regression and Linear SVM achieved ~0.86 recall for relapse with AUC ~0.70.',
-      'Uncovered five overlapping, biologically meaningful genes across models as potential relapse biomarkers.'
-    ],
-    tech: ['Python', 'Bioinformatics', 'Machine Learning', 'Pipelines'],
+    year: '2024',
+    impact: '~0.86 recall · AUC ~0.70 · 5 biomarkers uncovered', // TODO: add/verify metrics
+    description: 'End-to-end OOP ML pipeline on the GSE2034 dataset predicting breast cancer relapse from highly-dimensional gene expression data.',
+    tech: ['Python', 'Bioinformatics', 'Scikit-learn', 'Pipelines'],
     categories: ['Machine Learning', 'Research'],
+    gradient: 'from-rose-500 via-pink-500 to-fuchsia-600',
     github: '#'
   },
   {
     title: 'SBA Loan Default Prediction',
     subtitle: 'Cost-Sensitive ML Modeling',
-    description: 'Built a credit-risk model to predict whether SBA loans would be paid back in full or charged off using 899K+ historical loans (1987–2014).',
-    details: [
-      'Tuned a cost-sensitive Decision Tree achieving 93% accuracy with 0.91+ ROC-AUC.',
-      'Completed a cost-based threshold analysis to roughly estimate $6.8M in potential savings by reducing risky approvals.',
-      'Compared predictive metrics directly with business financial impact.'
-    ],
+    year: '2024',
+    impact: '93% accuracy · 0.91+ ROC-AUC · ~$6.8M estimated savings', // TODO: verify metric
+    description: 'Credit-risk model predicting SBA loan outcomes using 899K+ historical loans (1987–2014) with cost-based threshold analysis.',
     tech: ['Python', 'Scikit-learn', 'Neural Networks', 'Decision Trees'],
     categories: ['Data Science', 'Machine Learning'],
+    gradient: 'from-amber-500 via-orange-500 to-red-500',
     github: '#'
   },
   {
     title: 'Commercial Lease Market Forecasting',
     subtitle: 'Predicting Rent Trends',
-    description: 'Analyzed 194K+ commercial lease records to identify macroeconomic drivers of rent trends across the market. Earned Overall Winner at ASA DataFest.',
-    details: [
-      'Built ARIMA and regression forecasting models, achieving 92% accuracy (MAPE).',
-      'Improved forecast performance by 18% using targeted feature engineering.',
-      'Extracted actionable insights regarding market volatility.'
-    ],
+    year: '2025',
+    impact: '92% MAPE · 18% improvement via feature engineering · ASA DataFest Overall Winner', // TODO: verify
+    description: 'Analyzed 194K+ commercial lease records to identify macroeconomic drivers of rent trends. Earned Overall Winner at ASA DataFest.',
     tech: ['Python', 'R', 'ARIMA', 'Regression'],
     categories: ['Data Science'],
+    gradient: 'from-blue-500 via-indigo-500 to-violet-600',
     github: '#'
   }
 ];
@@ -155,28 +146,20 @@ export const awardsData = [
     description: 'Worked with a team to analyze 194K+ commercial lease transactions and uncover macroeconomic trends. Built forecasting models using time-series and regression analysis to identify oversupply risks and predict rent growth, earning Best Overall Winner among 40+ teams.'
   },
   {
-    title: 'SafeRoute 3rd Place - Public Safety Track',
+    title: 'SafeRoute 3rd Place — Public Safety Track',
     issuer: 'SJ Hacks',
     date: 'Apr 2025',
-    description: 'Collaborated with a team to develop SafeRoute, an insight-driven web application that integrates geospatial analytics and real-time risk modeling. Built a spatial-temporal risk prediction model using clustering and weighted severity scores, earning 3rd Place out of 91 teams.'
+    description: 'Collaborated with a team to develop SafeRoute, an insight-driven web application integrating geospatial analytics and real-time risk modeling. Built a spatial-temporal risk prediction model using clustering and weighted severity scores, earning 3rd Place out of 91 teams.'
   }
 ];
 
 export const skillsData = [
   {
-    category: 'Languages',
-    skills: ['Python', 'SQL', 'JavaScript', 'Java', 'R', 'HTML', 'CSS']
+    category: 'Core Skills',
+    skills: ['Python', 'SQL', 'Machine Learning', 'Data Engineering', 'Statistical Modeling', 'Dashboard Design', 'API Development', 'React']
   },
   {
-    category: 'Machine Learning & AI',
-    skills: ['Scikit-learn', 'TensorFlow', 'PyTorch', 'OpenAI API', 'LLMs', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn']
-  },
-  {
-    category: 'Frontend & Backend',
-    skills: ['React', 'FastAPI', 'Flask', 'Firebase', 'Streamlit', 'WebSockets', 'Tailwind CSS']
-  },
-  {
-    category: 'Tools & Platforms',
-    skills: ['Power BI', 'Tableau', 'Snowflake', 'MySQL', 'AWS', 'Git', 'GitHub', 'Power Automate']
+    category: 'Tools & Technologies',
+    skills: ['Scikit-learn', 'TensorFlow', 'PyTorch', 'Pandas', 'NumPy', 'Power BI', 'Tableau', 'Snowflake', 'AWS', 'FastAPI', 'Firebase', 'Git']
   }
 ];

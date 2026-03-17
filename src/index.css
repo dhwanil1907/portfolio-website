@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+/* ── Google Fonts ─────────────────────────────────── */
+/* Inter + JetBrains Mono loaded via index.html <link> */
+
+/* ── Design Tokens ────────────────────────────────── */
+:root {
+  --bg-primary:    #0a0a0f;
+  --bg-card:       #111118;
+  --bg-card-hover: #1a1a24;
+  --border:        #ffffff14;
+  --accent:        #6366f1;
+  --accent-glow:   #6366f133;
+  --text-primary:  #f1f5f9;
+  --text-muted:    #94a3b8;
+}
+
+/* ── Base ─────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
 }
@@ -8,26 +24,61 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #1B1F2E;
-  color: #EAF2EE;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   font-size: 16px;
-}
-
-p, .leading-relaxed, .description-text {
   line-height: 1.75;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
+/* ── Focus Visible ──────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
 }
-::-webkit-scrollbar-track {
-  background: #1B1F2E;
+
+/* ── Monospace for tags / metrics ─────────────────── */
+.font-mono-tech {
+  font-family: 'JetBrains Mono', monospace;
 }
-::-webkit-scrollbar-thumb {
-  background: #3E5C4F;
-  border-radius: 5px;
+
+/* ── Scroll Animations ────────────────────────────── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #6EC99A;
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Custom Scrollbar ─────────────────────────────── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: #2a2a3a; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ── Touch: swap hover for active ─────────────────── */
+@media (hover: none) {
+  .hover\:scale-card:hover {
+    transform: none !important;
+  }
+  .hover\:scale-card:active {
+    transform: translateY(-2px);
+  }
 }

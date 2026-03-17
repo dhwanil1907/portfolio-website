@@ -1,78 +1,166 @@
-import React from 'react';
-import { ExternalLink, Github, FolderGit2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { ExternalLink, Github } from 'lucide-react';
 import { projectsData } from '../data/portfolio';
+import useInView from '../hooks/useInView';
+
+const DEFAULT_SHOW = 4;
+
+function ProjectCard({ project, index }) {
+  const [ref, visible] = useInView();
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div
+      ref={ref}
+      className={`fade-up ${visible ? 'visible' : ''}`}
+      style={{ transitionDelay: `${index * 0.1}s` }}
+    >
+      <div
+        className="rounded-2xl overflow-hidden flex flex-col h-full border transition-all duration-[250ms] ease-out cursor-default"
+        style={{
+          backgroundColor: 'var(--bg-card)',
+          borderColor: hovered ? 'var(--accent)' : 'var(--border)',
+          transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
+          boxShadow: hovered ? '0 8px 32px var(--accent-glow)' : 'none',
+        }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        {/* Gradient visual area (180px) */}
+        <div
+          className={`h-[180px] bg-gradient-to-br ${project.gradient} relative overflow-hidden`}
+        >
+          <div className="absolute inset-0 flex items-end p-4 gap-2">
+            <span
+              className="px-2.5 py-1 rounded-full text-xs font-semibold font-mono-tech backdrop-blur-sm"
+              style={{ backgroundColor: 'rgba(0,0,0,0.4)', color: '#fff' }}
+            >
+              {project.categories[0]}
+            </span>
+            <span
+              className="px-2.5 py-1 rounded-full text-xs font-mono-tech backdrop-blur-sm"
+              style={{ backgroundColor: 'rgba(0,0,0,0.4)', color: 'rgba(255,255,255,0.8)' }}
+            >
+              {project.year}
+            </span>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="p-6 flex flex-col flex-grow">
+          {/* Title */}
+          <h3 className="text-xl font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
+            {project.title}
+          </h3>
+
+          {/* Impact line */}
+          <p className="text-xs font-medium font-mono-tech mb-3" style={{ color: 'var(--accent)' }}>
+            {project.impact}
+          </p>
+
+          {/* Description */}
+          <p className="text-sm leading-relaxed mb-4 flex-grow" style={{ color: 'var(--text-muted)' }}>
+            {project.description}
+          </p>
+
+          {/* Tech pills */}
+          <div className="flex flex-wrap gap-2 mb-5">
+            {project.tech.map((t, i) => (
+              <span
+                key={i}
+                className="px-2 py-0.5 rounded text-xs font-mono-tech"
+                style={{
+                  backgroundColor: 'var(--bg-primary)',
+                  border: '1px solid var(--border)',
+                  color: 'var(--text-muted)'
+                }}
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+
+          {/* Links */}
+          <div className="flex items-center gap-4 mt-auto">
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-sm font-medium transition-colors duration-150"
+                style={{ color: 'var(--text-muted)' }}
+                onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
+                onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
+                aria-label={`GitHub: ${project.title}`}
+              >
+                <Github className="w-4 h-4" /> Code
+              </a>
+            )}
+            {project.demo && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-sm font-medium transition-colors duration-150"
+                style={{ color: 'var(--text-muted)' }}
+                onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
+                onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
+                aria-label={`Live demo: ${project.title}`}
+              >
+                <ExternalLink className="w-4 h-4" /> Demo
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Projects() {
+  const [showAll, setShowAll] = useState(false);
+  const [ref, visible] = useInView();
+  const displayed = showAll ? projectsData : projectsData.slice(0, DEFAULT_SHOW);
+
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-      
-      <div className="mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold text-[#EAF2EE] mb-6">Projects</h1>
-        <div className="w-20 h-1 bg-[#6EC99A] rounded-full mb-8"></div>
-        <p className="text-xl font-light text-[#EAF2EE] opacity-85 max-w-2xl description-text">A selection of my technical work spanning full-stack applications, machine learning pipelines, and predictive analytics.</p>
-      </div>
+    <div
+      className="py-24 px-4 sm:px-6 lg:px-8"
+      style={{ borderTop: '1px solid var(--border)' }}
+    >
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div ref={ref} className={`mb-12 fade-up ${visible ? 'visible' : ''}`}>
+          <p
+            className="text-xs font-medium uppercase tracking-widest mb-3 font-mono-tech"
+            style={{ color: 'var(--accent)' }}
+          >
+            Portfolio
+          </p>
+          <h2 className="text-3xl font-bold" style={{ color: 'var(--text-primary)' }}>
+            Selected Work
+          </h2>
+        </div>
 
-      <div className="grid md:grid-cols-2 gap-8">
-        {projectsData.map((project, idx) => (
-          <div key={idx} className="bg-[#2A2F40] rounded-2xl border-[0.5px] border-[#3E5C4F] border-t-[3px] border-t-[#6EC99A] overflow-hidden hover:border-[#6EC99A] hover:border-[1px] hover:-translate-y-1 transition-all duration-[250ms] ease-in-out flex flex-col h-full group">
-            
-            {/* Top Tag & Actions */}
-            <div className="px-8 pt-8 pb-4 flex justify-between items-start">
-              <div className="flex gap-2 flex-wrap">
-                {project.categories.map((cat, i) => (
-                  <span key={i} className={`px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full ${i === 0 ? 'bg-[#3E5C4F]/30 text-[#6EC99A] border border-[#3E5C4F]/50' : 'bg-[#1B1F2E] text-[#EAF2EE] opacity-90 border border-[#3E5C4F]'}`}>
-                    {cat}
-                  </span>
-                ))}
-              </div>
-              
-              <div className="flex gap-3 text-[#EAF2EE] opacity-80">
-                {project.github && project.github !== '#' && (
-                  <a href={project.github} className="hover:text-[#6EC99A] transition-colors duration-[250ms]" title="View Source">
-                    <Github className="w-5 h-5" />
-                  </a>
-                )}
-                {project.demo && project.demo !== '#' && (
-                  <a href={project.demo} className="hover:text-[#6EC99A] transition-colors duration-[250ms]" title="Live Demo">
-                    <ExternalLink className="w-5 h-5" />
-                  </a>
-                )}
-                {(!project.github || project.github === '#') && (!project.demo || project.demo === '#') && (
-                  <FolderGit2 className="w-5 h-5" />
-                )}
-              </div>
-            </div>
+        {/* Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {displayed.map((project, idx) => (
+            <ProjectCard key={project.title} project={project} index={idx} />
+          ))}
+        </div>
 
-            {/* Content Area */}
-            <div className="px-8 pb-6 flex-grow">
-              <h2 className="text-2xl font-bold text-[#EAF2EE] mb-2">{project.title}</h2>
-              <h3 className="text-sm font-semibold text-[#6EC99A] mb-4">{project.subtitle}</h3>
-              <p className="text-[#EAF2EE] opacity-85 mb-6 description-text">
-                {project.description}
-              </p>
-              <ul className="space-y-3 mb-8">
-                {project.details.map((detail, i) => (
-                  <li key={i} className="text-sm text-[#EAF2EE] opacity-85 flex items-start">
-                    <span className="text-[#3E5C4F] mr-2 mt-0.5">—</span>
-                    <span>{detail}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Tech Stack Footer */}
-            <div className="px-8 py-6 bg-[#1B1F2E]/50 border-t border-[#3E5C4F] flex flex-wrap gap-2">
-              {project.tech.map((t, i) => (
-                <span key={i} className="px-3 py-1.5 bg-[#1B1F2E] border border-[#3E5C4F] rounded-[20px] text-xs font-medium text-[#6EC99A]">
-                  {t}
-                </span>
-              ))}
-            </div>
-
+        {/* Show All toggle */}
+        {!showAll && projectsData.length > DEFAULT_SHOW && (
+          <div className="mt-10 text-center">
+            <button
+              onClick={() => setShowAll(true)}
+              className="px-8 py-3 rounded-lg text-sm font-semibold border transition-all duration-200 hover:bg-white/5"
+              style={{ borderColor: 'var(--border)', color: 'var(--text-muted)' }}
+            >
+              Show All Projects ({projectsData.length})
+            </button>
           </div>
-        ))}
+        )}
       </div>
-
     </div>
   );
 }

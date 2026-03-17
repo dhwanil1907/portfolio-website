@@ -1,109 +1,158 @@
 import React from 'react';
 import { Mail, Linkedin, Github, MapPin, Send } from 'lucide-react';
 import { personalInfo } from '../data/portfolio';
+import useInView from '../hooks/useInView';
 
 export default function Contact() {
+  const [ref, visible] = useInView();
+
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-      
-      <div className="mb-16 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-[#EAF2EE] mb-6">Let's Connect</h1>
-        <div className="w-20 h-1 bg-[#6EC99A] rounded-full mx-auto mb-8"></div>
-        <p className="text-xl font-light text-[#EAF2EE] opacity-85 description-text max-w-2xl mx-auto">
-          Currently open for internship opportunities, collaborations, or just chatting about data and technology.
-        </p>
-      </div>
-
-      <div className="grid lg:grid-cols-5 gap-12 bg-transparent text-[#EAF2EE]">
-        
-        {/* Info Column */}
-        <div className="lg:col-span-2 bg-[#2A2F40] rounded-[2rem] p-8 md:p-12 text-[#EAF2EE] relative overflow-hidden flex flex-col justify-between border-[0.5px] border-[#3E5C4F] shadow-lg">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#3E5C4F] rounded-full mix-blend-screen filter blur-[80px] opacity-20 -translate-y-1/2 translate-x-1/2"></div>
-          
-          <div className="z-10 relative">
-            <h3 className="text-2xl font-bold mb-2 text-[#EAF2EE]">Reach Out</h3>
-            <p className="text-[#EAF2EE] opacity-85 mb-12">I generally reply within 24 hours.</p>
-
-            <div className="space-y-8">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-[#1B1F2E] rounded-full flex items-center justify-center border border-[#3E5C4F]">
-                  <Mail className="w-5 h-5 text-[#6EC99A]" />
-                </div>
-                <div>
-                  <p className="text-[#6EC99A] text-sm font-semibold">Email</p>
-                  <a href={`mailto:${personalInfo.email}`} className="font-medium text-[#EAF2EE] hover:text-[#6EC99A] transition-colors duration-[250ms]">{personalInfo.email}</a>
-                </div>
-              </div>
-              
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-[#1B1F2E] rounded-full flex items-center justify-center border border-[#3E5C4F]">
-                  <MapPin className="w-5 h-5 text-[#6EC99A]" />
-                </div>
-                <div>
-                  <p className="text-[#6EC99A] text-sm font-semibold">Location</p>
-                  <p className="font-medium text-[#EAF2EE]">{personalInfo.education.location}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-16 sm:mt-24 z-10 relative hidden">
-            <div className="flex gap-4">
-              <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#0A66C2] transition-colors">
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-slate-900 transition-colors">
-                <Github className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
-
+    <div
+      className="py-24 px-4 sm:px-6 lg:px-8"
+      style={{ borderTop: '1px solid var(--border)' }}
+    >
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div ref={ref} className={`mb-16 fade-up ${visible ? 'visible' : ''}`}>
+          <p
+            className="text-xs font-medium uppercase tracking-widest mb-3 font-mono-tech"
+            style={{ color: 'var(--accent)' }}
+          >
+            Contact
+          </p>
+          <h2 className="text-3xl font-bold" style={{ color: 'var(--text-primary)' }}>
+            Let's Connect
+          </h2>
+          <p className="mt-2 max-w-xl" style={{ color: 'var(--text-muted)' }}>
+            Open to internships, collaborations, and data conversations. I reply within 24 hours.
+          </p>
         </div>
 
-        {/* Form Column */}
-        <div className="lg:col-span-3 lg:p-12 flex flex-col justify-center">
-          <div className="flex justify-between items-center mb-8">
-            <h3 className="text-2xl font-bold text-[#EAF2EE]">Send a Message</h3>
-            <div className="flex gap-4">
-              <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="text-[#6EC99A] hover:opacity-75 transition-opacity duration-[250ms]">
-                <Github size={24} />
-              </a>
-              <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="text-[#6EC99A] hover:opacity-75 transition-opacity duration-[250ms]">
-                <Linkedin size={24} />
-              </a>
+        <div className="grid lg:grid-cols-5 gap-12">
+          {/* Info column */}
+          <div className="lg:col-span-2 space-y-4">
+            {[
+              { icon: Mail, label: 'Email', value: personalInfo.email, href: `mailto:${personalInfo.email}` },
+              { icon: MapPin, label: 'Location', value: personalInfo.education.location, href: null },
+            ].map(({ icon: Icon, label, value, href }) => (
+              <div
+                key={label}
+                className="flex items-center gap-4 p-4 rounded-xl border"
+                style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border)' }}
+              >
+                <div
+                  className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
+                  style={{ backgroundColor: 'var(--accent-glow)' }}
+                >
+                  <Icon className="w-5 h-5" style={{ color: 'var(--accent)' }} aria-hidden="true" />
+                </div>
+                <div>
+                  <p className="text-xs font-medium font-mono-tech uppercase tracking-wider" style={{ color: 'var(--accent)' }}>{label}</p>
+                  {href
+                    ? <a href={href} className="text-sm font-medium transition-colors hover:underline" style={{ color: 'var(--text-primary)' }}>{value}</a>
+                    : <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{value}</p>
+                  }
+                </div>
+              </div>
+            ))}
+
+            <div className="flex gap-3 pt-2">
+              {[
+                { icon: Github, href: personalInfo.github, label: 'GitHub profile' },
+                { icon: Linkedin, href: personalInfo.linkedin, label: 'LinkedIn profile' },
+              ].map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="p-3 rounded-xl border transition-all duration-200 hover:-translate-y-0.5"
+                  style={{ borderColor: 'var(--border)', backgroundColor: 'var(--bg-card)', color: 'var(--text-muted)' }}
+                  onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.borderColor = 'var(--accent)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.borderColor = 'var(--border)'; }}
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              ))}
             </div>
           </div>
-          
-          <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-semibold text-[#6EC99A] mb-2">First Name</label>
-                <input type="text" className="w-full px-5 py-4 rounded-lg bg-[#2A2F40] border border-[#3E5C4F] text-[#EAF2EE] focus:outline-none focus:ring-1 focus:ring-[#6EC99A] focus:border-[#6EC99A] transition-all duration-[250ms] placeholder-[#EAF2EE]/50" placeholder="John" />
+
+          {/* Form column */}
+          <div className="lg:col-span-3">
+            <form
+              className="space-y-5 p-8 rounded-2xl border"
+              style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border)' }}
+              onSubmit={e => e.preventDefault()}
+            >
+              <h3 className="text-xl font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>Send a Message</h3>
+
+              <div className="grid sm:grid-cols-2 gap-5">
+                {['First Name', 'Last Name'].map(name => (
+                  <div key={name}>
+                    <label className="block text-xs font-medium font-mono-tech uppercase tracking-wider mb-2" style={{ color: 'var(--text-muted)' }}>{name}</label>
+                    <input
+                      type="text"
+                      placeholder={name === 'First Name' ? 'John' : 'Doe'}
+                      className="w-full px-4 py-3 rounded-lg text-sm transition-colors duration-200"
+                      style={{
+                        backgroundColor: 'var(--bg-primary)',
+                        border: '1px solid var(--border)',
+                        color: 'var(--text-primary)',
+                        outline: 'none'
+                      }}
+                      onFocus={e => e.target.style.borderColor = 'var(--accent)'}
+                      onBlur={e => e.target.style.borderColor = 'var(--border)'}
+                    />
+                  </div>
+                ))}
               </div>
+
               <div>
-                <label className="block text-sm font-semibold text-[#6EC99A] mb-2">Last Name</label>
-                <input type="text" className="w-full px-5 py-4 rounded-lg bg-[#2A2F40] border border-[#3E5C4F] text-[#EAF2EE] focus:outline-none focus:ring-1 focus:ring-[#6EC99A] focus:border-[#6EC99A] transition-all duration-[250ms] placeholder-[#EAF2EE]/50" placeholder="Doe" />
+                <label className="block text-xs font-medium font-mono-tech uppercase tracking-wider mb-2" style={{ color: 'var(--text-muted)' }}>Email</label>
+                <input
+                  type="email"
+                  placeholder="john@example.com"
+                  className="w-full px-4 py-3 rounded-lg text-sm transition-colors duration-200"
+                  style={{
+                    backgroundColor: 'var(--bg-primary)',
+                    border: '1px solid var(--border)',
+                    color: 'var(--text-primary)',
+                    outline: 'none'
+                  }}
+                  onFocus={e => e.target.style.borderColor = 'var(--accent)'}
+                  onBlur={e => e.target.style.borderColor = 'var(--border)'}
+                />
               </div>
-            </div>
-            
-            <div>
-              <label className="block text-sm font-semibold text-[#6EC99A] mb-2">Email Address</label>
-              <input type="email" className="w-full px-5 py-4 rounded-lg bg-[#2A2F40] border border-[#3E5C4F] text-[#EAF2EE] focus:outline-none focus:ring-1 focus:ring-[#6EC99A] focus:border-[#6EC99A] transition-all duration-[250ms] placeholder-[#EAF2EE]/50" placeholder="john@example.com" />
-            </div>
-            
-            <div>
-              <label className="block text-sm font-semibold text-[#6EC99A] mb-2">Message</label>
-              <textarea rows="5" className="w-full px-5 py-4 rounded-lg bg-[#2A2F40] border border-[#3E5C4F] text-[#EAF2EE] focus:outline-none focus:ring-1 focus:ring-[#6EC99A] focus:border-[#6EC99A] transition-all duration-[250ms] resize-none placeholder-[#EAF2EE]/50" placeholder="How can I help you?"></textarea>
-            </div>
-            
-            <button type="submit" className="w-full sm:w-auto px-10 py-4 bg-[#6EC99A] hover:bg-[#5bb889] text-[#1B1F2E] rounded-lg font-semibold text-lg transition-colors duration-[250ms] flex items-center justify-center gap-2">
-              Send Message <Send className="w-4 h-4" />
-            </button>
-          </form>
+
+              <div>
+                <label className="block text-xs font-medium font-mono-tech uppercase tracking-wider mb-2" style={{ color: 'var(--text-muted)' }}>Message</label>
+                <textarea
+                  rows="5"
+                  placeholder="How can I help you?"
+                  className="w-full px-4 py-3 rounded-lg text-sm transition-colors duration-200 resize-none"
+                  style={{
+                    backgroundColor: 'var(--bg-primary)',
+                    border: '1px solid var(--border)',
+                    color: 'var(--text-primary)',
+                    outline: 'none'
+                  }}
+                  onFocus={e => e.target.style.borderColor = 'var(--accent)'}
+                  onBlur={e => e.target.style.borderColor = 'var(--border)'}
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="flex items-center justify-center gap-2 px-8 py-3 rounded-lg font-semibold text-sm text-white transition-all duration-200 hover:brightness-110 hover:-translate-y-0.5"
+                style={{ backgroundColor: 'var(--accent)' }}
+              >
+                Send Message <Send className="w-4 h-4" aria-hidden="true" />
+              </button>
+            </form>
+          </div>
         </div>
-
       </div>
-
     </div>
   );
 }

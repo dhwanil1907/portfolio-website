@@ -1,57 +1,122 @@
 import React from 'react';
-import { personalInfo } from '../data/portfolio';
+import { personalInfo, skillsData } from '../data/portfolio';
+import useInView from '../hooks/useInView';
 
 export default function About() {
+  const [ref, visible] = useInView();
+
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-      
-      <div className="mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold text-[#EAF2EE] mb-6">About Me</h1>
-        <div className="w-20 h-1 bg-[#6EC99A] rounded-full"></div>
-      </div>
+    <div
+      className="py-24 px-4 sm:px-6 lg:px-8"
+      style={{ borderTop: '1px solid var(--border)' }}
+    >
+      <div className="max-w-5xl mx-auto">
+        {/* Section header */}
+        <div
+          ref={ref}
+          className={`mb-16 fade-up ${visible ? 'visible' : ''}`}
+        >
+          <p
+            className="text-xs font-medium uppercase tracking-widest mb-3 font-mono-tech"
+            style={{ color: 'var(--accent)' }}
+          >
+            About
+          </p>
+          <h2
+            className="text-3xl font-bold"
+            style={{ color: 'var(--text-primary)' }}
+          >
+            Who I am
+          </h2>
+        </div>
 
-      <div className="prose prose-slate prose-invert prose-lg md:prose-xl text-[#EAF2EE] opacity-90 max-w-none description-text">
-        <p className="lead text-2xl text-[#EAF2EE] font-medium mb-8">
-          I am a builder focused on the intersection of data science and software engineering, currently pursuing my B.S. in Data Science at San Jose State University.
-        </p>
+        <div className="grid lg:grid-cols-3 gap-12">
+          {/* Bio + headshot */}
+          <div className={`lg:col-span-2 fade-up ${visible ? 'visible' : ''}`} style={{ transitionDelay: '0.1s' }}>
+            {/* Circular headshot */}
+            <div className="mb-8 flex items-center gap-6">
+              <div
+                className="w-[120px] h-[120px] rounded-full shrink-0 flex items-center justify-center text-2xl font-black"
+                style={{
+                  background: 'linear-gradient(135deg, var(--accent), #a855f7)',
+                  padding: '3px'
+                }}
+              >
+                <div
+                  className="w-full h-full rounded-full flex items-center justify-center font-black text-2xl"
+                  style={{ backgroundColor: 'var(--bg-card)', color: 'var(--accent)' }}
+                >
+                  DR {/* TODO: add photo */}
+                </div>
+              </div>
+              <div>
+                <p className="font-bold text-lg" style={{ color: 'var(--text-primary)' }}>{personalInfo.name}</p>
+                <p className="text-sm" style={{ color: 'var(--text-muted)' }}>{personalInfo.tagline}</p>
+              </div>
+            </div>
 
-        <div className="grid md:grid-cols-5 gap-12 items-start mt-12">
-          
-          <div className="md:col-span-3 space-y-6">
-            <p>
-              My journey started with a fascination for uncovering patterns in raw data, but I quickly realized that a model trained in a Jupyter notebook has no impact until it's accessible. That realization drove me to learn full-stack development, enabling me to build end-to-end data products.
+            {/* 3-sentence bio */}
+            <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--text-muted)' }}>
+              I'm a Data Science student at San Jose State University building ML systems and full-stack data products that solve real-world problems.
+              My work spans the full pipeline — from raw data ingestion and model training to production APIs and interactive dashboards.
+              I lead Spartan Analytics and care deeply about making data literacy accessible.
             </p>
-            <p>
-              I believe in <strong>product-minded engineering</strong>. Whether I'm designing a spatio-temporal crime prediction model or building out a React interface, I always start with the user problem. I thrive in environments where analytics meet operations—where we don't just ask "what is the accuracy?", but rather, "how does this reduce latency, improve underwriting decisions, or optimize processes?"
-            </p>
-            <p>
-              When I'm not coding, you can find me leading the Spartan Analytics organization, organizing hackathons, and teaching technical workshops to scale data literacy across my campus.
-            </p>
+
+            {/* Currently block */}
+            <div
+              className="rounded-xl p-5 border"
+              style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border)' }}
+            >
+              <p
+                className="text-xs font-medium uppercase tracking-widest mb-4 font-mono-tech"
+                style={{ color: 'var(--accent)' }}
+              >
+                Currently
+              </p>
+              <ul className="space-y-2 text-sm" style={{ color: 'var(--text-muted)' }}>
+                <li>📚 Studying — B.S. Data Science @ SJSU (Class of 2027)</li>
+                <li>💼 Seeking — Full-time Data Engineering / ML roles</li>
+                <li>📍 Located — San Jose, CA</li>
+              </ul>
+            </div>
           </div>
 
-          <div className="md:col-span-2 bg-[#2A2F40] p-8 rounded-2xl border-[0.5px] border-[#3E5C4F]">
-            <h3 className="text-lg font-bold text-[#6EC99A] mb-4 tracking-wider">Background</h3>
-            
-            <ul className="space-y-4 text-base">
-              <li>
-                <strong className="block text-[#EAF2EE]">Education</strong>
-                <span className="text-[#EAF2EE] opacity-85">{personalInfo.education.degree}</span> <br/>
-                <span className="text-[#EAF2EE] opacity-85">{personalInfo.education.university} (Class of 2027)</span>
-              </li>
-              <li>
-                <strong className="block text-[#EAF2EE]">Location</strong>
-                <span className="text-[#EAF2EE] opacity-85">{personalInfo.education.location}</span>
-              </li>
-              <li>
-                <strong className="block text-[#EAF2EE]">Focus Areas</strong>
-                <span className="text-[#EAF2EE] opacity-85">Machine Learning Systems, Frontend Architecture, Data Engineering</span>
-              </li>
-            </ul>
+          {/* Skill badges */}
+          <div className={`fade-up ${visible ? 'visible' : ''}`} style={{ transitionDelay: '0.2s' }}>
+            <div className="space-y-6">
+              {skillsData.map((cat, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-xl p-5 border"
+                  style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border)' }}
+                >
+                  <p
+                    className="text-xs font-medium uppercase tracking-widest mb-4 font-mono-tech"
+                    style={{ color: 'var(--accent)' }}
+                  >
+                    {cat.category}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {cat.skills.map((skill, i) => (
+                      <span
+                        key={i}
+                        className="px-2.5 py-1 rounded-md text-xs font-medium font-mono-tech transition-colors cursor-default"
+                        style={{
+                          backgroundColor: 'var(--bg-primary)',
+                          border: '1px solid var(--border)',
+                          color: 'var(--text-muted)'
+                        }}
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-          
         </div>
       </div>
-      
     </div>
   );
 }
