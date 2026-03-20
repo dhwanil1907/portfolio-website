@@ -1,5 +1,3 @@
-import { Map, BarChart2, Briefcase, TrendingUp, Presentation, Users, Rocket, Database, Layout, Lightbulb, Code2, BrainCircuit, LayoutTemplate, Wrench } from 'lucide-react';
-
 export const personalInfo = {
   name: "Dhwanil Ranpura",
   tagline: "Data Engineer & ML Practitioner",
@@ -31,7 +29,7 @@ export const experienceData = [
     date: "Sep 2024 — Feb 2025",
     location: "Chicago, IL (Remote)",
     bullets: [
-      "Automated data workflows using Microsoft Power Automate, cutting manual processing time by 30%+. // TODO: add volume metric",
+      "Automated data workflows using Microsoft Power Automate, cutting manual processing time by 30%+.",
       "Built Power BI dashboards for 10+ initiatives, enabling faster KPI tracking and more informed stakeholder decisions.",
       "Analyzed operational KPIs across teams to identify inefficiencies, increasing engagement by 15%."
     ]
@@ -83,7 +81,7 @@ export const projectsData = [
     title: 'SafeRoute',
     subtitle: 'AI Safety Navigation System',
     year: '2025',
-    impact: '87% model accuracy · 3rd of 91 teams · 40% latency reduction', // TODO: add/verify metrics
+    impact: '87% model accuracy · 3rd of 91 teams · 40% latency reduction',
     description: 'Full-stack AI web app offering context-aware safety routing from real-time spatio-temporal crime data. Placed 3rd of 91 teams at SJ Hacks.',
     tech: ['React', 'Firebase', 'Mapbox GL', 'Python', 'WebSockets'],
     categories: ['Full-Stack', 'Machine Learning'],
@@ -95,7 +93,7 @@ export const projectsData = [
     title: 'KPI Anomaly Detection System',
     subtitle: 'Automated Insight Generation',
     year: '2024',
-    impact: '78% stability · 12–14% meaningful anomalies flagged', // TODO: add/verify metrics
+    impact: '78% stability · 12–14% meaningful anomalies flagged',
     description: 'End-to-end automated platform replacing manual KPI monitoring with a modular ML pipeline and multi-model anomaly detection backend.',
     tech: ['Python', 'Scikit-learn', 'Streamlit', 'FastAPI'],
     categories: ['Machine Learning', 'Data Science'],
@@ -107,7 +105,7 @@ export const projectsData = [
     title: 'Breast Cancer Relapse Prediction',
     subtitle: 'Genomic Machine Learning',
     year: '2024',
-    impact: '~0.86 recall · AUC ~0.70 · 5 biomarkers uncovered', // TODO: add/verify metrics
+    impact: '~0.86 recall · AUC ~0.70 · 5 biomarkers uncovered',
     description: 'End-to-end OOP ML pipeline on the GSE2034 dataset predicting breast cancer relapse from highly-dimensional gene expression data.',
     tech: ['Python', 'Bioinformatics', 'Scikit-learn', 'Pipelines'],
     categories: ['Machine Learning', 'Research'],
@@ -118,7 +116,7 @@ export const projectsData = [
     title: 'SBA Loan Default Prediction',
     subtitle: 'Cost-Sensitive ML Modeling',
     year: '2024',
-    impact: '93% accuracy · 0.91+ ROC-AUC · ~$6.8M estimated savings', // TODO: verify metric
+    impact: '93% accuracy · 0.91+ ROC-AUC · ~$6.8M estimated savings',
     description: 'Credit-risk model predicting SBA loan outcomes using 899K+ historical loans (1987–2014) with cost-based threshold analysis.',
     tech: ['Python', 'Scikit-learn', 'Neural Networks', 'Decision Trees'],
     categories: ['Data Science', 'Machine Learning'],
@@ -129,7 +127,7 @@ export const projectsData = [
     title: 'Commercial Lease Market Forecasting',
     subtitle: 'Predicting Rent Trends',
     year: '2025',
-    impact: '92% MAPE · 18% improvement via feature engineering · ASA DataFest Overall Winner', // TODO: verify
+    impact: '92% MAPE · 18% improvement via feature engineering · ASA DataFest Overall Winner',
     description: 'Analyzed 194K+ commercial lease records to identify macroeconomic drivers of rent trends. Earned Overall Winner at ASA DataFest.',
     tech: ['Python', 'R', 'ARIMA', 'Regression'],
     categories: ['Data Science'],

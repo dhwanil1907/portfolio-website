@@ -24,7 +24,7 @@ export default function Footer() {
             Let's build something.
           </h2>
           <p className="text-lg mb-10" style={{ color: 'var(--text-muted)' }}>
-            Open to full-time data engineering / ML roles and freelance data projects.
+            Open to internships, full-time data engineering / ML roles, and freelance data projects.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <a

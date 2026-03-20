@@ -68,7 +68,7 @@ export default function Home() {
             className="text-sm font-mono-tech"
             style={{ color: 'var(--text-muted)' }}
           >
-            Open to full-time roles · Available for freelance · Based in San Jose, CA{/* TODO: fill city */}
+            Open to internships &amp; full-time roles · Available for freelance · Based in San Jose, CA
           </p>
         </div>
 

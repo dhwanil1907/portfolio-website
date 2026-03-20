@@ -1,10 +1,42 @@
-import React from 'react';
-import { Mail, Linkedin, Github, MapPin, Send } from 'lucide-react';
+import { useState } from 'react';
+import { Mail, LinkedinIcon, GithubIcon, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { personalInfo } from '../data/portfolio';
 import useInView from '../hooks/useInView';
 
+// Replace with your Formspree form ID from https://formspree.io
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+
 export default function Contact() {
   const [ref, visible] = useInView();
+  const [status, setStatus] = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setStatus('loading');
+    const form = e.target;
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      if (res.ok) {
+        setStatus('success');
+        form.reset();
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
+  }
+
+  const inputStyle = {
+    backgroundColor: 'var(--bg-primary)',
+    border: '1px solid var(--border)',
+    color: 'var(--text-primary)',
+    outline: 'none'
+  };
 
   return (
     <div
@@ -58,8 +90,8 @@ export default function Contact() {
 
             <div className="flex gap-3 pt-2">
               {[
-                { icon: Github, href: personalInfo.github, label: 'GitHub profile' },
-                { icon: Linkedin, href: personalInfo.linkedin, label: 'LinkedIn profile' },
+                { icon: GithubIcon, href: personalInfo.github, label: 'GitHub profile' },
+                { icon: LinkedinIcon, href: personalInfo.linkedin, label: 'LinkedIn profile' },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
@@ -83,24 +115,38 @@ export default function Contact() {
             <form
               className="space-y-5 p-8 rounded-2xl border"
               style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border)' }}
-              onSubmit={e => e.preventDefault()}
+              onSubmit={handleSubmit}
             >
               <h3 className="text-xl font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>Send a Message</h3>
 
+              {status === 'success' && (
+                <div className="flex items-center gap-3 p-4 rounded-lg" style={{ backgroundColor: 'var(--accent-glow)', color: 'var(--accent)' }}>
+                  <CheckCircle className="w-5 h-5 shrink-0" />
+                  <p className="text-sm font-medium">Message sent! I'll get back to you within 24 hours.</p>
+                </div>
+              )}
+
+              {status === 'error' && (
+                <div className="flex items-center gap-3 p-4 rounded-lg" style={{ backgroundColor: 'rgba(239,68,68,0.1)', color: '#ef4444' }}>
+                  <AlertCircle className="w-5 h-5 shrink-0" />
+                  <p className="text-sm font-medium">Something went wrong. Try emailing me directly.</p>
+                </div>
+              )}
+
               <div className="grid sm:grid-cols-2 gap-5">
-                {['First Name', 'Last Name'].map(name => (
+                {[
+                  { label: 'First Name', name: 'firstName', placeholder: 'John' },
+                  { label: 'Last Name',  name: 'lastName',  placeholder: 'Doe' },
+                ].map(({ label, name, placeholder }) => (
                   <div key={name}>
-                    <label className="block text-xs font-medium font-mono-tech uppercase tracking-wider mb-2" style={{ color: 'var(--text-muted)' }}>{name}</label>
+                    <label className="block text-xs font-medium font-mono-tech uppercase tracking-wider mb-2" style={{ color: 'var(--text-muted)' }}>{label}</label>
                     <input
                       type="text"
-                      placeholder={name === 'First Name' ? 'John' : 'Doe'}
+                      name={name}
+                      placeholder={placeholder}
+                      required
                       className="w-full px-4 py-3 rounded-lg text-sm transition-colors duration-200"
-                      style={{
-                        backgroundColor: 'var(--bg-primary)',
-                        border: '1px solid var(--border)',
-                        color: 'var(--text-primary)',
-                        outline: 'none'
-                      }}
+                      style={inputStyle}
                       onFocus={e => e.target.style.borderColor = 'var(--accent)'}
                       onBlur={e => e.target.style.borderColor = 'var(--border)'}
                     />
@@ -112,14 +158,11 @@ export default function Contact() {
                 <label className="block text-xs font-medium font-mono-tech uppercase tracking-wider mb-2" style={{ color: 'var(--text-muted)' }}>Email</label>
                 <input
                   type="email"
+                  name="email"
                   placeholder="john@example.com"
+                  required
                   className="w-full px-4 py-3 rounded-lg text-sm transition-colors duration-200"
-                  style={{
-                    backgroundColor: 'var(--bg-primary)',
-                    border: '1px solid var(--border)',
-                    color: 'var(--text-primary)',
-                    outline: 'none'
-                  }}
+                  style={inputStyle}
                   onFocus={e => e.target.style.borderColor = 'var(--accent)'}
                   onBlur={e => e.target.style.borderColor = 'var(--border)'}
                 />
@@ -129,14 +172,11 @@ export default function Contact() {
                 <label className="block text-xs font-medium font-mono-tech uppercase tracking-wider mb-2" style={{ color: 'var(--text-muted)' }}>Message</label>
                 <textarea
                   rows="5"
+                  name="message"
                   placeholder="How can I help you?"
+                  required
                   className="w-full px-4 py-3 rounded-lg text-sm transition-colors duration-200 resize-none"
-                  style={{
-                    backgroundColor: 'var(--bg-primary)',
-                    border: '1px solid var(--border)',
-                    color: 'var(--text-primary)',
-                    outline: 'none'
-                  }}
+                  style={inputStyle}
                   onFocus={e => e.target.style.borderColor = 'var(--accent)'}
                   onBlur={e => e.target.style.borderColor = 'var(--border)'}
                 />
@@ -144,10 +184,12 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="flex items-center justify-center gap-2 px-8 py-3 rounded-lg font-semibold text-sm text-white transition-all duration-200 hover:brightness-110 hover:-translate-y-0.5"
+                disabled={status === 'loading' || status === 'success'}
+                className="flex items-center justify-center gap-2 px-8 py-3 rounded-lg font-semibold text-sm text-white transition-all duration-200 hover:brightness-110 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
                 style={{ backgroundColor: 'var(--accent)' }}
               >
-                Send Message <Send className="w-4 h-4" aria-hidden="true" />
+                {status === 'loading' ? 'Sending…' : 'Send Message'}
+                {status !== 'loading' && <Send className="w-4 h-4" aria-hidden="true" />}
               </button>
             </form>
           </div>

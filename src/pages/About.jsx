@@ -75,7 +75,7 @@ export default function About() {
               </p>
               <ul className="space-y-2 text-sm" style={{ color: 'var(--text-muted)' }}>
                 <li>📚 Studying — B.S. Data Science @ SJSU (Class of 2027)</li>
-                <li>💼 Seeking — Full-time Data Engineering / ML roles</li>
+                <li>💼 Seeking — Internship &amp; full-time Data Engineering / ML roles</li>
                 <li>📍 Located — San Jose, CA</li>
               </ul>
             </div>

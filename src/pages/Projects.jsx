@@ -3,6 +3,7 @@ import { ExternalLink, Github } from 'lucide-react';
 import { projectsData } from '../data/portfolio';
 import useInView from '../hooks/useInView';
 
+const ALL_CATEGORIES = ['All', ...Array.from(new Set(projectsData.flatMap(p => p.categories)))];
 const DEFAULT_SHOW = 4;
 
 function ProjectCard({ project, index }) {
@@ -119,8 +120,18 @@ function ProjectCard({ project, index }) {
 
 export default function Projects() {
   const [showAll, setShowAll] = useState(false);
+  const [activeCategory, setActiveCategory] = useState('All');
   const [ref, visible] = useInView();
-  const displayed = showAll ? projectsData : projectsData.slice(0, DEFAULT_SHOW);
+
+  const filtered = activeCategory === 'All'
+    ? projectsData
+    : projectsData.filter(p => p.categories.includes(activeCategory));
+  const displayed = showAll ? filtered : filtered.slice(0, DEFAULT_SHOW);
+
+  function handleCategoryChange(cat) {
+    setActiveCategory(cat);
+    setShowAll(false);
+  }
 
   return (
     <div
@@ -129,7 +140,7 @@ export default function Projects() {
     >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div ref={ref} className={`mb-12 fade-up ${visible ? 'visible' : ''}`}>
+        <div ref={ref} className={`mb-8 fade-up ${visible ? 'visible' : ''}`}>
           <p
             className="text-xs font-medium uppercase tracking-widest mb-3 font-mono-tech"
             style={{ color: 'var(--accent)' }}
@@ -141,6 +152,27 @@ export default function Projects() {
           </h2>
         </div>
 
+        {/* Category filters */}
+        <div className={`flex flex-wrap gap-2 mb-10 fade-up ${visible ? 'visible' : ''}`} style={{ transitionDelay: '0.05s' }}>
+          {ALL_CATEGORIES.map(cat => {
+            const isActive = activeCategory === cat;
+            return (
+              <button
+                key={cat}
+                onClick={() => handleCategoryChange(cat)}
+                className="px-4 py-1.5 rounded-full text-xs font-semibold font-mono-tech border transition-all duration-150"
+                style={{
+                  backgroundColor: isActive ? 'var(--accent)' : 'transparent',
+                  borderColor: isActive ? 'var(--accent)' : 'var(--border)',
+                  color: isActive ? '#fff' : 'var(--text-muted)',
+                }}
+              >
+                {cat}
+              </button>
+            );
+          })}
+        </div>
+
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayed.map((project, idx) => (
@@ -149,14 +181,14 @@ export default function Projects() {
         </div>
 
         {/* Show All toggle */}
-        {!showAll && projectsData.length > DEFAULT_SHOW && (
+        {!showAll && filtered.length > DEFAULT_SHOW && (
           <div className="mt-10 text-center">
             <button
               onClick={() => setShowAll(true)}
               className="px-8 py-3 rounded-lg text-sm font-semibold border transition-all duration-200 hover:bg-white/5"
               style={{ borderColor: 'var(--border)', color: 'var(--text-muted)' }}
             >
-              Show All Projects ({projectsData.length})
+              Show All ({filtered.length})
             </button>
           </div>
         )}
