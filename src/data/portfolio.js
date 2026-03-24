@@ -5,7 +5,6 @@ export const personalInfo = {
   email: "dhwanil.ranpura@sjsu.edu",
   linkedin: "https://linkedin.com/in/dhwanil-ranpura",
   github: "https://github.com/dhwanil1907",
-  resume: "#", // TODO: link resume PDF
   education: {
     university: "San Jose State University",
     degree: "Bachelor of Science in Data Science",
@@ -15,9 +14,12 @@ export const personalInfo = {
 };
 
 export const navLinks = [
-  { name: 'Work',       path: '#work' },
   { name: 'About',      path: '#about' },
   { name: 'Experience', path: '#experience' },
+  { name: 'Work',       path: '#work' },
+  { name: 'Leadership', path: '#leadership' },
+  { name: 'Awards',     path: '#awards' },
+  { name: 'Certificates', path: '#certifications' },
   { name: 'Contact',    path: '#contact' },
 ];
 
@@ -86,8 +88,7 @@ export const projectsData = [
     tech: ['React', 'Firebase', 'Mapbox GL', 'Python', 'WebSockets'],
     categories: ['Full-Stack', 'Machine Learning'],
     gradient: 'from-violet-600 via-purple-500 to-indigo-600',
-    github: '#',
-    demo: '#'
+    github: 'https://github.com/dhwanil1907/SafeRoute_SJHacks-2025',
   },
   {
     title: 'KPI Anomaly Detection System',
@@ -98,8 +99,7 @@ export const projectsData = [
     tech: ['Python', 'Scikit-learn', 'Streamlit', 'FastAPI'],
     categories: ['Machine Learning', 'Data Science'],
     gradient: 'from-cyan-500 via-teal-500 to-emerald-600',
-    github: '#',
-    demo: '#'
+    github: 'https://github.com/dhwanil1907/kpi-anomaly-detector',
   },
   {
     title: 'Breast Cancer Relapse Prediction',
@@ -110,7 +110,7 @@ export const projectsData = [
     tech: ['Python', 'Bioinformatics', 'Scikit-learn', 'Pipelines'],
     categories: ['Machine Learning', 'Research'],
     gradient: 'from-rose-500 via-pink-500 to-fuchsia-600',
-    github: '#'
+    github: 'https://github.com/dhwanil1907/CS-123A-Predicting-Breast-Cancer-Relapse-Using-Gene-Expression-and-Machine-Learning',
   },
   {
     title: 'SBA Loan Default Prediction',
@@ -121,7 +121,7 @@ export const projectsData = [
     tech: ['Python', 'Scikit-learn', 'Neural Networks', 'Decision Trees'],
     categories: ['Data Science', 'Machine Learning'],
     gradient: 'from-amber-500 via-orange-500 to-red-500',
-    github: '#'
+    github: 'https://github.com/dhwanil1907/sba-loan-approval-and-default-risk',
   },
   {
     title: 'Commercial Lease Market Forecasting',
@@ -132,7 +132,6 @@ export const projectsData = [
     tech: ['Python', 'R', 'ARIMA', 'Regression'],
     categories: ['Data Science'],
     gradient: 'from-blue-500 via-indigo-500 to-violet-600',
-    github: '#'
   }
 ];
 
@@ -149,6 +148,31 @@ export const awardsData = [
     date: 'Apr 2025',
     description: 'Collaborated with a team to develop SafeRoute, an insight-driven web application integrating geospatial analytics and real-time risk modeling. Built a spatial-temporal risk prediction model using clustering and weighted severity scores, earning 3rd Place out of 91 teams.'
   }
+];
+
+export const certificationsData = [
+  {
+    title: 'Building LLM Applications With Prompt Engineering',
+    issuer: 'NVIDIA',
+    date: 'Mar 2025',
+    credentialId: 'v4rq1bLWQO-q2Ymc5WeYfw',
+    url: 'https://learn.nvidia.com/certificates?id=v4rq1bLWQO-q2Ymc5WeYfw',
+  },
+  {
+    title: 'Introduction to Transformer-Based Natural Language Processing',
+    issuer: 'NVIDIA',
+    date: 'Dec 2024',
+    credentialId: 'He2KfYSaRj28w6FgPx1-aA',
+    url: 'https://learn.nvidia.com/certificates?id=He2KfYSaRj28w6FgPx1-aA',
+  },
+  {
+    title: 'Accenture — Data Analytics and Visualization Job Simulation',
+    issuer: 'Forage',
+    date: 'Oct 2024',
+    credentialId: 'trcWphttyBXDKSXCr',
+    url: 'https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/Accenture%20North%20America/hzmoNKtzvAzXsEqx8_Accenture%20North%20America_EYSyCjSosZ8RZTju3_1728512365409_completion_certificate.pdf',
+    skills: ['Data Analysis'],
+  },
 ];
 
 export const skillsData = [

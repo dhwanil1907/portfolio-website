@@ -1,98 +1,107 @@
 import React from 'react';
-import { Github, Linkedin, Mail, ArrowRight } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 import { personalInfo } from '../../data/portfolio';
 
 export default function Footer() {
   return (
     <footer>
-      {/* CTA Section */}
       <section
         className="py-24 px-4 sm:px-6 lg:px-8 text-center"
-        style={{ backgroundColor: 'var(--bg-card)', borderTop: '1px solid var(--border)' }}
+        style={{ backgroundColor: 'var(--inverse-bg)' }}
       >
         <div className="max-w-3xl mx-auto">
           <p
-            className="text-xs font-medium uppercase tracking-widest mb-4 font-mono-tech"
-            style={{ color: 'var(--accent)' }}
+            style={{
+              fontSize: '12px',
+              fontFamily: "'JetBrains Mono', monospace",
+              color: 'var(--inverse-muted)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em',
+              marginBottom: '16px',
+            }}
           >
             Let's work together
           </p>
           <h2
-            className="text-4xl md:text-5xl font-black mb-4"
-            style={{ color: 'var(--text-primary)' }}
+            style={{
+              fontSize: 'clamp(2.2rem, 5vw, 3.2rem)',
+              fontWeight: 900,
+              color: 'var(--inverse-text)',
+              fontFamily: "'Space Grotesk', sans-serif",
+              marginBottom: '16px',
+              lineHeight: 1.1,
+            }}
           >
-            Let's build something.
+            Let's build{' '}
+            <span className="highlight-yellow">something.</span>
           </h2>
-          <p className="text-lg mb-10" style={{ color: 'var(--text-muted)' }}>
+          <p style={{ fontSize: '17px', color: 'var(--inverse-muted)', marginBottom: '40px' }}>
             Open to internships, full-time data engineering / ML roles, and freelance data projects.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '16px' }}>
             <a
               href={`mailto:${personalInfo.email}`}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg font-semibold text-white transition-all duration-200 hover:brightness-110 hover:-translate-y-0.5"
-              style={{ backgroundColor: 'var(--accent)' }}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '14px 32px',
+                backgroundColor: 'var(--inverse-cta-bg)',
+                color: 'var(--inverse-cta-fg)',
+                borderRadius: '9999px',
+                fontWeight: 700,
+                fontSize: '15px',
+                border: '2px solid var(--inverse-cta-bg)',
+                boxShadow: '3px 3px 0 var(--btn-shadow)',
+                textDecoration: 'none',
+                fontFamily: "'Space Grotesk', sans-serif",
+                transition: 'transform 0.15s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.transform = 'translate(-2px,-2px)'; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = 'translate(0,0)'; }}
             >
-              <Mail className="w-5 h-5" aria-hidden="true" />
+              <Mail style={{ width: '18px', height: '18px' }} />
               Send Email
-            </a>
-            <a
-              href={personalInfo.resume}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg font-semibold border transition-all duration-200 hover:bg-white/5 hover:-translate-y-0.5"
-              style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}
-            >
-              View Resume{/* TODO: link resume PDF */}
-              <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </a>
           </div>
         </div>
       </section>
 
-      {/* Footer bar */}
       <div
-        className="py-6 px-4 sm:px-6 lg:px-8"
-        style={{ backgroundColor: 'var(--bg-primary)', borderTop: '1px solid var(--border)' }}
+        style={{
+          padding: '24px 24px',
+          backgroundColor: 'var(--inverse-bg)',
+          borderTop: '1px solid var(--inverse-border)',
+        }}
       >
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+          <p style={{ fontSize: '13px', color: 'var(--inverse-muted)' }}>
             © {new Date().getFullYear()} {personalInfo.name}. Built with React & Tailwind CSS.
           </p>
-          <div className="flex items-center gap-2">
-            <a
-              href={personalInfo.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg transition-all duration-200 hover:scale-110"
-              style={{ color: 'var(--text-muted)' }}
-              onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.boxShadow = '0 0 12px var(--accent-glow)'; }}
-              onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.boxShadow = 'none'; }}
-              aria-label="GitHub profile"
-            >
-              <Github className="w-5 h-5" />
-            </a>
-            <a
-              href={personalInfo.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg transition-all duration-200 hover:scale-110"
-              style={{ color: 'var(--text-muted)' }}
-              onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.boxShadow = '0 0 12px var(--accent-glow)'; }}
-              onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.boxShadow = 'none'; }}
-              aria-label="LinkedIn profile"
-            >
-              <Linkedin className="w-5 h-5" />
-            </a>
-            <a
-              href={`mailto:${personalInfo.email}`}
-              className="p-2 rounded-lg transition-all duration-200 hover:scale-110"
-              style={{ color: 'var(--text-muted)' }}
-              onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.boxShadow = '0 0 12px var(--accent-glow)'; }}
-              onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.boxShadow = 'none'; }}
-              aria-label="Send email"
-            >
-              <Mail className="w-5 h-5" />
-            </a>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            {[
+              { icon: Github, href: personalInfo.github, label: 'GitHub profile' },
+              { icon: Linkedin, href: personalInfo.linkedin, label: 'LinkedIn profile' },
+              { icon: Mail, href: `mailto:${personalInfo.email}`, label: 'Send email' },
+            ].map(({ icon: Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                target={label !== 'Send email' ? '_blank' : undefined}
+                rel={label !== 'Send email' ? 'noopener noreferrer' : undefined}
+                aria-label={label}
+                style={{
+                  padding: '8px',
+                  borderRadius: '8px',
+                  color: 'var(--inverse-muted)',
+                  transition: 'color 0.15s',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.color = 'var(--inverse-text)'; }}
+                onMouseLeave={e => { e.currentTarget.style.color = 'var(--inverse-muted)'; }}
+              >
+                <Icon style={{ width: '20px', height: '20px' }} />
+              </a>
+            ))}
           </div>
         </div>
       </div>

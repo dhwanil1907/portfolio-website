@@ -9,35 +9,55 @@ function AwardCard({ award, index }) {
   return (
     <div
       ref={ref}
-      className={`flex gap-6 items-start p-6 rounded-xl border transition-all duration-[250ms] hover:-translate-y-0.5 fade-up ${visible ? 'visible' : ''}`}
+      className={`neo-card fade-up ${visible ? 'visible' : ''}`}
       style={{
-        backgroundColor: 'var(--bg-card)',
-        borderColor: 'var(--border)',
-        transitionDelay: `${index * 0.1}s`
+        padding: '24px',
+        display: 'flex',
+        gap: '20px',
+        alignItems: 'flex-start',
+        transitionDelay: `${index * 0.1}s`,
       }}
     >
       <div
-        className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border"
-        style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border)' }}
+        style={{
+          width: '48px',
+          height: '48px',
+          borderRadius: '12px',
+          backgroundColor: '#fbbf24',
+          border: '2px solid var(--border)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexShrink: 0,
+        }}
       >
-        <Award className="w-6 h-6" style={{ color: 'var(--accent)' }} aria-hidden="true" />
+        <Award style={{ width: '24px', height: '24px', color: '#0a0a0a' }} />
       </div>
-      <div className="flex-1 min-w-0">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-1">
-          <h3 className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>
+
+      <div style={{ flex: 1 }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px', marginBottom: '6px' }}>
+          <h3 style={{ fontSize: '17px', fontWeight: 700, color: 'var(--text-primary)', fontFamily: "'Space Grotesk', sans-serif" }}>
             {award.title}
           </h3>
           <span
-            className="self-start shrink-0 px-3 py-0.5 rounded-full text-xs font-semibold font-mono-tech"
-            style={{ backgroundColor: 'var(--accent-glow)', color: 'var(--accent)' }}
+            style={{
+              padding: '3px 12px',
+              borderRadius: '9999px',
+              fontSize: '11px',
+              fontFamily: "'JetBrains Mono', monospace",
+              backgroundColor: '#fbbf24',
+              color: '#0a0a0a',
+              border: '1px solid var(--border)',
+              flexShrink: 0,
+            }}
           >
             {award.date}
           </span>
         </div>
-        <p className="text-sm font-medium mb-2" style={{ color: 'var(--accent)' }}>
+        <p style={{ fontSize: '13px', fontWeight: 600, color: 'var(--accent)', marginBottom: '8px' }}>
           {award.issuer}
         </p>
-        <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+        <p style={{ fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.65 }}>
           {award.description}
         </p>
       </div>
@@ -49,25 +69,22 @@ export default function Awards() {
   const [ref, visible] = useInView();
 
   return (
-    <div
-      className="py-24 px-4 sm:px-6 lg:px-8"
-      style={{ borderTop: '1px solid var(--border)' }}
-    >
+    <div className="py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--bg-primary)' }}>
       <div className="max-w-4xl mx-auto">
-        {/* Header */}
         <div ref={ref} className={`mb-12 fade-up ${visible ? 'visible' : ''}`}>
-          <p
-            className="text-xs font-medium uppercase tracking-widest mb-3 font-mono-tech"
-            style={{ color: 'var(--accent)' }}
+          <h2
+            style={{
+              fontSize: 'clamp(2rem, 4vw, 2.8rem)',
+              fontWeight: 900,
+              color: 'var(--text-primary)',
+              fontFamily: "'Space Grotesk', sans-serif",
+            }}
           >
-            Recognition
-          </p>
-          <h2 className="text-3xl font-bold" style={{ color: 'var(--text-primary)' }}>
-            Honors &amp; Awards
+            Honors &amp; <span className="highlight-yellow">Awards</span>
           </h2>
         </div>
 
-        <div className="space-y-6">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           {awardsData.map((award, idx) => (
             <AwardCard key={idx} award={award} index={idx} />
           ))}

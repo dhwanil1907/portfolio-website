@@ -8,37 +8,56 @@ function LeadershipCard({ item, index }) {
   return (
     <div
       ref={ref}
-      className={`rounded-xl p-5 border fade-up ${visible ? 'visible' : ''}`}
+      className={`neo-card fade-up ${visible ? 'visible' : ''}`}
       style={{
-        backgroundColor: 'var(--bg-card)',
-        borderColor: 'var(--border)',
-        transitionDelay: `${index * 0.1}s`
+        padding: '24px',
+        transitionDelay: `${index * 0.1}s`,
       }}
     >
-      {/* Org + latest role */}
-      <div className="mb-4">
-        <h3 className="text-base font-semibold leading-snug" style={{ color: 'var(--text-primary)' }}>
+      <div style={{ marginBottom: '16px' }}>
+        <h3
+          style={{
+            fontSize: '16px',
+            fontWeight: 700,
+            color: 'var(--text-primary)',
+            fontFamily: "'Space Grotesk', sans-serif",
+            marginBottom: '6px',
+          }}
+        >
           {item.organization}
         </h3>
-        <p className="text-xs font-mono-tech mt-0.5" style={{ color: 'var(--accent)' }}>
+        <span
+          style={{
+            display: 'inline-block',
+            backgroundColor: '#6c4fff',
+            color: '#ffffff',
+            padding: '3px 12px',
+            borderRadius: '9999px',
+            fontSize: '12px',
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontWeight: 600,
+            marginBottom: '4px',
+          }}
+        >
           {item.roles[0].title}
-        </p>
-        <p className="text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>
+        </span>
+        <p style={{ fontSize: '12px', color: 'var(--text-subtle)', fontFamily: "'JetBrains Mono', monospace" }}>
           {item.roles[0].date}
         </p>
       </div>
 
-      {/* Role progression pills */}
       {item.roles.length > 1 && (
-        <div className="flex flex-wrap gap-1.5 mb-4">
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '16px' }}>
           {item.roles.slice(1).map((role, i) => (
             <span
               key={i}
-              className="px-2 py-0.5 rounded text-xs font-mono-tech"
               style={{
-                backgroundColor: 'var(--bg-primary)',
-                border: '1px solid var(--border)',
-                color: 'var(--text-muted)'
+                padding: '3px 10px',
+                borderRadius: '9999px',
+                fontSize: '11px',
+                backgroundColor: 'var(--skill-tag-bg)',
+                color: 'var(--skill-tag-fg)',
+                fontFamily: "'Space Grotesk', sans-serif",
               }}
             >
               {role.title}
@@ -47,11 +66,22 @@ function LeadershipCard({ item, index }) {
         </div>
       )}
 
-      {/* Bullets */}
-      <ul className="space-y-2">
+      <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
         {item.bullets.map((b, i) => (
-          <li key={i} className="flex items-start gap-2 text-xs leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-            <span className="mt-1.5 w-1 h-1 rounded-full shrink-0" style={{ backgroundColor: 'var(--accent)' }} />
+          <li
+            key={i}
+            style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontSize: '13px', color: 'var(--text-muted)', lineHeight: 1.6 }}
+          >
+            <span
+              style={{
+                width: '6px',
+                height: '6px',
+                borderRadius: '50%',
+                backgroundColor: '#6c4fff',
+                flexShrink: 0,
+                marginTop: '7px',
+              }}
+            />
             {b}
           </li>
         ))}
@@ -64,25 +94,21 @@ export default function Leadership() {
   const [ref, visible] = useInView();
 
   return (
-    <div
-      className="py-24 px-4 sm:px-6 lg:px-8"
-      style={{ borderTop: '1px solid var(--border)' }}
-    >
+    <div className="py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--bg-alt)' }}>
       <div className="max-w-5xl mx-auto">
-        {/* Header */}
         <div ref={ref} className={`mb-12 fade-up ${visible ? 'visible' : ''}`}>
-          <p
-            className="text-xs font-medium uppercase tracking-widest mb-3 font-mono-tech"
-            style={{ color: 'var(--accent)' }}
+          <h2
+            style={{
+              fontSize: 'clamp(2rem, 4vw, 2.8rem)',
+              fontWeight: 900,
+              color: 'var(--text-primary)',
+              fontFamily: "'Space Grotesk', sans-serif",
+            }}
           >
-            Leadership
-          </p>
-          <h2 className="text-3xl font-bold" style={{ color: 'var(--text-primary)' }}>
-            Campus Involvement
+            Campus <span className="highlight-pink">Involvement</span>
           </h2>
         </div>
 
-        {/* 2-column compact grid */}
         <div className="grid sm:grid-cols-2 gap-6">
           {leadershipData.map((item, idx) => (
             <LeadershipCard key={idx} item={item} index={idx} />
