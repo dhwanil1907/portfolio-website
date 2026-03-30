@@ -193,16 +193,28 @@ function ProjectCard({ project, index }) {
           }}
         >
           {project.image ? (
-            <img
-              src={project.image}
-              alt={project.title}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                display: 'block',
-              }}
-            />
+            <div style={{
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '20px',
+            }}>
+              <img
+                src={project.image}
+                alt={project.title}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: 'top center',
+                  borderRadius: '10px',
+                  boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
+                  display: 'block',
+                }}
+              />
+            </div>
           ) : (
             <span
               style={{
