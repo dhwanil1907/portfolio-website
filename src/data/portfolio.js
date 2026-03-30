@@ -90,6 +90,7 @@ export const projectsData = [
     gradient: 'from-emerald-500 via-teal-500 to-cyan-600',
     github: 'https://github.com/dhwanil1907/Verdict-HackHayward-2026',
     demo: 'https://verdict-hackhayward-2026.vercel.app/',
+    image: '/verdict.webp',
   },
   {
     title: 'SafeRoute',
@@ -101,6 +102,7 @@ export const projectsData = [
     categories: ['Full-Stack', 'Machine Learning'],
     gradient: 'from-violet-600 via-purple-500 to-indigo-600',
     github: 'https://github.com/dhwanil1907/SafeRoute_SJHacks-2025',
+    image: '/saferoute.webp',
   },
   {
     title: 'KPI Anomaly Detection System',

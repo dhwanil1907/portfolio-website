@@ -189,20 +189,34 @@ function ProjectCard({ project, index }) {
             alignItems: 'center',
             justifyContent: 'center',
             flexShrink: 0,
+            overflow: 'hidden',
           }}
         >
-          <span
-            style={{
-              fontSize: '80px',
-              fontWeight: 900,
-              color: 'rgba(255,255,255,0.2)',
-              fontFamily: "'Space Grotesk', sans-serif",
-              lineHeight: 1,
-              userSelect: 'none',
-            }}
-          >
-            {project.year}
-          </span>
+          {project.image ? (
+            <img
+              src={project.image}
+              alt={project.title}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                display: 'block',
+              }}
+            />
+          ) : (
+            <span
+              style={{
+                fontSize: '80px',
+                fontWeight: 900,
+                color: 'rgba(255,255,255,0.2)',
+                fontFamily: "'Space Grotesk', sans-serif",
+                lineHeight: 1,
+                userSelect: 'none',
+              }}
+            >
+              {project.year}
+            </span>
+          )}
         </div>
       </div>
     </div>
