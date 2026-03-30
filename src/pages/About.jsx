@@ -35,6 +35,7 @@ export default function About() {
                   height: '100%',
                   objectFit: 'cover',
                   objectPosition: 'center top',
+                  transform: 'scale(1.15)',
                   display: 'block',
                 }}
               />

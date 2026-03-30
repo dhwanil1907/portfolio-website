@@ -120,41 +120,24 @@ export default function Home() {
               style={{
                 width: '340px',
                 height: '340px',
-                backgroundColor: 'var(--hero-card-bg)',
                 border: '2px solid var(--border)',
                 borderRadius: '24px',
                 boxShadow: '8px 8px 0 var(--shadow-key)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexDirection: 'column',
-                gap: '8px',
+                overflow: 'hidden',
+                flexShrink: 0,
               }}
             >
-              <span
+              <img
+                src="/IMG_9684.jpg"
+                alt="Dhwanil Ranpura"
                 style={{
-                  fontSize: '96px',
-                  fontWeight: 900,
-                  color: 'var(--hero-card-text)',
-                  fontFamily: "'Space Grotesk', sans-serif",
-                  lineHeight: 1,
-                  opacity: 0.85,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: 'center 22%',
+                  display: 'block',
                 }}
-              >
-                DR
-              </span>
-              <span
-                style={{
-                  fontSize: '14px',
-                  fontWeight: 600,
-                  color: 'var(--hero-card-text)',
-                  opacity: 0.6,
-                  fontFamily: "'Space Grotesk', sans-serif",
-                  letterSpacing: '0.05em',
-                }}
-              >
-                Data Engineer &amp; ML
-              </span>
+              />
             </div>
           </div>
         </div>
