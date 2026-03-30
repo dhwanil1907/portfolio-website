@@ -26,6 +26,15 @@ function ProjectCard({ project, index }) {
           boxShadow: 'var(--neo-shadow-lg)',
           overflow: 'hidden',
           minHeight: '220px',
+          transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.transform = 'scale(1.02)';
+          e.currentTarget.style.boxShadow = '0 20px 48px rgba(0,0,0,0.18)';
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.transform = 'scale(1)';
+          e.currentTarget.style.boxShadow = 'var(--neo-shadow-lg)';
         }}
       >
         <div
@@ -207,7 +216,7 @@ function ProjectCard({ project, index }) {
                 style={{
                   width: '100%',
                   height: '100%',
-                  objectFit: 'contain',
+                  objectFit: 'cover',
                   objectPosition: 'top center',
                   borderRadius: '10px',
                   boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
