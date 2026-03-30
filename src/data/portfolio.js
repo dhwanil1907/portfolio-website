@@ -80,6 +80,18 @@ export const leadershipData = [
 
 export const projectsData = [
   {
+    title: 'Verdict',
+    subtitle: 'AI Startup Validation Platform',
+    year: '2026',
+    impact: '~60s full diligence memo · 6 parallel API calls · HackHayward 2026 3rd Place',
+    description: 'AI-powered startup validation platform built at HackHayward 2026. Founders describe their idea and complete a quick profile survey — Verdict runs 6 parallel live web searches via Perplexity Sonar Pro to return TAM/SAM/SOM sizing, competitor intel, an entry strategy score, and a Go/No-Go verdict with real failure patterns. Includes PDF export, report history, and a Dossier AI chatbot.',
+    tech: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'Perplexity Sonar Pro', 'Vercel'],
+    categories: ['Full-Stack', 'AI/ML'],
+    gradient: 'from-emerald-500 via-teal-500 to-cyan-600',
+    github: 'https://github.com/dhwanil1907/Verdict-HackHayward-2026',
+    demo: 'https://verdict-hackhayward-2026.vercel.app/',
+  },
+  {
     title: 'SafeRoute',
     subtitle: 'AI Safety Navigation System',
     year: '2025',
@@ -136,6 +148,12 @@ export const projectsData = [
 ];
 
 export const awardsData = [
+  {
+    title: 'Verdict 3rd Place — HackHayward 2026',
+    issuer: 'HackHayward',
+    date: 'Mar 2026',
+    description: 'Built Verdict, an AI-powered startup validation platform that generates a full diligence memo in ~60 seconds. Leveraged 6 parallel Perplexity Sonar Pro API calls with SSE streaming to deliver TAM/SAM/SOM market sizing, competitor intel, a 4-dimension entry strategy score, and a Go/No-Go verdict personalized to the founder\'s stage, budget, and geography. Placed 3rd overall.'
+  },
   {
     title: 'ASA DataFest 2025 Best Overall Winner',
     issuer: 'American Statistical Association',
