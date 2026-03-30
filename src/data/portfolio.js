@@ -5,6 +5,7 @@ export const personalInfo = {
   email: "dhwanil.ranpura@sjsu.edu",
   linkedin: "https://linkedin.com/in/dhwanil-ranpura",
   github: "https://github.com/dhwanil1907",
+  resume: "/master_resume.pdf",
   education: {
     university: "San Jose State University",
     degree: "Bachelor of Science in Data Science",

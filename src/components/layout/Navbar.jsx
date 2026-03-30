@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Github, Linkedin, Mail, Sun, Moon } from 'lucide-react';
+import { Menu, X, Github, Linkedin, Mail, Sun, Moon, FileText } from 'lucide-react';
 import { navLinks, personalInfo } from '../../data/portfolio';
 import { useTheme } from '../../context/ThemeContext';
 
@@ -150,6 +150,20 @@ export default function Navbar() {
             <Mail style={{ width: '16px', height: '16px' }} />
           </a>
 
+          <a
+            href={personalInfo.resume}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden lg:flex"
+            style={{
+              ...iconCircleStyle,
+              textDecoration: 'none',
+            }}
+            aria-label="Open resume (PDF)"
+          >
+            <FileText style={{ width: '16px', height: '16px' }} />
+          </a>
+
           <button
             className="lg:hidden"
             type="button"
@@ -238,6 +252,16 @@ export default function Navbar() {
                 aria-label="LinkedIn profile"
               >
                 <Linkedin style={{ width: '18px', height: '18px' }} /> LinkedIn
+              </a>
+              <a
+                href={personalInfo.resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="col-span-2 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-medium"
+                style={{ border: '2px solid var(--border)', color: 'var(--text-primary)', textDecoration: 'none' }}
+                aria-label="Open resume (PDF)"
+              >
+                <FileText style={{ width: '18px', height: '18px' }} /> Resume
               </a>
             </div>
           </div>

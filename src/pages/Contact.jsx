@@ -1,4 +1,4 @@
-import { Mail, Linkedin, Github, MapPin } from 'lucide-react';
+import { Mail, Linkedin, Github, MapPin, FileText } from 'lucide-react';
 import { personalInfo } from '../data/portfolio';
 import useInView from '../hooks/useInView';
 
@@ -64,10 +64,11 @@ export default function Contact() {
               </div>
             ))}
 
-            <div style={{ display: 'flex', gap: '12px', paddingTop: '8px' }}>
+            <div style={{ display: 'flex', gap: '12px', paddingTop: '8px', flexWrap: 'wrap' }}>
               {[
                 { icon: Github, href: personalInfo.github, label: 'GitHub profile' },
                 { icon: Linkedin, href: personalInfo.linkedin, label: 'LinkedIn profile' },
+                { icon: FileText, href: personalInfo.resume, label: 'Open resume (PDF)' },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}

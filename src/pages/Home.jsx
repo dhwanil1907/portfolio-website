@@ -120,9 +120,8 @@ export default function Home() {
               style={{
                 width: '340px',
                 height: '340px',
-                border: '2px solid var(--border)',
+                border: '1px solid var(--divider)',
                 borderRadius: '24px',
-                boxShadow: '8px 8px 0 var(--shadow-key)',
                 overflow: 'hidden',
                 flexShrink: 0,
               }}

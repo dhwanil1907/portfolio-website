@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail, FileText } from 'lucide-react';
 import { personalInfo } from '../../data/portfolio';
 
 export default function Footer() {
@@ -82,6 +82,7 @@ export default function Footer() {
             {[
               { icon: Github, href: personalInfo.github, label: 'GitHub profile' },
               { icon: Linkedin, href: personalInfo.linkedin, label: 'LinkedIn profile' },
+              { icon: FileText, href: personalInfo.resume, label: 'Open resume (PDF)' },
               { icon: Mail, href: `mailto:${personalInfo.email}`, label: 'Send email' },
             ].map(({ icon: Icon, href, label }) => (
               <a
