@@ -125,6 +125,7 @@ export const projectsData = [
     categories: ['Machine Learning', 'Research'],
     gradient: 'from-rose-500 via-pink-500 to-fuchsia-600',
     github: 'https://github.com/dhwanil1907/CS-123A-Predicting-Breast-Cancer-Relapse-Using-Gene-Expression-and-Machine-Learning',
+    image: '/breastcancer .webp',
   },
   {
     title: 'SBA Loan Default Prediction',
