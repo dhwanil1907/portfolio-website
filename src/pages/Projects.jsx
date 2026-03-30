@@ -207,7 +207,7 @@ function ProjectCard({ project, index }) {
                 style={{
                   width: '100%',
                   height: '100%',
-                  objectFit: 'cover',
+                  objectFit: 'contain',
                   objectPosition: 'top center',
                   borderRadius: '10px',
                   boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
