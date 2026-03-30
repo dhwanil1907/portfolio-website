@@ -10,6 +10,7 @@ const PANEL_COLORS = ['#6c4fff', '#4169ff', '#f4647a', '#fbbf24', '#10b981'];
 
 function ProjectCard({ project, index }) {
   const [ref, visible] = useInView();
+  const [imgHovered, setImgHovered] = React.useState(false);
   const panelColor = PANEL_COLORS[index % PANEL_COLORS.length];
 
   return (
@@ -199,17 +200,25 @@ function ProjectCard({ project, index }) {
             justifyContent: 'center',
             flexShrink: 0,
             overflow: 'hidden',
+            position: 'relative',
           }}
         >
           {project.image ? (
-            <div style={{
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '20px',
-            }}>
+            <div
+              onMouseEnter={() => setImgHovered(true)}
+              onMouseLeave={() => setImgHovered(false)}
+              style={{
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '20px',
+                position: 'relative',
+                zIndex: imgHovered ? 10 : 1,
+                overflow: 'visible',
+              }}
+            >
               <img
                 src={project.image}
                 alt={project.title}
@@ -219,8 +228,13 @@ function ProjectCard({ project, index }) {
                   objectFit: 'cover',
                   objectPosition: 'top center',
                   borderRadius: '10px',
-                  boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
+                  boxShadow: imgHovered
+                    ? '0 24px 64px rgba(0,0,0,0.55)'
+                    : '0 8px 24px rgba(0,0,0,0.35)',
                   display: 'block',
+                  transform: imgHovered ? 'scale(1.08) translateY(-6px)' : 'scale(1) translateY(0)',
+                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                  cursor: 'pointer',
                 }}
               />
             </div>

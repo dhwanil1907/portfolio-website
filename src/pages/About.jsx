@@ -22,26 +22,23 @@ export default function About() {
                 width: '280px',
                 height: '280px',
                 borderRadius: '50%',
-                backgroundColor: 'var(--pink)',
                 border: '3px solid var(--border)',
                 boxShadow: '6px 6px 0 var(--shadow-key)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexDirection: 'column',
+                overflow: 'hidden',
+                flexShrink: 0,
               }}
             >
-              <span
+              <img
+                src="/IMG_9684.jpg"
+                alt="Dhwanil Ranpura"
                 style={{
-                  fontSize: '64px',
-                  fontWeight: 900,
-                  color: '#ffffff',
-                  fontFamily: "'Space Grotesk', sans-serif",
-                  lineHeight: 1,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: 'center top',
+                  display: 'block',
                 }}
-              >
-                DR
-              </span>
+              />
             </div>
           </div>
 
