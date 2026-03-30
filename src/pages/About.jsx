@@ -23,7 +23,6 @@ export default function About() {
                 height: '280px',
                 borderRadius: '50%',
                 border: '3px solid var(--border)',
-                boxShadow: '6px 6px 0 var(--shadow-key)',
                 overflow: 'hidden',
                 flexShrink: 0,
               }}
