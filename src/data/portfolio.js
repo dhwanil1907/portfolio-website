@@ -40,7 +40,7 @@ export const experienceData = [
   {
     role: "Documentation Assistant",
     company: "GovAI Coalition",
-    type: "Internship",
+    type: "Volunteer",
     date: "Dec 2024 — Jan 2025",
     location: "San Jose, CA",
     bullets: [

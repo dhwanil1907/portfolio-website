@@ -1,257 +1,219 @@
-import React, { useState } from 'react';
-import { ArrowRight, Github, ExternalLink } from 'lucide-react';
+import React from 'react';
+import { Github, ExternalLink } from 'lucide-react';
 import { projectsData } from '../data/portfolio';
 import useInView from '../hooks/useInView';
 
-const ALL_CATEGORIES = ['All', ...Array.from(new Set(projectsData.flatMap(p => p.categories)))];
-const DEFAULT_SHOW = 4;
+const featured =
+  projectsData.find(p => p.title === 'Verdict') ?? projectsData[0];
+const gridProjects = projectsData.filter(p => p.title !== featured.title);
 
-const PANEL_COLORS = ['#6c4fff', '#4169ff', '#f4647a', '#fbbf24', '#10b981'];
+const cardBase =
+  'rounded-xl border transition-colors duration-200 overflow-hidden group/image';
+const cardStyle = {
+  backgroundColor: 'var(--bg-card)',
+  borderColor: 'var(--border)',
+  borderWidth: '1px',
+};
 
-function ProjectCard({ project, index }) {
+function ProjectLinks({ project }) {
+  return (
+    <div className="flex flex-wrap gap-5 mt-6">
+      {project.github && (
+        <a
+          href={project.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
+          style={{ color: 'var(--text-primary)', textDecoration: 'none', fontFamily: "'Inter', system-ui, sans-serif" }}
+        >
+          <Github className="w-4 h-4" strokeWidth={1.5} />
+          GitHub
+        </a>
+      )}
+      {project.demo && (
+        <a
+          href={project.demo}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
+          style={{ color: 'var(--accent)', textDecoration: 'none', fontFamily: "'Inter', system-ui, sans-serif" }}
+        >
+          <ExternalLink className="w-4 h-4" strokeWidth={1.5} />
+          Demo
+        </a>
+      )}
+    </div>
+  );
+}
+
+function TechTags({ tech }) {
+  return (
+    <div className="flex flex-wrap gap-2 mt-5">
+      {tech.map(t => (
+        <span
+          key={t}
+          className="rounded-full px-2.5 py-1 text-[11px] leading-tight"
+          style={{
+            backgroundColor: 'var(--bg-card-hover)',
+            border: '1px solid var(--border)',
+            color: 'var(--text-muted)',
+            fontFamily: "'JetBrains Mono', monospace",
+          }}
+        >
+          {t}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function FeaturedProject({ project }) {
   const [ref, visible] = useInView();
-  const [imgHovered, setImgHovered] = React.useState(false);
-  const panelColor = PANEL_COLORS[index % PANEL_COLORS.length];
+
+  return (
+    <div ref={ref} className={`fade-up ${visible ? 'visible' : ''}`}>
+      <div
+        className={`${cardBase} flex flex-col lg:flex-row lg:items-stretch`}
+        style={{
+          ...cardStyle,
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.backgroundColor = 'var(--bg-card-hover)';
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.backgroundColor = 'var(--bg-card)';
+        }}
+      >
+        <div
+          className="w-full lg:w-1/2 shrink-0 aspect-video lg:aspect-auto lg:min-h-[280px] transition-colors duration-200 border-b lg:border-b-0 lg:border-r border-solid group-hover/image:bg-[var(--bg-card-hover)]"
+          style={{
+            backgroundColor: 'var(--bg-card)',
+            borderColor: 'var(--border)',
+          }}
+        >
+          {project.image ? (
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-cover object-top"
+              style={{ minHeight: '100%' }}
+            />
+          ) : null}
+        </div>
+        <div className="flex-1 p-8 lg:p-10 min-w-0">
+          <p
+            className="text-xs m-0 mb-3"
+            style={{ color: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace" }}
+          >
+            {project.year}
+          </p>
+          <h3
+            className="text-2xl sm:text-3xl font-bold m-0 mb-2 leading-tight"
+            style={{ color: 'var(--text-primary)', fontFamily: "'Space Grotesk', sans-serif" }}
+          >
+            {project.title}
+          </h3>
+          <p
+            className="text-sm m-0 mb-4"
+            style={{ color: 'var(--text-muted)', fontFamily: "'Inter', system-ui, sans-serif" }}
+          >
+            {project.subtitle}
+          </p>
+          <span
+            className="inline-block text-[11px] px-3 py-1.5 rounded-full mb-4"
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              color: 'var(--text-muted)',
+              border: '1px solid var(--border)',
+            }}
+          >
+            {project.impact}
+          </span>
+          <p
+            className="text-sm m-0 leading-relaxed"
+            style={{ color: 'var(--text-muted)', fontFamily: "'Inter', system-ui, sans-serif" }}
+          >
+            {project.description}
+          </p>
+          <TechTags tech={project.tech} />
+          <ProjectLinks project={project} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function GridProjectCard({ project, index }) {
+  const [ref, visible] = useInView();
 
   return (
     <div
       ref={ref}
       className={`fade-up ${visible ? 'visible' : ''}`}
-      style={{ transitionDelay: `${index * 0.08}s` }}
+      style={{ transitionDelay: `${index * 0.06}s` }}
     >
       <div
-        style={{
-          display: 'flex',
-          border: '2px solid var(--border)',
-          borderRadius: '20px',
-          boxShadow: 'var(--neo-shadow-lg)',
-          overflow: 'hidden',
-          minHeight: '220px',
-          transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-        }}
+        className={cardBase}
+        style={cardStyle}
         onMouseEnter={e => {
-          e.currentTarget.style.transform = 'scale(1.02)';
-          e.currentTarget.style.boxShadow = '0 20px 48px rgba(0,0,0,0.18)';
+          e.currentTarget.style.backgroundColor = 'var(--bg-card-hover)';
         }}
         onMouseLeave={e => {
-          e.currentTarget.style.transform = 'scale(1)';
-          e.currentTarget.style.boxShadow = 'var(--neo-shadow-lg)';
+          e.currentTarget.style.backgroundColor = 'var(--bg-card)';
         }}
       >
         <div
+          className="aspect-video w-full transition-colors duration-200 border-b border-solid group-hover/image:bg-[var(--bg-card-hover)]"
           style={{
-            flex: 1,
-            padding: '32px',
-            backgroundColor: 'var(--bg-card-solid)',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-          }}
-        >
-          <div>
-            <span
-              style={{
-                display: 'inline-block',
-                backgroundColor: 'var(--btn-primary-bg)',
-                color: 'var(--btn-primary-fg)',
-                padding: '4px 12px',
-                borderRadius: '9999px',
-                fontSize: '11px',
-                fontFamily: "'JetBrains Mono', monospace",
-                marginBottom: '16px',
-              }}
-            >
-              {project.categories[0]}
-            </span>
-
-            <span
-              style={{
-                display: 'inline-block',
-                marginLeft: '8px',
-                backgroundColor: 'var(--tag-bg)',
-                color: 'var(--text-muted)',
-                padding: '4px 10px',
-                borderRadius: '9999px',
-                fontSize: '11px',
-                fontFamily: "'JetBrains Mono', monospace",
-                border: '1px solid var(--tag-border)',
-              }}
-            >
-              {project.year}
-            </span>
-
-            <h3
-              style={{
-                fontSize: '20px',
-                fontWeight: 700,
-                color: 'var(--text-primary)',
-                fontFamily: "'Space Grotesk', sans-serif",
-                marginBottom: '6px',
-                lineHeight: 1.3,
-              }}
-            >
-              {project.title}
-            </h3>
-
-            <p
-              style={{
-                fontSize: '12px',
-                color: 'var(--accent)',
-                fontFamily: "'JetBrains Mono', monospace",
-                marginBottom: '10px',
-              }}
-            >
-              {project.impact}
-            </p>
-
-            <p
-              style={{
-                fontSize: '13px',
-                color: 'var(--text-muted)',
-                lineHeight: 1.65,
-                marginBottom: '16px',
-              }}
-            >
-              {project.description}
-            </p>
-
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '20px' }}>
-              {project.tech.slice(0, 5).map((t, i) => (
-                <span
-                  key={i}
-                  style={{
-                    padding: '3px 8px',
-                    borderRadius: '4px',
-                    fontSize: '11px',
-                    backgroundColor: 'var(--tag-bg)',
-                    border: '1px solid var(--tag-border)',
-                    color: 'var(--text-muted)',
-                    fontFamily: "'JetBrains Mono', monospace",
-                  }}
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-            {project.github && project.github !== '#' && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  fontSize: '13px',
-                  fontWeight: 700,
-                  color: 'var(--text-primary)',
-                  textDecoration: 'none',
-                  fontFamily: "'Space Grotesk', sans-serif",
-                }}
-              >
-                <Github style={{ width: '15px', height: '15px' }} /> Code
-              </a>
-            )}
-            {project.demo && project.demo !== '#' && (
-              <a
-                href={project.demo}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  fontSize: '13px',
-                  fontWeight: 700,
-                  color: 'var(--text-primary)',
-                  textDecoration: 'none',
-                  fontFamily: "'Space Grotesk', sans-serif",
-                }}
-              >
-                <ExternalLink style={{ width: '15px', height: '15px' }} /> Demo
-              </a>
-            )}
-            <span
-              style={{
-                marginLeft: 'auto',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '4px',
-                fontSize: '13px',
-                fontWeight: 700,
-                color: 'var(--text-primary)',
-                fontFamily: "'Space Grotesk', sans-serif",
-              }}
-            >
-              View project <ArrowRight style={{ width: '14px', height: '14px' }} />
-            </span>
-          </div>
-        </div>
-
-        <div
-          className="hidden sm:flex"
-          style={{
-            width: '38%',
-            backgroundColor: panelColor,
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexShrink: 0,
-            overflow: 'hidden',
-            position: 'relative',
+            backgroundColor: 'var(--bg-card)',
+            borderColor: 'var(--border)',
           }}
         >
           {project.image ? (
-            <div
-              onMouseEnter={() => setImgHovered(true)}
-              onMouseLeave={() => setImgHovered(false)}
-              style={{
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '20px',
-                position: 'relative',
-                zIndex: imgHovered ? 10 : 1,
-                overflow: 'visible',
-              }}
-            >
-              <img
-                src={project.image}
-                alt={project.title}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'top center',
-                  borderRadius: '10px',
-                  boxShadow: imgHovered
-                    ? '0 24px 64px rgba(0,0,0,0.55)'
-                    : '0 8px 24px rgba(0,0,0,0.35)',
-                  display: 'block',
-                  transform: imgHovered ? 'scale(1.08) translateY(-6px)' : 'scale(1) translateY(0)',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                  cursor: 'pointer',
-                }}
-              />
-            </div>
-          ) : (
-            <span
-              style={{
-                fontSize: '80px',
-                fontWeight: 900,
-                color: 'rgba(255,255,255,0.2)',
-                fontFamily: "'Space Grotesk', sans-serif",
-                lineHeight: 1,
-                userSelect: 'none',
-              }}
-            >
-              {project.year}
-            </span>
-          )}
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-cover object-top"
+            />
+          ) : null}
+        </div>
+        <div className="p-6">
+          <p
+            className="text-[11px] m-0 mb-2"
+            style={{ color: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace" }}
+          >
+            {project.year}
+          </p>
+          <h3
+            className="text-lg font-bold m-0 mb-1 leading-snug"
+            style={{ color: 'var(--text-primary)', fontFamily: "'Space Grotesk', sans-serif" }}
+          >
+            {project.title}
+          </h3>
+          <p
+            className="text-xs m-0 mb-3"
+            style={{ color: 'var(--text-muted)', fontFamily: "'Inter', system-ui, sans-serif" }}
+          >
+            {project.subtitle}
+          </p>
+          <span
+            className="inline-block text-[10px] px-2.5 py-1 rounded-full mb-3"
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              color: 'var(--text-muted)',
+              border: '1px solid var(--border)',
+            }}
+          >
+            {project.impact}
+          </span>
+          <p
+            className="text-xs m-0 mb-4 line-clamp-3"
+            style={{ color: 'var(--text-muted)', lineHeight: 1.6, fontFamily: "'Inter', system-ui, sans-serif" }}
+          >
+            {project.description}
+          </p>
+          <TechTags tech={project.tech.slice(0, 6)} />
+          <ProjectLinks project={project} />
         </div>
       </div>
     </div>
@@ -259,93 +221,25 @@ function ProjectCard({ project, index }) {
 }
 
 export default function Projects() {
-  const [showAll, setShowAll] = useState(false);
-  const [activeCategory, setActiveCategory] = useState('All');
   const [ref, visible] = useInView();
 
-  const filtered = activeCategory === 'All'
-    ? projectsData
-    : projectsData.filter(p => p.categories.includes(activeCategory));
-  const displayed = showAll ? filtered : filtered.slice(0, DEFAULT_SHOW);
-
-  function handleCategoryChange(cat) {
-    setActiveCategory(cat);
-    setShowAll(false);
-  }
-
   return (
-    <div className="py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--bg-primary)' }}>
-      <div className="max-w-5xl mx-auto">
-        <div ref={ref} className={`mb-8 fade-up ${visible ? 'visible' : ''}`}>
-          <h2
-            style={{
-              fontSize: 'clamp(2rem, 4vw, 2.8rem)',
-              fontWeight: 900,
-              color: 'var(--text-primary)',
-              fontFamily: "'Space Grotesk', sans-serif",
-              marginBottom: '12px',
-            }}
-          >
-            Take a look at my{' '}
-            <span className="highlight-yellow">design portfolio</span>
-          </h2>
-        </div>
+    <div
+      className="py-16 md:py-24 px-4 sm:px-8 max-w-[1200px] mx-auto"
+      style={{}}
+    >
+      <div ref={ref} className={`mb-14 fade-up ${visible ? 'visible' : ''}`}>
+        <p className="eyebrow mb-4">Work</p>
+        <h2 className="section-heading">Things I&apos;ve built.</h2>
+      </div>
 
-        <div className={`flex flex-wrap gap-2 mb-10 fade-up ${visible ? 'visible' : ''}`} style={{ transitionDelay: '0.05s' }}>
-          {ALL_CATEGORIES.map(cat => {
-            const isActive = activeCategory === cat;
-            return (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => handleCategoryChange(cat)}
-                style={{
-                  padding: '6px 18px',
-                  borderRadius: '9999px',
-                  fontSize: '13px',
-                  fontWeight: 600,
-                  border: '2px solid var(--border)',
-                  backgroundColor: isActive ? 'var(--btn-primary-bg)' : 'transparent',
-                  color: isActive ? 'var(--btn-primary-fg)' : 'var(--text-primary)',
-                  cursor: 'pointer',
-                  fontFamily: "'Space Grotesk', sans-serif",
-                  transition: 'background-color 0.15s, color 0.15s',
-                }}
-              >
-                {cat}
-              </button>
-            );
-          })}
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-          {displayed.map((project, idx) => (
-            <ProjectCard key={project.title} project={project} index={idx} />
+      <div className="flex flex-col gap-16">
+        <FeaturedProject project={featured} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {gridProjects.map((project, idx) => (
+            <GridProjectCard key={project.title} project={project} index={idx} />
           ))}
         </div>
-
-        {!showAll && filtered.length > DEFAULT_SHOW && (
-          <div className="mt-10 text-center">
-            <button
-              type="button"
-              onClick={() => setShowAll(true)}
-              style={{
-                padding: '12px 32px',
-                borderRadius: '9999px',
-                fontSize: '14px',
-                fontWeight: 700,
-                border: '2px solid var(--border)',
-                backgroundColor: 'transparent',
-                color: 'var(--text-primary)',
-                cursor: 'pointer',
-                boxShadow: '3px 3px 0 var(--shadow-key)',
-                fontFamily: "'Space Grotesk', sans-serif",
-              }}
-            >
-              Show All ({filtered.length})
-            </button>
-          </div>
-        )}
       </div>
     </div>
   );

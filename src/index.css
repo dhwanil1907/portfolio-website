@@ -3,96 +3,49 @@
 /* ── Google Fonts ─────────────────────────────────── */
 /* Inter + JetBrains Mono + Space Grotesk loaded via index.html <link> */
 
-/* ── Design Tokens ────────────────────────────────── */
+/* ── Design tokens (dark-only editorial) ───────────── */
 :root {
-  --bg-primary:    #ffffff;
-  --bg-alt:        #f0f0f0;
-  --bg-card:       #f0f0f0;
-  --bg-card-solid: #ffffff;
-  --bg-card-hover: #e5e5e5;
-  --border:        #0a0a0a;
-  --shadow-key:    #0a0a0a;
-  --shadow-card:   #333333;
-  --accent:        #4169ff;
-  --accent-glow:   rgba(65,105,255,0.15);
-  --text-primary:  #0a0a0a;
-  --text-muted:    #555555;
-  --text-subtle:   #777777;
-  --text-faint:    #333333;
-  --divider:       #e5e5e5;
-  --tag-bg:        #f0f0f0;
-  --tag-border:    #cccccc;
-  --nav-surface:   #ffffff;
-  --nav-ink:       #0a0a0a;
-  --nav-logo-bg:   #0a0a0a;
-  --nav-logo-fg:   #ffffff;
-  --btn-primary-bg:  #0a0a0a;
-  --btn-primary-fg:  #ffffff;
-  --btn-secondary-fg: #0a0a0a;
-  --btn-shadow:    #555555;
-  --inverse-bg:    #0a0a0a;
-  --inverse-text:  #ffffff;
-  --inverse-muted: #999999;
-  --inverse-border:#222222;
-  --inverse-cta-bg:  #ffffff;
-  --inverse-cta-fg:  #0a0a0a;
-  --pill-track:    #e5e5e5;
-  --skill-tag-bg:  #0a0a0a;
-  --skill-tag-fg:  #ffffff;
-  --cert-skill-bg: #f0f0f0;
-  --cert-skill-fg: #0a0a0a;
-  --cert-pill-bg:  #d1fae5;
-  --cert-pill-fg:  #0a0a0a;
+  --bg-primary: #111111;
+  --bg-alt: #171717;
+  --bg-card: #1A1A1A;
+  --bg-card-hover: #202020;
+  --border: #2A2A2A;
+  --accent: #86EFAC;
+  --accent-hover: #6EE7A0;
+  --text-primary: #F0F4F1;
+  --text-muted: #888888;
+  --text-subtle: #555555;
+  --divider: #1F1F1F;
+  --nav-surface: rgba(17, 17, 17, 0.88);
 
-  /* Neo-brutalism palette (accents stay vivid) */
-  --pink:    #f4647a;
-  --blue:    #4169ff;
-  --purple:  #6c4fff;
-  --yellow:  #fbbf24;
-  --neo-shadow:    4px 4px 0 var(--shadow-key);
-  --neo-shadow-lg: 6px 6px 0 var(--shadow-key);
-  --neo-border:    2px solid var(--border);
-}
-
-[data-theme="dark"] {
-  --bg-primary:    #0c0c0f;
-  --bg-alt:        #12121a;
-  --bg-card:       #17171f;
-  --bg-card-solid: #13131a;
-  --bg-card-hover: #1f1f28;
-  --border:        #e4e4e7;
-  --shadow-key:    #d4d4d8;
-  --shadow-card:   #71717a;
-  --accent:        #7c9eff;
-  --accent-glow:   rgba(124,158,255,0.2);
-  --text-primary:  #fafafa;
-  --text-muted:    #a1a1aa;
-  --text-subtle:   #a1a1aa;
-  --text-faint:    #d4d4d8;
-  --divider:       #27272a;
-  --tag-bg:        #27272a;
-  --tag-border:    #52525b;
-  --nav-surface:   #17171f;
-  --nav-ink:       #fafafa;
-  --nav-logo-bg:   #fafafa;
-  --nav-logo-fg:   #0c0c0f;
-  --btn-primary-bg:  #fafafa;
-  --btn-primary-fg:  #0c0c0f;
-  --btn-secondary-fg:#fafafa;
-  --btn-shadow:    #71717a;
-  --inverse-bg:    #030304;
-  --inverse-text:  #fafafa;
-  --inverse-muted: #a1a1aa;
-  --inverse-border:#3f3f46;
-  --inverse-cta-bg:  #fafafa;
-  --inverse-cta-fg:  #0c0c0f;
-  --pill-track:    #3f3f46;
-  --skill-tag-bg:  #fafafa;
-  --skill-tag-fg:  #0c0c0f;
-  --cert-skill-bg: #27272a;
-  --cert-skill-fg: #fafafa;
-  --cert-pill-bg:  #134e4a;
-  --cert-pill-fg:  #ecfdf5;
+  /* Referenced by page components until Phase 2 — map to editorial system */
+  --bg-card-solid: var(--bg-card);
+  --text-faint: var(--text-muted);
+  --tag-bg: var(--bg-card);
+  --tag-border: var(--border);
+  --btn-primary-bg: var(--accent);
+  --btn-primary-fg: #0d0d0d;
+  --btn-secondary-fg: var(--text-primary);
+  --nav-ink: var(--text-primary);
+  --shadow-key: var(--bg-primary);
+  --shadow-card: var(--bg-primary);
+  --btn-shadow: var(--bg-primary);
+  --neo-shadow: none;
+  --neo-shadow-lg: none;
+  --inverse-bg: var(--bg-alt);
+  --inverse-text: var(--text-primary);
+  --inverse-muted: var(--text-muted);
+  --inverse-border: var(--border);
+  --inverse-cta-bg: var(--accent);
+  --inverse-cta-fg: #0d0d0d;
+  --pill-track: var(--divider);
+  --skill-tag-bg: var(--bg-card-hover);
+  --skill-tag-fg: var(--text-primary);
+  --cert-skill-bg: var(--bg-card);
+  --cert-skill-fg: var(--text-primary);
+  --cert-pill-bg: rgba(129, 140, 248, 0.12);
+  --cert-pill-fg: var(--text-primary);
+  --accent-glow: rgba(129, 140, 248, 0.15);
 }
 
 /* ── Base ─────────────────────────────────────────── */
@@ -108,10 +61,22 @@ body {
   color: var(--text-primary);
   font-size: 16px;
   line-height: 1.75;
-  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* ── Focus Visible ──────────────────────────────── */
+/* ── Grain noise overlay ──────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.038;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  background-repeat: repeat;
+}
+
+/* ── Focus visible ───────────────────────────────── */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
@@ -123,60 +88,46 @@ body {
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* ── Highlight spans (neo-brutalist text markers) ─── */
-.highlight-pink {
-  background-color: var(--pink);
-  color: #ffffff;
-  padding: 0 10px 4px;
-  display: inline;
-  line-height: 1.15;
+/* ── Editorial utilities ───────────────────────────── */
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
-.highlight-blue {
-  background-color: var(--blue);
-  color: #ffffff;
-  padding: 0 10px 4px;
-  display: inline;
-  line-height: 1.15;
+.section-heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color: var(--text-primary);
+  line-height: 1.1;
 }
 
-.highlight-purple {
-  background-color: var(--purple);
-  color: #ffffff;
-  padding: 0 10px 4px;
-  display: inline;
-  line-height: 1.15;
+.divider {
+  margin: 0;
+  border: none;
+  border-top: 1px solid var(--divider);
 }
 
-.highlight-yellow {
-  background-color: var(--yellow);
-  color: #0a0a0a;
-  padding: 0 10px 4px;
-  display: inline;
-  line-height: 1.15;
+.editorial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: background 0.2s ease;
 }
 
-/* ── Neo-brutalism cards ──────────────────────────── */
-.neo-card {
-  border: var(--neo-border);
-  border-radius: 16px;
-  box-shadow: var(--neo-shadow);
-  background-color: var(--bg-card);
-  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+.editorial-card:hover {
+  background: var(--bg-card-hover);
 }
 
-.neo-card-lg {
-  border: var(--neo-border);
-  border-radius: 20px;
-  box-shadow: var(--neo-shadow-lg);
-}
-
-/* ── Scroll Animations ────────────────────────────── */
+/* ── Scroll animations ────────────────────────────── */
 .fade-up {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .fade-up.visible {
@@ -190,23 +141,37 @@ body {
     transform: none;
     transition: none;
   }
+
   * {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
 }
 
-/* ── Custom Scrollbar ─────────────────────────────── */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--bg-alt); }
-::-webkit-scrollbar-thumb { background: var(--tag-border); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+/* ── Custom scrollbar ───────────────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-alt);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
 
 /* ── Touch: swap hover for active ─────────────────── */
 @media (hover: none) {
   .hover\:scale-card:hover {
     transform: none !important;
   }
+
   .hover\:scale-card:active {
     transform: translateY(-2px);
   }

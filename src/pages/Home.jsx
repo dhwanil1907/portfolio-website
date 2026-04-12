@@ -1,142 +1,177 @@
 import React from 'react';
-import { Mail, FolderOpen } from 'lucide-react';
+import { personalInfo } from '../data/portfolio';
 import useInView from '../hooks/useInView';
 
 export default function Home() {
   const [ref, visible] = useInView();
 
-  const primaryShadow = '3px 3px 0 var(--btn-shadow)';
-  const primaryShadowHover = '5px 5px 0 var(--btn-shadow)';
-  const outlineShadow = '3px 3px 0 var(--shadow-key)';
-  const outlineShadowHover = '5px 5px 0 var(--shadow-key)';
-
   return (
-    <div className="w-full">
-      <section className="px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto pt-12 pb-24 md:pt-16 md:pb-32">
+    <div className="w-full relative">
+      {/* Sage glow — top right */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '-10%',
+          right: '-5%',
+          width: '600px',
+          height: '600px',
+          background: 'radial-gradient(ellipse, rgba(134,239,172,0.07) 0%, transparent 65%)',
+          pointerEvents: 'none',
+        }}
+      />
+
+      <section
+        className="relative min-h-screen flex flex-col justify-center px-4 sm:px-8 max-w-[1200px] mx-auto"
+        style={{ paddingTop: '80px', paddingBottom: '80px' }}
+      >
         <div
           ref={ref}
-          className={`grid lg:grid-cols-2 gap-12 items-center fade-up ${visible ? 'visible' : ''}`}
+          className={`w-full fade-up ${visible ? 'visible' : ''}`}
         >
-          <div>
-            <h1
-              style={{
-                fontSize: 'clamp(2.4rem, 5vw, 4rem)',
-                fontWeight: 900,
-                lineHeight: 1.1,
-                color: 'var(--text-primary)',
-                fontFamily: "'Space Grotesk', sans-serif",
-                marginBottom: '24px',
-              }}
-            >
-              I'm{' '}
-              <span className="highlight-pink">Dhwanil</span>
-              ,{' '}
-              <br className="hidden sm:block" />
-              a Data Scientist
-              <br />
-              from{' '}
-              <span className="highlight-blue">San Jose</span>
-            </h1>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
 
-            <p
-              style={{
-                fontSize: '17px',
-                color: 'var(--text-muted)',
-                lineHeight: 1.7,
-                marginBottom: '36px',
-                maxWidth: '480px',
-              }}
-            >
-              ML Practitioner & Data Engineer — building pipelines, models,
-              and dashboards for production. Currently seeking internships &amp; full-time roles.
-            </p>
-
-            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-              <a
-                href="#contact"
+            {/* Left — text */}
+            <div>
+              {/* Eyebrow pill */}
+              <div
+                className="inline-flex items-center gap-2 mb-6 sm:mb-8"
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '14px 28px',
-                  backgroundColor: 'var(--btn-primary-bg)',
-                  color: 'var(--btn-primary-fg)',
+                  border: '1px solid var(--border)',
                   borderRadius: '9999px',
-                  fontWeight: 700,
-                  fontSize: '15px',
-                  border: '2px solid var(--border)',
-                  boxShadow: primaryShadow,
-                  textDecoration: 'none',
-                  fontFamily: "'Space Grotesk', sans-serif",
-                  transition: 'transform 0.15s, box-shadow 0.15s',
+                  padding: '6px 14px',
+                  backgroundColor: 'rgba(255,255,255,0.03)',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translate(-2px,-2px)'; e.currentTarget.style.boxShadow = primaryShadowHover; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'translate(0,0)'; e.currentTarget.style.boxShadow = primaryShadow; }}
               >
-                <Mail style={{ width: '18px', height: '18px' }} />
-                Get in touch
-              </a>
+                <span
+                  style={{
+                    width: '6px',
+                    height: '6px',
+                    borderRadius: '50%',
+                    backgroundColor: 'var(--text-muted)',
+                    display: 'inline-block',
+                    flexShrink: 0,
+                  }}
+                />
+                <span
+                  style={{
+                    fontSize: '11px',
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    fontFamily: "'JetBrains Mono', monospace",
+                    color: 'var(--text-muted)',
+                  }}
+                >
+                  Data Science · ML · Engineering
+                </span>
+              </div>
 
-              <a
-                href="#work"
+              {/* Heading */}
+              <h1
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '14px 28px',
-                  backgroundColor: 'transparent',
-                  color: 'var(--btn-secondary-fg)',
-                  borderRadius: '9999px',
-                  fontWeight: 700,
-                  fontSize: '15px',
-                  border: '2px solid var(--border)',
-                  boxShadow: outlineShadow,
-                  textDecoration: 'none',
                   fontFamily: "'Space Grotesk', sans-serif",
-                  transition: 'transform 0.15s, box-shadow 0.15s',
+                  fontWeight: 700,
+                  fontSize: 'clamp(2.8rem, 6vw, 5rem)',
+                  lineHeight: 1.05,
+                  color: 'var(--text-primary)',
+                  letterSpacing: '-0.02em',
+                  marginBottom: '24px',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translate(-2px,-2px)'; e.currentTarget.style.boxShadow = outlineShadowHover; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'translate(0,0)'; e.currentTarget.style.boxShadow = outlineShadow; }}
               >
-                <FolderOpen style={{ width: '18px', height: '18px' }} />
-                View portfolio
-              </a>
+                Building data<br />
+                systems that<br />
+                <span style={{ color: 'var(--accent)' }}>actually work.</span>
+              </h1>
+
+              {/* Description */}
+              <p
+                style={{
+                  fontSize: '16px',
+                  color: 'var(--text-muted)',
+                  lineHeight: 1.75,
+                  maxWidth: '440px',
+                  marginBottom: '40px',
+                  fontFamily: "'Inter', system-ui, sans-serif",
+                }}
+              >
+                {personalInfo.description} Currently seeking internships &amp; full-time roles in data science and ML engineering.
+              </p>
+
+              {/* CTAs */}
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <a
+                  href="#contact"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '9999px',
+                    padding: '13px 28px',
+                    fontSize: '14px',
+                    fontWeight: 600,
+                    fontFamily: "'Inter', system-ui, sans-serif",
+                    backgroundColor: 'var(--accent)',
+                    color: '#080C09',
+                    textDecoration: 'none',
+                    transition: 'opacity 0.2s',
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.opacity = '0.88'}
+                  onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+                >
+                  Get in touch
+                </a>
+                <a
+                  href="#work"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '9999px',
+                    padding: '13px 28px',
+                    fontSize: '14px',
+                    fontWeight: 600,
+                    fontFamily: "'Inter', system-ui, sans-serif",
+                    backgroundColor: 'transparent',
+                    color: 'var(--text-primary)',
+                    textDecoration: 'none',
+                    border: '1px solid var(--border)',
+                    transition: 'border-color 0.2s',
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'}
+                  onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
+                >
+                  See projects
+                </a>
+              </div>
             </div>
 
-            <p
-              style={{
-                marginTop: '28px',
-                fontSize: '13px',
-                color: 'var(--text-muted)',
-                fontFamily: "'JetBrains Mono', monospace",
-              }}
-            >
-              Open to internships &amp; full-time · Based in San Jose, CA
-            </p>
-          </div>
-
-          <div className="hidden lg:flex justify-center">
-            <div
-              style={{
-                width: '340px',
-                height: '340px',
-                border: '1px solid var(--divider)',
-                borderRadius: '24px',
-                overflow: 'hidden',
-                flexShrink: 0,
-              }}
-            >
-              <img
-                src="/IMG_9684.jpg"
-                alt="Dhwanil Ranpura"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'center 22%',
-                  display: 'block',
-                }}
-              />
+            {/* Right — headshot */}
+            <div className="hidden lg:flex items-center justify-center">
+              <div style={{ position: 'relative' }}>
+                {/* Soft glow behind photo */}
+                <div style={{
+                  position: 'absolute',
+                  inset: '-24px',
+                  borderRadius: '50%',
+                  background: 'radial-gradient(ellipse, rgba(134,239,172,0.12) 0%, transparent 70%)',
+                  filter: 'blur(24px)',
+                  zIndex: 0,
+                }} />
+                <img
+                  src="/headshot.jpg"
+                  alt="Dhwanil Ranpura"
+                  style={{
+                    position: 'relative',
+                    zIndex: 1,
+                    width: '340px',
+                    height: '400px',
+                    objectFit: 'cover',
+                    objectPosition: 'center top',
+                    borderRadius: '24px',
+                    border: '1px solid var(--border)',
+                    display: 'block',
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>

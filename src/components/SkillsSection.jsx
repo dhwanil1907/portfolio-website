@@ -1,53 +1,92 @@
 import React from 'react';
 import { skillsData } from '../data/portfolio';
+import useInView from '../hooks/useInView';
 
-export default function SkillsSection({ visible }) {
+export default function SkillsSection() {
+  const [ref, visible] = useInView();
+
   return (
-    <div
-      className={`fade-up ${visible ? 'visible' : ''}`}
-      style={{ transitionDelay: '0.15s' }}
-    >
-      <h3
-        style={{
-          fontSize: '2rem',
-          fontWeight: 900,
-          color: 'var(--text-primary)',
-          fontFamily: "'Space Grotesk', sans-serif",
-          marginBottom: '32px',
-        }}
-      >
-        My broad <span className="highlight-pink">skill set</span>
-      </h3>
+    <div ref={ref} className={`fade-up ${visible ? 'visible' : ''}`}>
+      {/* Section header */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'baseline',
+        justifyContent: 'space-between',
+        borderBottom: '1px solid var(--divider)',
+        paddingBottom: '20px',
+        marginBottom: '48px',
+      }}>
+        <h2 className="section-heading" style={{ margin: 0 }}>What I work with.</h2>
+        <span style={{
+          fontFamily: "'JetBrains Mono', monospace",
+          fontSize: '11px',
+          color: 'var(--text-muted)',
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+        }}>
+          Skills
+        </span>
+      </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Two-column grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: '1px', backgroundColor: 'var(--divider)' }}>
         {skillsData.map((cat, idx) => (
           <div
             key={idx}
-            className="neo-card"
-            style={{ padding: '24px' }}
+            style={{
+              backgroundColor: 'var(--bg-primary)',
+              padding: '32px',
+            }}
           >
-            <p
-              style={{
-                fontWeight: 700,
-                fontSize: '16px',
-                color: 'var(--text-primary)',
-                fontFamily: "'Space Grotesk', sans-serif",
-                marginBottom: '16px',
-              }}
-            >
-              {cat.category}
-            </p>
+            {/* Category header */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
+              <span style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: '10px',
+                color: 'var(--accent)',
+                opacity: 0.7,
+              }}>
+                {String(idx + 1).padStart(2, '0')}
+              </span>
+              <span style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: '10px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.12em',
+                color: 'var(--text-muted)',
+              }}>
+                {cat.category}
+              </span>
+            </div>
+
+            {/* Pills */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-              {cat.skills.map((skill, i) => (
+              {cat.skills.map(skill => (
                 <span
-                  key={i}
+                  key={skill}
                   style={{
-                    backgroundColor: 'var(--skill-tag-bg)',
-                    color: 'var(--skill-tag-fg)',
-                    padding: '4px 10px',
-                    borderRadius: '4px',
-                    fontSize: '12px',
-                    fontFamily: "'JetBrains Mono', monospace",
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    padding: '8px 16px',
+                    borderRadius: '9999px',
+                    border: '1px solid var(--divider)',
+                    backgroundColor: 'rgba(255,255,255,0.03)',
+                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontSize: '13px',
+                    color: 'var(--text-primary)',
+                    letterSpacing: '0.01em',
+                    transition: 'border-color 0.2s, background-color 0.2s, color 0.2s',
+                    cursor: 'default',
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.borderColor = 'rgba(134,239,172,0.4)';
+                    e.currentTarget.style.backgroundColor = 'rgba(134,239,172,0.06)';
+                    e.currentTarget.style.color = 'var(--accent)';
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.borderColor = 'var(--divider)';
+                    e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.03)';
+                    e.currentTarget.style.color = 'var(--text-primary)';
                   }}
                 >
                   {skill}

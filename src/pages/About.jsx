@@ -1,121 +1,148 @@
 import React from 'react';
-import { User } from 'lucide-react';
 import SkillsSection from '../components/SkillsSection';
+import { personalInfo, leadershipData } from '../data/portfolio';
 import useInView from '../hooks/useInView';
 
 export default function About() {
   const [ref, visible] = useInView();
-  const btnShadow = '3px 3px 0 var(--btn-shadow)';
-  const btnShadowHover = '5px 5px 0 var(--btn-shadow)';
+  const primaryOrg = leadershipData[0];
 
   return (
-    <div className="py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--bg-primary)' }}>
-      <div className="max-w-5xl mx-auto">
+    <div className="py-16 sm:py-24 md:py-32 px-4 sm:px-8 max-w-[1200px] mx-auto">
+      <div
+        ref={ref}
+        className={`flex flex-col lg:flex-row gap-16 lg:gap-20 items-start fade-up ${visible ? 'visible' : ''}`}
+      >
+        {/* Left — text */}
+        <div className="w-full lg:w-[55%] shrink-0">
 
-        <div
-          ref={ref}
-          className={`grid lg:grid-cols-2 gap-16 items-center mb-24 fade-up ${visible ? 'visible' : ''}`}
-        >
-          <div className="flex justify-center lg:justify-start">
-            <div
-              style={{
-                width: '280px',
-                height: '280px',
-                borderRadius: '50%',
-                border: '3px solid var(--border)',
-                overflow: 'hidden',
-                flexShrink: 0,
-              }}
-            >
-              <img
-                src="/IMG_9684.jpg"
-                alt="Dhwanil Ranpura"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'center top',
-                  transform: 'scale(1.15)',
-                  display: 'block',
-                }}
-              />
-            </div>
+          {/* Heading */}
+          <h2 className="section-heading mb-3">Meet Dhwanil.</h2>
+
+          {/* Subtitle — broken up */}
+          <p style={{
+            fontSize: '15px',
+            color: 'var(--accent)',
+            fontFamily: "'JetBrains Mono', monospace",
+            letterSpacing: '0.02em',
+            marginBottom: '28px',
+          }}>
+            {personalInfo.tagline} · {personalInfo.education.location}
+          </p>
+
+          {/* Bio paragraphs — no bullets */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '40px' }}>
+            <p style={{
+              fontSize: '15px',
+              color: 'var(--text-muted)',
+              lineHeight: 1.8,
+              fontFamily: "'Inter', system-ui, sans-serif",
+              margin: 0,
+            }}>
+              I'm a data scientist and ML practitioner based in San Jose, studying at{' '}
+              <span style={{ color: 'var(--text-primary)' }}>{personalInfo.education.university}</span>.
+              I build end-to-end pipelines, machine learning models, and production-ready dashboards
+              that turn raw data into decisions.
+            </p>
+            <p style={{
+              fontSize: '15px',
+              color: 'var(--text-muted)',
+              lineHeight: 1.8,
+              fontFamily: "'Inter', system-ui, sans-serif",
+              margin: 0,
+            }}>
+              Outside of shipping projects, I lead{' '}
+              <span style={{ color: 'var(--text-primary)' }}>{primaryOrg.organization}</span> as{' '}
+              {primaryOrg.roles[0].title} — running workshops, competitions, and mentoring
+              students breaking into data science.
+            </p>
           </div>
 
-          <div>
-            <h2
-              style={{
-                fontSize: 'clamp(2rem, 4vw, 2.8rem)',
-                fontWeight: 900,
-                lineHeight: 1.15,
-                color: 'var(--text-primary)',
-                fontFamily: "'Space Grotesk', sans-serif",
-                marginBottom: '20px',
-              }}
-            >
-              Who's behind all this{' '}
-              <span className="highlight-blue">great work?</span>
-            </h2>
-
-            <p style={{ fontSize: '16px', color: 'var(--text-muted)', lineHeight: 1.75, marginBottom: '28px', maxWidth: '420px' }}>
-              I'm a Data Science student at San Jose State University building ML systems and full-stack data products that solve real-world problems.
-              My work spans the full pipeline — from raw data ingestion and model training to production APIs and interactive dashboards.
-              I lead Spartan Analytics and care deeply about making data literacy accessible.
-            </p>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '32px' }}>
-              {[
-                { color: '#6c4fff', text: 'President, Spartan Analytics @ SJSU' },
-                { color: '#f4647a', text: 'B.S. Data Science @ SJSU, Class of 2027' },
-                { color: '#4169ff', text: 'Open to internships & full-time Data Engineering / ML roles' },
-              ].map(({ color, text }) => (
-                <div key={text} style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
-                  <span
-                    style={{
-                      width: '14px',
-                      height: '14px',
-                      backgroundColor: color,
-                      border: '2px solid var(--border)',
-                      flexShrink: 0,
-                      marginTop: '3px',
-                    }}
-                  />
-                  <span style={{ fontSize: '15px', fontWeight: 600, color: 'var(--text-primary)', fontFamily: "'Space Grotesk', sans-serif" }}>
-                    {text}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <a
-              href="#contact"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '14px 28px',
-                backgroundColor: 'var(--btn-primary-bg)',
-                color: 'var(--btn-primary-fg)',
-                borderRadius: '9999px',
-                fontWeight: 700,
-                fontSize: '15px',
-                border: '2px solid var(--border)',
-                boxShadow: btnShadow,
-                textDecoration: 'none',
-                fontFamily: "'Space Grotesk', sans-serif",
-                transition: 'transform 0.15s, box-shadow 0.15s',
-              }}
-              onMouseEnter={e => { e.currentTarget.style.transform = 'translate(-2px,-2px)'; e.currentTarget.style.boxShadow = btnShadowHover; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = 'translate(0,0)'; e.currentTarget.style.boxShadow = btnShadow; }}
-            >
-              <User style={{ width: '18px', height: '18px' }} />
-              More about me
-            </a>
+          {/* Education rows */}
+          <div style={{
+            borderTop: '1px solid var(--divider)',
+            paddingTop: '28px',
+            borderLeft: '2px solid var(--accent)',
+            paddingLeft: '20px',
+          }}>
+            {[
+              { num: '01', label: 'University', value: personalInfo.education.university },
+              { num: '02', label: 'Degree',     value: personalInfo.education.degree },
+              { num: '03', label: 'Graduation', value: personalInfo.education.graduation },
+            ].map((row, i, arr) => (
+              <div
+                key={row.label}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '20px',
+                  padding: '12px 0',
+                  borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none',
+                }}
+              >
+                <span style={{
+                  fontSize: '10px',
+                  color: 'var(--accent)',
+                  fontFamily: "'JetBrains Mono', monospace",
+                  flexShrink: 0,
+                  opacity: 0.7,
+                }}>
+                  {row.num}
+                </span>
+                <span style={{
+                  width: '90px',
+                  flexShrink: 0,
+                  fontSize: '10px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.12em',
+                  color: 'var(--text-muted)',
+                  fontFamily: "'JetBrains Mono', monospace",
+                }}>
+                  {row.label}
+                </span>
+                <span style={{
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  color: 'var(--text-primary)',
+                  fontFamily: "'Inter', system-ui, sans-serif",
+                }}>
+                  {row.value}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
 
-        <SkillsSection visible={visible} />
+        {/* Right — photo */}
+        <div className="w-full lg:w-[45%]">
+          <div
+            style={{
+              width: '100%',
+              maxWidth: '420px',
+              aspectRatio: '3 / 4',
+              borderRadius: '20px',
+              overflow: 'hidden',
+              border: '1px solid var(--border)',
+              margin: '0 auto',
+            }}
+          >
+            <img
+              src="/headshot.jpg"
+              alt={personalInfo.name}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center 15%',
+                display: 'block',
+              }}
+            />
+          </div>
+        </div>
+      </div>
 
+      <div className="mt-32 md:mt-44 lg:mt-56">
+        <SkillsSection />
       </div>
     </div>
   );

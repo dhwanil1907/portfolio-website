@@ -4,11 +4,7 @@
     <script>
       (function () {
         try {
-          var k = 'portfolio-theme';
-          var t = localStorage.getItem(k);
-          if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
-          else if (window.matchMedia('(prefers-color-scheme: dark)').matches)
-            document.documentElement.dataset.theme = 'dark';
+          document.documentElement.dataset.theme = 'dark';
         } catch (e) {}
       })();
     </script>

@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="flex flex-col min-h-screen font-sans bg-[var(--bg-primary)] text-[var(--text-primary)] transition-[background-color,color] duration-200">
       <Navbar />
-      <main className="flex-grow pt-28 w-full overflow-hidden">
+      <main className="flex-grow w-full overflow-hidden">
         <div id="home"><Home /></div>
         <div id="about"    className="scroll-mt-20"><About /></div>
         <div id="experience" className="scroll-mt-20"><Experience /></div>

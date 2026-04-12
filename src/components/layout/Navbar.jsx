@@ -1,95 +1,128 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Github, Linkedin, Mail, Sun, Moon, FileText } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { navLinks, personalInfo } from '../../data/portfolio';
-import { useTheme } from '../../context/ThemeContext';
+
+const pillNavStyle = {
+  pointerEvents: 'auto',
+  alignItems: 'center',
+  gap: '0',
+  height: '52px',
+  padding: '0 8px',
+  borderRadius: '9999px',
+  border: '1px solid rgba(255,255,255,0.22)',
+  backgroundColor: 'rgba(20,20,20,0.96)',
+  backdropFilter: 'blur(20px)',
+  WebkitBackdropFilter: 'blur(20px)',
+  boxShadow: '0 8px 32px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.08)',
+};
+
+const logoStyle = {
+  fontFamily: "'Space Grotesk', sans-serif",
+  fontWeight: 800,
+  fontSize: '16px',
+  color: '#ffffff',
+  textDecoration: 'none',
+  letterSpacing: '-0.01em',
+  flexShrink: 0,
+  marginLeft: '8px',
+  marginRight: '12px',
+};
 
 export default function Navbar() {
-  const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     const sectionIds = navLinks.map(l => l.path.replace('#', ''));
     const observers = [];
-
     sectionIds.forEach(id => {
       const el = document.getElementById(id);
       if (!el) return;
       const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(id);
+        },
         { rootMargin: '-40% 0px -55% 0px' }
       );
       obs.observe(el);
       observers.push(obs);
     });
-
     return () => observers.forEach(o => o.disconnect());
   }, []);
 
   const closeMobile = () => setMobileMenuOpen(false);
 
-  const pillStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-    padding: '8px 10px',
-    backgroundColor: 'var(--nav-surface)',
-    border: '2px solid var(--border)',
-    borderRadius: '9999px',
-    boxShadow: 'var(--neo-shadow)',
-    whiteSpace: 'nowrap',
-  };
-
-  const iconCircleStyle = {
-    width: '36px',
-    height: '36px',
-    borderRadius: '50%',
-    backgroundColor: 'var(--nav-logo-bg)',
-    color: 'var(--nav-logo-fg)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexShrink: 0,
-    textDecoration: 'none',
-    border: 'none',
-    cursor: 'pointer',
-    display: 'flex',
-  };
-
   return (
     <>
-      <nav
+      <div
         style={{
           position: 'fixed',
-          top: '16px',
-          left: '50%',
-          transform: 'translateX(-50%)',
+          top: '20px',
+          left: 0,
+          right: 0,
           zIndex: 50,
-          maxWidth: 'calc(100vw - 32px)',
+          display: 'flex',
+          justifyContent: 'center',
+          padding: '0 16px',
+          pointerEvents: 'none',
         }}
       >
-        <div style={pillStyle}>
-          <a
-            href="#home"
+        {/* Mobile / tablet: compact pill — DR + menu */}
+        <nav className="flex lg:hidden" style={pillNavStyle}>
+          <a href="#home" style={logoStyle}>
+            DR
+          </a>
+          <div
             style={{
-              width: '36px',
-              height: '36px',
-              borderRadius: '50%',
-              backgroundColor: 'var(--nav-logo-bg)',
-              color: 'var(--nav-logo-fg)',
+              width: '1px',
+              height: '18px',
+              backgroundColor: 'rgba(255,255,255,0.15)',
+              marginRight: '8px',
+            }}
+          />
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(o => !o)}
+            aria-label={mobileMenuOpen ? 'Close navigation' : 'Open navigation'}
+            style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '11px',
-              fontWeight: 800,
-              textDecoration: 'none',
-              flexShrink: 0,
-              fontFamily: "'Space Grotesk', sans-serif",
+              width: '40px',
+              height: '40px',
+              marginRight: '4px',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              color: 'rgba(255,255,255,0.7)',
+              padding: 0,
+              borderRadius: '9999px',
             }}
           >
+            {mobileMenuOpen ? (
+              <X style={{ width: '20px', height: '20px' }} strokeWidth={1.5} />
+            ) : (
+              <Menu style={{ width: '20px', height: '20px' }} strokeWidth={1.5} />
+            )}
+          </button>
+        </nav>
+
+        {/* Desktop: full pill */}
+        <nav className="hidden lg:flex" style={pillNavStyle}>
+          <a href="#home" style={logoStyle}>
             DR
           </a>
 
-          <div className="hidden lg:flex items-center">
+          <div
+            style={{
+              width: '1px',
+              height: '18px',
+              backgroundColor: 'rgba(255,255,255,0.15)',
+              marginRight: '12px',
+            }}
+          />
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
             {navLinks.map(link => {
               const id = link.path.replace('#', '');
               const isActive = activeSection === id;
@@ -99,173 +132,144 @@ export default function Navbar() {
                   href={link.path}
                   style={{
                     position: 'relative',
+                    display: 'inline-flex',
+                    alignItems: 'center',
                     padding: '6px 14px',
+                    borderRadius: '9999px',
+                    fontFamily: "'Inter', system-ui, sans-serif",
                     fontSize: '14px',
-                    fontWeight: 600,
-                    color: isActive ? 'var(--accent)' : 'var(--nav-ink)',
+                    fontWeight: isActive ? 500 : 400,
+                    color: isActive ? '#ffffff' : 'rgba(255,255,255,0.55)',
                     textDecoration: 'none',
-                    transition: 'color 0.15s',
-                    fontFamily: "'Space Grotesk', sans-serif",
+                    backgroundColor: isActive ? 'rgba(255,255,255,0.1)' : 'transparent',
+                    transition: 'color 0.2s, background-color 0.2s',
+                  }}
+                  onMouseEnter={e => {
+                    if (!isActive) {
+                      e.currentTarget.style.color = '#ffffff';
+                      e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.06)';
+                    }
+                  }}
+                  onMouseLeave={e => {
+                    if (!isActive) {
+                      e.currentTarget.style.color = 'rgba(255,255,255,0.55)';
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }
                   }}
                 >
                   {link.name}
-                  {isActive && (
-                    <span
-                      style={{
-                        position: 'absolute',
-                        bottom: '0px',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        width: '4px',
-                        height: '4px',
-                        borderRadius: '50%',
-                        backgroundColor: 'var(--accent)',
-                      }}
-                    />
-                  )}
                 </a>
               );
             })}
           </div>
 
-          <button
-            type="button"
-            className="hidden lg:flex"
-            onClick={toggleTheme}
-            style={iconCircleStyle}
-            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-          >
-            {theme === 'dark' ? <Sun style={{ width: '16px', height: '16px' }} /> : <Moon style={{ width: '16px', height: '16px' }} />}
-          </button>
-
-          <a
-            href={`mailto:${personalInfo.email}`}
-            className="hidden lg:flex"
+          <div
             style={{
-              ...iconCircleStyle,
-              textDecoration: 'none',
+              width: '1px',
+              height: '18px',
+              backgroundColor: 'rgba(255,255,255,0.15)',
+              marginLeft: '12px',
+              marginRight: '12px',
             }}
-            aria-label="Send email"
-          >
-            <Mail style={{ width: '16px', height: '16px' }} />
-          </a>
+          />
 
           <a
             href={personalInfo.resume}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden lg:flex"
             style={{
-              ...iconCircleStyle,
-              textDecoration: 'none',
-            }}
-            aria-label="Open resume (PDF)"
-          >
-            <FileText style={{ width: '16px', height: '16px' }} />
-          </a>
-
-          <button
-            className="lg:hidden"
-            type="button"
-            style={{
-              padding: '4px 10px',
-              backgroundColor: 'transparent',
-              border: 'none',
-              cursor: 'pointer',
-              color: 'var(--nav-ink)',
-              display: 'flex',
+              display: 'inline-flex',
               alignItems: 'center',
+              gap: '5px',
+              padding: '7px 16px',
+              borderRadius: '9999px',
+              border: '1px solid rgba(255,255,255,0.28)',
+              fontFamily: "'Inter', system-ui, sans-serif",
+              fontSize: '13px',
+              fontWeight: 500,
+              color: '#ffffff',
+              textDecoration: 'none',
+              marginRight: '4px',
+              transition: 'background-color 0.2s, border-color 0.2s',
+              backgroundColor: 'rgba(255,255,255,0.06)',
             }}
-            onClick={() => setMobileMenuOpen(o => !o)}
-            aria-label={mobileMenuOpen ? 'Close navigation' : 'Open navigation'}
+            onMouseEnter={e => {
+              e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.12)';
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.06)';
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.28)';
+            }}
           >
-            {mobileMenuOpen ? <X style={{ width: '22px', height: '22px' }} /> : <Menu style={{ width: '22px', height: '22px' }} />}
-          </button>
-        </div>
-      </nav>
+            Resume
+            <span style={{ fontSize: '11px', opacity: 0.7 }}>↗</span>
+          </a>
+        </nav>
+      </div>
 
       <div
-        className={`fixed inset-0 z-40 lg:hidden flex flex-col transition-transform duration-300 ease-in-out ${
-          mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
-        style={{ backgroundColor: 'var(--bg-primary)' }}
+        className="lg:hidden"
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 40,
+          backgroundColor: 'var(--bg-primary)',
+          display: 'flex',
+          flexDirection: 'column',
+          paddingTop: '88px',
+          paddingLeft: '24px',
+          paddingRight: '24px',
+          paddingBottom: '32px',
+          transform: mobileMenuOpen ? 'translateX(0)' : 'translateX(100%)',
+          transition: 'transform 0.3s ease',
+          overflowY: 'auto',
+        }}
       >
-        <div className="flex flex-col h-full pt-24 px-6 pb-8 overflow-y-auto">
-          <div className="flex flex-col gap-1">
-            {navLinks.map(link => (
-              <a
-                key={link.name}
-                href={link.path}
-                onClick={closeMobile}
-                style={{
-                  padding: '16px',
-                  fontSize: '22px',
-                  fontWeight: 700,
-                  color: 'var(--text-primary)',
-                  textDecoration: 'none',
-                  borderRadius: '12px',
-                  fontFamily: "'Space Grotesk', sans-serif",
-                }}
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-
-          <div
-            className="mt-auto pt-8 border-t flex flex-col gap-4"
-            style={{ borderColor: 'var(--pill-track)' }}
-          >
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-medium w-full"
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+          {navLinks.map(link => (
+            <a
+              key={link.name}
+              href={link.path}
+              onClick={closeMobile}
               style={{
-                border: '2px solid var(--border)',
+                padding: '14px 4px',
+                fontSize: '22px',
+                fontWeight: 600,
                 color: 'var(--text-primary)',
-                backgroundColor: 'var(--bg-alt)',
-                cursor: 'pointer',
+                textDecoration: 'none',
                 fontFamily: "'Space Grotesk', sans-serif",
+                borderBottom: '1px solid var(--divider)',
               }}
-              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
             >
-              {theme === 'dark' ? <Sun style={{ width: '18px', height: '18px' }} /> : <Moon style={{ width: '18px', height: '18px' }} />}
-              {theme === 'dark' ? 'Light mode' : 'Dark mode'}
-            </button>
-            <div className="grid grid-cols-2 gap-3">
-              <a
-                href={personalInfo.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-medium"
-                style={{ border: '2px solid var(--border)', color: 'var(--text-primary)', textDecoration: 'none' }}
-                aria-label="GitHub profile"
-              >
-                <Github style={{ width: '18px', height: '18px' }} /> GitHub
-              </a>
-              <a
-                href={personalInfo.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-medium"
-                style={{ border: '2px solid var(--border)', color: 'var(--text-primary)', textDecoration: 'none' }}
-                aria-label="LinkedIn profile"
-              >
-                <Linkedin style={{ width: '18px', height: '18px' }} /> LinkedIn
-              </a>
-              <a
-                href={personalInfo.resume}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="col-span-2 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-medium"
-                style={{ border: '2px solid var(--border)', color: 'var(--text-primary)', textDecoration: 'none' }}
-                aria-label="Open resume (PDF)"
-              >
-                <FileText style={{ width: '18px', height: '18px' }} /> Resume
-              </a>
-            </div>
-          </div>
+              {link.name}
+            </a>
+          ))}
         </div>
+
+        <a
+          href={personalInfo.resume}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={closeMobile}
+          style={{
+            marginTop: '32px',
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '6px',
+            padding: '14px 24px',
+            borderRadius: '9999px',
+            border: '1px solid var(--border)',
+            fontFamily: "'Inter', system-ui, sans-serif",
+            fontSize: '15px',
+            fontWeight: 500,
+            color: 'var(--text-primary)',
+            textDecoration: 'none',
+          }}
+        >
+          Resume ↗
+        </a>
       </div>
     </>
   );
