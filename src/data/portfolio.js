@@ -60,8 +60,8 @@ export const leadershipData = [
       { title: "VP of Programs",       date: "Dec 2024 — Jul 2025", duration: "8 mos" }
     ],
     bullets: [
-      "Directed 7-officer team, scaling paid membership 60% (25 → 40 members).",
-      "Designed Python and SQL workshops for 30+ students culminating in a loan default prediction capstone.",
+      "Lead a 7-officer team, scaling paid membership 60% (25 → 40 members).",
+      "Design Python and SQL workshops for 30+ students culminating in a loan default prediction capstone.",
       "Established annual data competition, engaging 30+ participants across problem design and judging."
     ]
   },
@@ -155,7 +155,7 @@ export const awardsData = [
   {
     title: 'ASA DataFest 2025 Best Overall Winner',
     issuer: 'American Statistical Association',
-    date: 'Apr 2025',
+    date: 'Mar 2025',
     description: 'Worked with a team to analyze 194K+ commercial lease transactions and uncover macroeconomic trends. Built forecasting models using time-series and regression analysis to identify oversupply risks and predict rent growth, earning Best Overall Winner among 40+ teams.'
   },
   {

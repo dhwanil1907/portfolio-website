@@ -79,8 +79,8 @@ export default function SkillsSection() {
                     cursor: 'default',
                   }}
                   onMouseEnter={e => {
-                    e.currentTarget.style.borderColor = 'rgba(134,239,172,0.4)';
-                    e.currentTarget.style.backgroundColor = 'rgba(134,239,172,0.06)';
+                    e.currentTarget.style.borderColor = 'var(--accent-ring)';
+                    e.currentTarget.style.backgroundColor = 'var(--accent-glow)';
                     e.currentTarget.style.color = 'var(--accent)';
                   }}
                   onMouseLeave={e => {

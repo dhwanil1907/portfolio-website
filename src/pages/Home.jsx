@@ -110,7 +110,7 @@ export default function Home() {
                     fontWeight: 600,
                     fontFamily: "'Inter', system-ui, sans-serif",
                     backgroundColor: 'var(--accent)',
-                    color: '#080C09',
+                    color: 'var(--accent-fg)',
                     textDecoration: 'none',
                     transition: 'opacity 0.2s',
                   }}

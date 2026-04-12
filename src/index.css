@@ -3,8 +3,9 @@
 /* ── Google Fonts ─────────────────────────────────── */
 /* Inter + JetBrains Mono + Space Grotesk loaded via index.html <link> */
 
-/* ── Design tokens (dark-only editorial) ───────────── */
-:root {
+/* ── Design tokens — dark (default) ────────────────── */
+:root,
+[data-theme="dark"] {
   --bg-primary: #111111;
   --bg-alt: #171717;
   --bg-card: #1A1A1A;
@@ -12,13 +13,31 @@
   --border: #2A2A2A;
   --accent: #86EFAC;
   --accent-hover: #6EE7A0;
+  --accent-fg: #080C09;
+  --accent-glow: rgba(134,239,172,0.06);
+  --accent-ring: rgba(134,239,172,0.32);
   --text-primary: #F0F4F1;
   --text-muted: #888888;
   --text-subtle: #555555;
   --divider: #1F1F1F;
-  --nav-surface: rgba(17, 17, 17, 0.88);
 
-  /* Referenced by page components until Phase 2 — map to editorial system */
+  /* Navbar */
+  --nav-bg: rgba(20,20,20,0.96);
+  --nav-border: rgba(255,255,255,0.22);
+  --nav-shadow: 0 8px 32px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.08);
+  --nav-logo: #ffffff;
+  --nav-link: rgba(255,255,255,0.55);
+  --nav-link-active: #ffffff;
+  --nav-link-active-bg: rgba(255,255,255,0.1);
+  --nav-link-hover-bg: rgba(255,255,255,0.06);
+  --nav-divider: rgba(255,255,255,0.15);
+  --nav-resume-bg: rgba(255,255,255,0.06);
+  --nav-resume-border: rgba(255,255,255,0.28);
+  --nav-resume-hover-bg: rgba(255,255,255,0.12);
+  --nav-resume-hover-border: rgba(255,255,255,0.4);
+
+  /* Legacy aliases */
+  --nav-surface: rgba(17,17,17,0.88);
   --bg-card-solid: var(--bg-card);
   --text-faint: var(--text-muted);
   --tag-bg: var(--bg-card);
@@ -43,9 +62,70 @@
   --skill-tag-fg: var(--text-primary);
   --cert-skill-bg: var(--bg-card);
   --cert-skill-fg: var(--text-primary);
-  --cert-pill-bg: rgba(129, 140, 248, 0.12);
+  --cert-pill-bg: rgba(129,140,248,0.12);
   --cert-pill-fg: var(--text-primary);
-  --accent-glow: rgba(129, 140, 248, 0.15);
+}
+
+/* ── Design tokens — light ──────────────────────────── */
+[data-theme="light"] {
+  --bg-primary: #F7F5F1;
+  --bg-alt: #EEEAE3;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F2EFE9;
+  --border: #DDD9D2;
+  --accent: #15803D;
+  --accent-hover: #166534;
+  --accent-fg: #FFFFFF;
+  --accent-glow: rgba(21,128,61,0.07);
+  --accent-ring: rgba(21,128,61,0.28);
+  --text-primary: #1C1917;
+  --text-muted: #78716C;
+  --text-subtle: #A8A29E;
+  --divider: #E2DDD6;
+
+  /* Navbar */
+  --nav-bg: rgba(247,245,241,0.96);
+  --nav-border: rgba(0,0,0,0.1);
+  --nav-shadow: 0 4px 24px rgba(0,0,0,0.08), inset 0 -1px 0 rgba(0,0,0,0.06);
+  --nav-logo: #1C1917;
+  --nav-link: rgba(28,25,23,0.5);
+  --nav-link-active: #1C1917;
+  --nav-link-active-bg: rgba(0,0,0,0.07);
+  --nav-link-hover-bg: rgba(0,0,0,0.04);
+  --nav-divider: rgba(0,0,0,0.1);
+  --nav-resume-bg: rgba(0,0,0,0.04);
+  --nav-resume-border: rgba(0,0,0,0.18);
+  --nav-resume-hover-bg: rgba(0,0,0,0.09);
+  --nav-resume-hover-border: rgba(0,0,0,0.28);
+
+  /* Legacy aliases */
+  --nav-surface: rgba(247,245,241,0.96);
+  --bg-card-solid: var(--bg-card);
+  --text-faint: var(--text-muted);
+  --tag-bg: var(--bg-card);
+  --tag-border: var(--border);
+  --btn-primary-bg: var(--accent);
+  --btn-primary-fg: #ffffff;
+  --btn-secondary-fg: var(--text-primary);
+  --nav-ink: var(--text-primary);
+  --shadow-key: var(--bg-primary);
+  --shadow-card: var(--bg-primary);
+  --btn-shadow: var(--bg-primary);
+  --neo-shadow: none;
+  --neo-shadow-lg: none;
+  --inverse-bg: var(--bg-alt);
+  --inverse-text: var(--text-primary);
+  --inverse-muted: var(--text-muted);
+  --inverse-border: var(--border);
+  --inverse-cta-bg: var(--accent);
+  --inverse-cta-fg: #ffffff;
+  --pill-track: var(--divider);
+  --skill-tag-bg: var(--bg-card-hover);
+  --skill-tag-fg: var(--text-primary);
+  --cert-skill-bg: var(--bg-card);
+  --cert-skill-fg: var(--text-primary);
+  --cert-pill-bg: rgba(21,128,61,0.1);
+  --cert-pill-fg: var(--text-primary);
 }
 
 /* ── Base ─────────────────────────────────────────── */

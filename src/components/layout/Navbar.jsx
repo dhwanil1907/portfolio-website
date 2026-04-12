@@ -1,36 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { navLinks, personalInfo } from '../../data/portfolio';
-
-const pillNavStyle = {
-  pointerEvents: 'auto',
-  alignItems: 'center',
-  gap: '0',
-  height: '52px',
-  padding: '0 8px',
-  borderRadius: '9999px',
-  border: '1px solid rgba(255,255,255,0.22)',
-  backgroundColor: 'rgba(20,20,20,0.96)',
-  backdropFilter: 'blur(20px)',
-  WebkitBackdropFilter: 'blur(20px)',
-  boxShadow: '0 8px 32px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.08)',
-};
-
-const logoStyle = {
-  fontFamily: "'Space Grotesk', sans-serif",
-  fontWeight: 800,
-  fontSize: '16px',
-  color: '#ffffff',
-  textDecoration: 'none',
-  letterSpacing: '-0.01em',
-  flexShrink: 0,
-  marginLeft: '8px',
-  marginRight: '12px',
-};
+import useTheme from '../../hooks/useTheme';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
+  const { theme, toggle } = useTheme();
 
   useEffect(() => {
     const sectionIds = navLinks.map(l => l.path.replace('#', ''));
@@ -39,9 +15,7 @@ export default function Navbar() {
       const el = document.getElementById(id);
       if (!el) return;
       const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id);
-        },
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
         { rootMargin: '-40% 0px -55% 0px' }
       );
       obs.observe(el);
@@ -51,6 +25,38 @@ export default function Navbar() {
   }, []);
 
   const closeMobile = () => setMobileMenuOpen(false);
+
+  const pillStyle = {
+    pointerEvents: 'auto',
+    alignItems: 'center',
+    gap: '0',
+    height: '52px',
+    padding: '0 8px',
+    borderRadius: '9999px',
+    border: '1px solid var(--nav-border)',
+    backgroundColor: 'var(--nav-bg)',
+    backdropFilter: 'blur(20px)',
+    WebkitBackdropFilter: 'blur(20px)',
+    boxShadow: 'var(--nav-shadow)',
+  };
+
+  const logoStyle = {
+    fontFamily: "'Space Grotesk', sans-serif",
+    fontWeight: 800,
+    fontSize: '16px',
+    color: 'var(--nav-logo)',
+    textDecoration: 'none',
+    letterSpacing: '-0.01em',
+    flexShrink: 0,
+    marginLeft: '8px',
+    marginRight: '12px',
+  };
+
+  const dividerStyle = {
+    width: '1px',
+    height: '18px',
+    backgroundColor: 'var(--nav-divider)',
+  };
 
   return (
     <>
@@ -67,60 +73,52 @@ export default function Navbar() {
           pointerEvents: 'none',
         }}
       >
-        {/* Mobile / tablet: compact pill — DR + menu */}
-        <nav className="flex lg:hidden" style={pillNavStyle}>
-          <a href="#home" style={logoStyle}>
-            DR
-          </a>
-          <div
+        {/* Mobile pill */}
+        <nav className="flex lg:hidden" style={pillStyle}>
+          <a href="#home" style={logoStyle}>DR</a>
+          <div style={{ ...dividerStyle, marginRight: '8px' }} />
+
+          {/* Theme toggle — mobile */}
+          <button
+            type="button"
+            onClick={toggle}
+            aria-label="Toggle theme"
             style={{
-              width: '1px',
-              height: '18px',
-              backgroundColor: 'rgba(255,255,255,0.15)',
-              marginRight: '8px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              width: '36px', height: '36px', marginRight: '4px',
+              background: 'none', border: 'none', cursor: 'pointer',
+              color: 'var(--nav-link)', padding: 0, borderRadius: '9999px',
             }}
-          />
+          >
+            {theme === 'dark'
+              ? <Sun style={{ width: '16px', height: '16px' }} strokeWidth={1.5} />
+              : <Moon style={{ width: '16px', height: '16px' }} strokeWidth={1.5} />
+            }
+          </button>
+
           <button
             type="button"
             onClick={() => setMobileMenuOpen(o => !o)}
             aria-label={mobileMenuOpen ? 'Close navigation' : 'Open navigation'}
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '40px',
-              height: '40px',
-              marginRight: '4px',
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              color: 'rgba(255,255,255,0.7)',
-              padding: 0,
-              borderRadius: '9999px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              width: '40px', height: '40px', marginRight: '4px',
+              background: 'none', border: 'none', cursor: 'pointer',
+              color: 'var(--nav-link)', padding: 0, borderRadius: '9999px',
             }}
           >
-            {mobileMenuOpen ? (
-              <X style={{ width: '20px', height: '20px' }} strokeWidth={1.5} />
-            ) : (
-              <Menu style={{ width: '20px', height: '20px' }} strokeWidth={1.5} />
-            )}
+            {mobileMenuOpen
+              ? <X style={{ width: '20px', height: '20px' }} strokeWidth={1.5} />
+              : <Menu style={{ width: '20px', height: '20px' }} strokeWidth={1.5} />
+            }
           </button>
         </nav>
 
-        {/* Desktop: full pill */}
-        <nav className="hidden lg:flex" style={pillNavStyle}>
-          <a href="#home" style={logoStyle}>
-            DR
-          </a>
+        {/* Desktop pill */}
+        <nav className="hidden lg:flex" style={pillStyle}>
+          <a href="#home" style={logoStyle}>DR</a>
 
-          <div
-            style={{
-              width: '1px',
-              height: '18px',
-              backgroundColor: 'rgba(255,255,255,0.15)',
-              marginRight: '12px',
-            }}
-          />
+          <div style={{ ...dividerStyle, marginRight: '12px' }} />
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
             {navLinks.map(link => {
@@ -139,20 +137,20 @@ export default function Navbar() {
                     fontFamily: "'Inter', system-ui, sans-serif",
                     fontSize: '14px',
                     fontWeight: isActive ? 500 : 400,
-                    color: isActive ? '#ffffff' : 'rgba(255,255,255,0.55)',
+                    color: isActive ? 'var(--nav-link-active)' : 'var(--nav-link)',
                     textDecoration: 'none',
-                    backgroundColor: isActive ? 'rgba(255,255,255,0.1)' : 'transparent',
+                    backgroundColor: isActive ? 'var(--nav-link-active-bg)' : 'transparent',
                     transition: 'color 0.2s, background-color 0.2s',
                   }}
                   onMouseEnter={e => {
                     if (!isActive) {
-                      e.currentTarget.style.color = '#ffffff';
-                      e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.06)';
+                      e.currentTarget.style.color = 'var(--nav-link-active)';
+                      e.currentTarget.style.backgroundColor = 'var(--nav-link-hover-bg)';
                     }
                   }}
                   onMouseLeave={e => {
                     if (!isActive) {
-                      e.currentTarget.style.color = 'rgba(255,255,255,0.55)';
+                      e.currentTarget.style.color = 'var(--nav-link)';
                       e.currentTarget.style.backgroundColor = 'transparent';
                     }
                   }}
@@ -163,43 +161,52 @@ export default function Navbar() {
             })}
           </div>
 
-          <div
+          <div style={{ ...dividerStyle, marginLeft: '12px', marginRight: '12px' }} />
+
+          {/* Theme toggle — desktop */}
+          <button
+            type="button"
+            onClick={toggle}
+            aria-label="Toggle theme"
             style={{
-              width: '1px',
-              height: '18px',
-              backgroundColor: 'rgba(255,255,255,0.15)',
-              marginLeft: '12px',
-              marginRight: '12px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              width: '34px', height: '34px', marginRight: '6px',
+              background: 'none', border: 'none', cursor: 'pointer',
+              color: 'var(--nav-link)', padding: 0, borderRadius: '9999px',
+              transition: 'color 0.2s',
+              flexShrink: 0,
             }}
-          />
+            onMouseEnter={e => { e.currentTarget.style.color = 'var(--nav-link-active)'; }}
+            onMouseLeave={e => { e.currentTarget.style.color = 'var(--nav-link)'; }}
+          >
+            {theme === 'dark'
+              ? <Sun style={{ width: '15px', height: '15px' }} strokeWidth={1.5} />
+              : <Moon style={{ width: '15px', height: '15px' }} strokeWidth={1.5} />
+            }
+          </button>
 
           <a
             href={personalInfo.resume}
             target="_blank"
             rel="noopener noreferrer"
             style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '5px',
-              padding: '7px 16px',
-              borderRadius: '9999px',
-              border: '1px solid rgba(255,255,255,0.28)',
+              display: 'inline-flex', alignItems: 'center', gap: '5px',
+              padding: '7px 16px', borderRadius: '9999px',
+              border: '1px solid var(--nav-resume-border)',
               fontFamily: "'Inter', system-ui, sans-serif",
-              fontSize: '13px',
-              fontWeight: 500,
-              color: '#ffffff',
-              textDecoration: 'none',
-              marginRight: '4px',
+              fontSize: '13px', fontWeight: 500,
+              color: 'var(--nav-logo)',
+              textDecoration: 'none', marginRight: '4px',
               transition: 'background-color 0.2s, border-color 0.2s',
-              backgroundColor: 'rgba(255,255,255,0.06)',
+              backgroundColor: 'var(--nav-resume-bg)',
             }}
             onMouseEnter={e => {
-              e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.12)';
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)';
+              e.currentTarget.style.backgroundColor = 'var(--nav-resume-hover-bg)';
+              e.currentTarget.style.borderColor = 'var(--nav-resume-hover-border)';
             }}
             onMouseLeave={e => {
-              e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.06)';
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.28)';
+              e.currentTarget.style.backgroundColor = 'var(--nav-resume-bg)';
+              e.currentTarget.style.borderColor = 'var(--nav-resume-border)';
             }}
           >
             Resume
@@ -208,19 +215,15 @@ export default function Navbar() {
         </nav>
       </div>
 
+      {/* Mobile drawer */}
       <div
         className="lg:hidden"
         style={{
-          position: 'fixed',
-          inset: 0,
-          zIndex: 40,
+          position: 'fixed', inset: 0, zIndex: 40,
           backgroundColor: 'var(--bg-primary)',
-          display: 'flex',
-          flexDirection: 'column',
-          paddingTop: '88px',
-          paddingLeft: '24px',
-          paddingRight: '24px',
-          paddingBottom: '32px',
+          display: 'flex', flexDirection: 'column',
+          paddingTop: '88px', paddingLeft: '24px',
+          paddingRight: '24px', paddingBottom: '32px',
           transform: mobileMenuOpen ? 'translateX(0)' : 'translateX(100%)',
           transition: 'transform 0.3s ease',
           overflowY: 'auto',
@@ -233,11 +236,8 @@ export default function Navbar() {
               href={link.path}
               onClick={closeMobile}
               style={{
-                padding: '14px 4px',
-                fontSize: '22px',
-                fontWeight: 600,
-                color: 'var(--text-primary)',
-                textDecoration: 'none',
+                padding: '14px 4px', fontSize: '22px', fontWeight: 600,
+                color: 'var(--text-primary)', textDecoration: 'none',
                 fontFamily: "'Space Grotesk', sans-serif",
                 borderBottom: '1px solid var(--divider)',
               }}
@@ -254,18 +254,13 @@ export default function Navbar() {
           onClick={closeMobile}
           style={{
             marginTop: '32px',
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '6px',
-            padding: '14px 24px',
-            borderRadius: '9999px',
+            display: 'inline-flex', alignItems: 'center',
+            justifyContent: 'center', gap: '6px',
+            padding: '14px 24px', borderRadius: '9999px',
             border: '1px solid var(--border)',
             fontFamily: "'Inter', system-ui, sans-serif",
-            fontSize: '15px',
-            fontWeight: 500,
-            color: 'var(--text-primary)',
-            textDecoration: 'none',
+            fontSize: '15px', fontWeight: 500,
+            color: 'var(--text-primary)', textDecoration: 'none',
           }}
         >
           Resume ↗
