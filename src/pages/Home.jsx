@@ -54,11 +54,12 @@ export default function Home() {
                 />
                 <span
                   style={{
-                    fontSize: '11px',
+                    fontSize: '13px',
                     letterSpacing: '0.12em',
                     textTransform: 'uppercase',
-                    fontFamily: "'JetBrains Mono', monospace",
-                    color: 'var(--text-muted)',
+                    fontFamily: "Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif",
+                    fontWeight: 'normal',
+                    color: 'var(--text-primary)',
                   }}
                 >
                   Data Science · ML · Engineering
@@ -68,8 +69,8 @@ export default function Home() {
               {/* Heading */}
               <h1
                 style={{
-                  fontFamily: "'Space Grotesk', sans-serif",
-                  fontWeight: 700,
+                  fontFamily: "Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif",
+                  fontWeight: 600,
                   fontSize: 'clamp(2.8rem, 6vw, 5rem)',
                   lineHeight: 1.05,
                   color: 'var(--text-primary)',
@@ -107,8 +108,8 @@ export default function Home() {
                     borderRadius: '9999px',
                     padding: '13px 28px',
                     fontSize: '14px',
-                    fontWeight: 600,
-                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontWeight: 'normal',
+                    fontFamily: "Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif",
                     backgroundColor: 'var(--accent)',
                     color: 'var(--accent-fg)',
                     textDecoration: 'none',
@@ -128,8 +129,8 @@ export default function Home() {
                     borderRadius: '9999px',
                     padding: '13px 28px',
                     fontSize: '14px',
-                    fontWeight: 600,
-                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontWeight: 'normal',
+                    fontFamily: "Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif",
                     backgroundColor: 'transparent',
                     color: 'var(--text-primary)',
                     textDecoration: 'none',

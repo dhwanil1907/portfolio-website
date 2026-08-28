@@ -12,26 +12,25 @@ const mono = (size = '12px', color = 'var(--text-muted)') => ({
 
 function BulletList({ items }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
       {items.map((text, i) => (
-        <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+        <div key={i} style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
           <span
             aria-hidden
             style={{
-              width: '6px',
-              height: '6px',
+              width: '5px',
+              height: '5px',
               borderRadius: '50%',
-              backgroundColor: 'var(--text-muted)',
+              backgroundColor: 'var(--accent)',
               flexShrink: 0,
-              marginTop: '9px',
+              marginTop: '10px',
             }}
           />
           <span style={{
-            fontSize: '14px',
-            lineHeight: 1.6,
+            fontSize: '15px',
+            lineHeight: 1.75,
             color: 'var(--text-primary)',
-            opacity: 0.92,
-            fontFamily: "'Inter', system-ui, sans-serif",
+            fontFamily: "Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif",
           }}>
             {text}
           </span>
@@ -74,21 +73,26 @@ function ExperienceJobEntry({ exp, index, isLast }) {
           }} />
 
           <div style={{ paddingRight: '12px' }}>
-            <div style={mono('12px', 'var(--text-muted)')}>{exp.date}</div>
+            <div style={{
+              fontFamily: "Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif",
+              fontSize: '15px',
+              color: 'var(--text-muted)',
+              lineHeight: 1.5,
+            }}>{exp.date}</div>
             <div style={{
               marginTop: '12px',
-              fontFamily: "'Inter', system-ui, sans-serif",
-              fontSize: '14px',
-              fontWeight: 600,
+              fontFamily: "Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif",
+              fontSize: '17px',
+              fontWeight: 700,
               color: 'var(--text-primary)',
-              lineHeight: 1.45,
+              lineHeight: 1.4,
             }}>
               {exp.company}
             </div>
             <div style={{
-              marginTop: '6px',
-              fontFamily: "'Inter', system-ui, sans-serif",
-              fontSize: '12px',
+              marginTop: '5px',
+              fontFamily: "Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif",
+              fontSize: '15px',
               fontWeight: 400,
               color: 'var(--text-muted)',
               lineHeight: 1.5,
@@ -100,22 +104,25 @@ function ExperienceJobEntry({ exp, index, isLast }) {
 
         {/* Right — content */}
         <div style={{ paddingBottom: isLast ? 0 : '48px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', flexWrap: 'wrap' }}>
             <h3 style={{
               margin: 0,
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: '20px',
-              fontWeight: 600,
+              fontFamily: "Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif",
+              fontSize: '22px',
+              fontWeight: 700,
               color: 'var(--text-primary)',
+              letterSpacing: '-0.01em',
             }}>
               {exp.role}
             </h3>
             <span style={{
-              ...mono('10px', 'var(--accent)'),
+              fontFamily: "Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif",
+              fontSize: '11px',
+              color: 'var(--accent)',
               border: '1px solid var(--accent-ring)',
               borderRadius: '9999px',
-              padding: '3px 10px',
-              letterSpacing: '0.08em',
+              padding: '3px 11px',
+              letterSpacing: '0.06em',
               textTransform: 'uppercase',
             }}>
               {exp.type}
@@ -140,10 +147,11 @@ function ExperienceJobEntry({ exp, index, isLast }) {
         </div>
         <h3 style={{
           margin: '8px 0 2px',
-          fontFamily: "'Space Grotesk', sans-serif",
-          fontSize: '18px',
-          fontWeight: 600,
+          fontFamily: "Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif",
+          fontSize: '20px',
+          fontWeight: 700,
           color: 'var(--text-primary)',
+          letterSpacing: '-0.01em',
         }}>
           {exp.role}
         </h3>

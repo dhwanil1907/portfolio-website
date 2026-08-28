@@ -149,6 +149,17 @@ export const projectsData = [
     gradient: 'from-amber-500 via-orange-500 to-red-500',
     github: 'https://github.com/dhwanil1907/sba-loan-approval-and-default-risk',
   },
+  {
+    title: 'Credit Risk Scorer',
+    subtitle: 'Production-Grade Credit Risk Assessment',
+    year: '2025',
+    impact: '0.778 ROC-AUC · 300K+ loan applications · SHAP explainability',
+    description: 'Production-grade credit risk assessment system trained on the Kaggle Home Credit Default Risk dataset. Combines XGBoost, Random Forest, and Logistic Regression with a two-layer scoring architecture — ML predictions layered with a business rules engine. Features per-applicant SHAP waterfall charts and an interactive Streamlit dashboard with real-time score updates.',
+    tech: ['Python', 'XGBoost', 'SHAP', 'Streamlit', 'Scikit-learn', 'Pytest'],
+    categories: ['Machine Learning', 'Data Science'],
+    gradient: 'from-sky-500 via-blue-500 to-indigo-600',
+    github: 'https://github.com/dhwanil1907/credit-risk-scorer',
+  },
 ];
 
 export const awardsData = [
@@ -194,10 +205,10 @@ export const certificationsData = [
 export const skillsData = [
   {
     category: 'Core Skills',
-    skills: ['Python', 'SQL', 'Machine Learning', 'Data Engineering', 'Statistical Modeling', 'Dashboard Design', 'API Development', 'React']
+    skills: ['Python', 'SQL', 'R', 'Machine Learning', 'Data Engineering', 'Statistical Modeling', 'Dashboard Design', 'API Development', 'React', 'TypeScript']
   },
   {
     category: 'Tools & Technologies',
-    skills: ['Scikit-learn', 'TensorFlow', 'PyTorch', 'Pandas', 'NumPy', 'Power BI', 'Tableau', 'Snowflake', 'AWS', 'FastAPI', 'Firebase', 'Git']
+    skills: ['Scikit-learn', 'XGBoost', 'TensorFlow', 'PyTorch', 'Pandas', 'NumPy', 'Streamlit', 'Power BI', 'Tableau', 'Snowflake', 'AWS', 'FastAPI', 'Next.js', 'Firebase', 'Git', 'Spark', 'Linux', 'Power Automate']
   }
 ];

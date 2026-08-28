@@ -17,13 +17,13 @@ export default function About() {
         <div className="w-full lg:w-[55%] shrink-0">
 
           {/* Heading */}
-          <h2 className="section-heading mb-3">Meet Dhwanil.</h2>
+          <h2 className="section-heading mb-3" style={{ fontFamily: "Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif", fontWeight: 700 }}>Meet Dhwanil.</h2>
 
           {/* Subtitle — broken up */}
           <p style={{
             fontSize: '15px',
             color: 'var(--accent)',
-            fontFamily: "'JetBrains Mono', monospace",
+            fontFamily: "Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif",
             letterSpacing: '0.02em',
             marginBottom: '28px',
           }}>
@@ -92,19 +92,19 @@ export default function About() {
                 <span style={{
                   width: '90px',
                   flexShrink: 0,
-                  fontSize: '10px',
+                  fontSize: '12px',
                   textTransform: 'uppercase',
                   letterSpacing: '0.12em',
-                  color: 'var(--text-muted)',
+                  color: 'var(--text-primary)',
                   fontFamily: "'JetBrains Mono', monospace",
                 }}>
                   {row.label}
                 </span>
                 <span style={{
-                  fontSize: '14px',
-                  fontWeight: 600,
-                  color: 'var(--text-primary)',
-                  fontFamily: "'Inter', system-ui, sans-serif",
+                  fontSize: '16px',
+                  fontWeight: 'normal',
+                  color: '#000000',
+                  fontFamily: "Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif",
                 }}>
                   {row.value}
                 </span>
