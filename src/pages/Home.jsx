@@ -7,7 +7,7 @@ export default function Home() {
 
   return (
     <div className="w-full relative">
-      {/* Sage glow — top right */}
+      {/* Ambient glow */}
       <div
         style={{
           position: 'absolute',
@@ -15,7 +15,7 @@ export default function Home() {
           right: '-5%',
           width: '600px',
           height: '600px',
-          background: 'radial-gradient(ellipse, rgba(134,239,172,0.07) 0%, transparent 65%)',
+          background: 'var(--glow-hero)',
           pointerEvents: 'none',
         }}
       />
@@ -26,12 +26,12 @@ export default function Home() {
       >
         <div
           ref={ref}
-          className={`w-full fade-up ${visible ? 'visible' : ''}`}
+          className="w-full"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-20 items-center">
 
             {/* Left — text */}
-            <div>
+            <div className={`hero-copy ${visible ? 'visible' : ''}`}>
               {/* Eyebrow pill */}
               <div
                 className="inline-flex items-center gap-2 mb-6 sm:mb-8"
@@ -39,15 +39,16 @@ export default function Home() {
                   border: '1px solid var(--border)',
                   borderRadius: '9999px',
                   padding: '6px 14px',
-                  backgroundColor: 'rgba(255,255,255,0.03)',
+                  backgroundColor: 'var(--surface-subtle)',
                 }}
               >
                 <span
+                  className="pulse-dot"
                   style={{
                     width: '6px',
                     height: '6px',
                     borderRadius: '50%',
-                    backgroundColor: 'var(--text-muted)',
+                    backgroundColor: 'var(--accent)',
                     display: 'inline-block',
                     flexShrink: 0,
                   }}
@@ -57,8 +58,8 @@ export default function Home() {
                     fontSize: '13px',
                     letterSpacing: '0.12em',
                     textTransform: 'uppercase',
-                    fontFamily: "Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif",
-                    fontWeight: 'normal',
+                    fontFamily: 'var(--font-mono)',
+                    fontWeight: 500,
                     color: 'var(--text-primary)',
                   }}
                 >
@@ -66,21 +67,46 @@ export default function Home() {
                 </span>
               </div>
 
-              {/* Heading */}
+              {/* Heading — word-level stagger */}
               <h1
                 style={{
-                  fontFamily: "Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif",
-                  fontWeight: 600,
-                  fontSize: 'clamp(2.8rem, 6vw, 5rem)',
-                  lineHeight: 1.05,
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 700,
+                  fontSize: 'clamp(3rem, 6.5vw, 6.5rem)',
+                  lineHeight: 1.0,
                   color: 'var(--text-primary)',
-                  letterSpacing: '-0.02em',
-                  marginBottom: '24px',
+                  letterSpacing: '-0.04em',
+                  marginBottom: '28px',
                 }}
               >
-                Building data<br />
-                systems that<br />
-                <span style={{ color: 'var(--accent)' }}>actually work.</span>
+                {['Building', 'data', 'systems', 'that'].map((word, i) => (
+                  <span
+                    key={word + i}
+                    style={{
+                      display: 'inline-block',
+                      marginRight: '0.28em',
+                      opacity: visible ? 1 : 0,
+                      transform: visible ? 'translateY(0)' : 'translateY(22px)',
+                      transition: `opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1)`,
+                      transitionDelay: `${180 + i * 55}ms`,
+                    }}
+                  >
+                    {word}
+                  </span>
+                ))}
+                <br />
+                <span
+                  style={{
+                    color: 'var(--accent)',
+                    display: 'inline-block',
+                    opacity: visible ? 1 : 0,
+                    transform: visible ? 'translateY(0)' : 'translateY(22px)',
+                    transition: 'opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1)',
+                    transitionDelay: '400ms',
+                  }}
+                >
+                  actually work.
+                </span>
               </h1>
 
               {/* Description */}
@@ -89,9 +115,9 @@ export default function Home() {
                   fontSize: '16px',
                   color: 'var(--text-muted)',
                   lineHeight: 1.75,
-                  maxWidth: '440px',
+                  maxWidth: '520px',
                   marginBottom: '40px',
-                  fontFamily: "'Inter', system-ui, sans-serif",
+                  fontFamily: 'var(--font-body)',
                 }}
               >
                 {personalInfo.description} Currently seeking internships &amp; full-time roles in data science and ML engineering.
@@ -108,8 +134,8 @@ export default function Home() {
                     borderRadius: '9999px',
                     padding: '13px 28px',
                     fontSize: '14px',
-                    fontWeight: 'normal',
-                    fontFamily: "Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif",
+                    fontWeight: 600,
+                    fontFamily: 'var(--font-body)',
                     backgroundColor: 'var(--accent)',
                     color: 'var(--accent-fg)',
                     textDecoration: 'none',
@@ -129,15 +155,15 @@ export default function Home() {
                     borderRadius: '9999px',
                     padding: '13px 28px',
                     fontSize: '14px',
-                    fontWeight: 'normal',
-                    fontFamily: "Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif",
+                    fontWeight: 600,
+                    fontFamily: 'var(--font-body)',
                     backgroundColor: 'transparent',
                     color: 'var(--text-primary)',
                     textDecoration: 'none',
                     border: '1px solid var(--border)',
                     transition: 'border-color 0.2s',
                   }}
-                  onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'}
+                  onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--surface-hover-border)'}
                   onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
                 >
                   See projects
@@ -146,16 +172,33 @@ export default function Home() {
             </div>
 
             {/* Right — headshot */}
-            <div className="hidden lg:flex items-center justify-center">
+            <div
+              className={`hidden lg:flex items-center justify-end fade-up ${
+                visible ? 'visible' : ''
+              }`}
+              style={{ transitionDelay: '180ms' }}
+            >
               <div style={{ position: 'relative' }}>
                 {/* Soft glow behind photo */}
                 <div style={{
                   position: 'absolute',
                   inset: '-24px',
                   borderRadius: '50%',
-                  background: 'radial-gradient(ellipse, rgba(134,239,172,0.12) 0%, transparent 70%)',
+                  background: 'var(--glow-photo)',
                   filter: 'blur(24px)',
                   zIndex: 0,
+                }} />
+                {/* Ghost offset border */}
+                <div style={{
+                  position: 'absolute',
+                  top: '10px',
+                  left: '10px',
+                  width: '340px',
+                  height: '400px',
+                  borderRadius: 'var(--radius-card)',
+                  border: '1px solid var(--accent-ring)',
+                  zIndex: 0,
+                  pointerEvents: 'none',
                 }} />
                 <img
                   src="/headshot.jpg"
@@ -167,7 +210,7 @@ export default function Home() {
                     height: '400px',
                     objectFit: 'cover',
                     objectPosition: 'center top',
-                    borderRadius: '24px',
+                    borderRadius: 'var(--radius-card)',
                     border: '1px solid var(--border)',
                     display: 'block',
                   }}

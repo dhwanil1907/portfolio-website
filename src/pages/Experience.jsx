@@ -3,7 +3,7 @@ import { experienceData, leadershipData } from '../data/portfolio';
 import useInView from '../hooks/useInView';
 
 const mono = (size = '12px', color = 'var(--text-muted)') => ({
-  fontFamily: "'JetBrains Mono', monospace",
+  fontFamily: 'var(--font-mono)',
   fontSize: size,
   color,
   lineHeight: 1.5,
@@ -30,7 +30,7 @@ function BulletList({ items }) {
             fontSize: '15px',
             lineHeight: 1.75,
             color: 'var(--text-primary)',
-            fontFamily: "Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif",
+            fontFamily: 'var(--font-body)',
           }}>
             {text}
           </span>
@@ -53,14 +53,18 @@ function ExperienceJobEntry({ exp, index, isLast }) {
       <div className="hidden md:grid" style={{ gridTemplateColumns: '180px 1fr', gap: '0 40px' }}>
         {/* Left — timeline column */}
         <div style={{ position: 'relative', paddingRight: '28px' }}>
-          <div style={{
-            position: 'absolute',
-            right: 0,
-            top: '10px',
-            bottom: isLast ? 'auto' : '-48px',
-            width: '1px',
-            backgroundColor: 'var(--border)',
-          }} />
+          <div
+            className={`timeline-line ${visible ? 'visible' : ''}`}
+            style={{
+              position: 'absolute',
+              right: 0,
+              top: '10px',
+              bottom: isLast ? 'auto' : '-48px',
+              width: '1px',
+              backgroundColor: 'var(--border)',
+              animationDelay: `${index * 0.15}s`,
+            }}
+          />
           <div style={{
             position: 'absolute',
             right: '-5px',
@@ -74,14 +78,14 @@ function ExperienceJobEntry({ exp, index, isLast }) {
 
           <div style={{ paddingRight: '12px' }}>
             <div style={{
-              fontFamily: "Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif",
+              fontFamily: 'var(--font-mono)',
               fontSize: '15px',
               color: 'var(--text-muted)',
               lineHeight: 1.5,
             }}>{exp.date}</div>
             <div style={{
               marginTop: '12px',
-              fontFamily: "Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif",
+              fontFamily: 'var(--font-display)',
               fontSize: '17px',
               fontWeight: 700,
               color: 'var(--text-primary)',
@@ -91,7 +95,7 @@ function ExperienceJobEntry({ exp, index, isLast }) {
             </div>
             <div style={{
               marginTop: '5px',
-              fontFamily: "Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif",
+              fontFamily: 'var(--font-body)',
               fontSize: '15px',
               fontWeight: 400,
               color: 'var(--text-muted)',
@@ -107,7 +111,7 @@ function ExperienceJobEntry({ exp, index, isLast }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', flexWrap: 'wrap' }}>
             <h3 style={{
               margin: 0,
-              fontFamily: "Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif",
+              fontFamily: 'var(--font-display)',
               fontSize: '22px',
               fontWeight: 700,
               color: 'var(--text-primary)',
@@ -116,7 +120,7 @@ function ExperienceJobEntry({ exp, index, isLast }) {
               {exp.role}
             </h3>
             <span style={{
-              fontFamily: "Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif",
+              fontFamily: 'var(--font-mono)',
               fontSize: '11px',
               color: 'var(--accent)',
               border: '1px solid var(--accent-ring)',
@@ -147,7 +151,7 @@ function ExperienceJobEntry({ exp, index, isLast }) {
         </div>
         <h3 style={{
           margin: '8px 0 2px',
-          fontFamily: "Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif",
+          fontFamily: 'var(--font-display)',
           fontSize: '20px',
           fontWeight: 700,
           color: 'var(--text-primary)',
@@ -157,7 +161,7 @@ function ExperienceJobEntry({ exp, index, isLast }) {
         </h3>
         <div style={{
           marginBottom: '14px',
-          fontFamily: "'Inter', system-ui, sans-serif",
+          fontFamily: 'var(--font-body)',
           fontSize: '13px',
           color: 'var(--text-muted)',
           lineHeight: 1.5,
@@ -187,7 +191,7 @@ export function LeadershipSection() {
         <h2 className="section-heading" style={{ margin: 0 }}>How I give back.</h2>
         <span
           style={{
-            fontFamily: "'JetBrains Mono', monospace",
+            fontFamily: 'var(--font-mono)',
             fontSize: '12px',
             letterSpacing: '0.12em',
             textTransform: 'uppercase',
@@ -210,7 +214,7 @@ export function LeadershipSection() {
               key={i}
               style={{
                 border: '1px solid var(--border)',
-                borderRadius: '16px',
+                borderRadius: 'var(--radius-card)',
                 overflow: 'hidden',
                 backgroundColor: 'var(--bg-card)',
                 display: 'flex',
@@ -227,7 +231,7 @@ export function LeadershipSection() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap', width: '100%' }}>
                   {isCurrent && (
                     <span style={{
-                      fontFamily: "'JetBrains Mono', monospace",
+                      fontFamily: 'var(--font-mono)',
                       fontSize: '11px',
                       fontWeight: 500,
                       color: 'var(--accent)',
@@ -244,7 +248,7 @@ export function LeadershipSection() {
                   <span
                     style={{
                       marginLeft: isCurrent ? 'auto' : 0,
-                      fontFamily: "'JetBrains Mono', monospace",
+                      fontFamily: 'var(--font-mono)',
                       fontSize: '13px',
                       fontWeight: 400,
                       color: 'var(--text-muted)',
@@ -256,7 +260,7 @@ export function LeadershipSection() {
                 </div>
 
                 <div style={{
-                  fontFamily: "'Space Grotesk', sans-serif",
+                  fontFamily: 'var(--font-display)',
                   fontSize: '22px',
                   fontWeight: 700,
                   color: 'var(--text-primary)',
@@ -270,7 +274,7 @@ export function LeadershipSection() {
                   flexWrap: 'wrap',
                   alignItems: 'center',
                   gap: '8px',
-                  fontFamily: "'Inter', system-ui, sans-serif",
+                  fontFamily: 'var(--font-body)',
                   fontSize: '14px',
                   lineHeight: 1.45,
                 }}>

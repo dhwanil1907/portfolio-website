@@ -3,7 +3,7 @@ import { awardsData, projectsData, leadershipData } from '../data/portfolio';
 import useInView from '../hooks/useInView';
 
 const mono = (size = '11px', color = 'var(--text-muted)') => ({
-  fontFamily: "'JetBrains Mono', monospace",
+  fontFamily: 'var(--font-mono)',
   fontSize: size,
   color,
 });
@@ -25,9 +25,9 @@ function AwardCard({ award, index }) {
     >
       <div style={{
         border: '1px solid var(--divider)',
-        borderRadius: '16px',
+        borderRadius: 'var(--radius-card)',
         overflow: 'hidden',
-        backgroundColor: 'rgba(255,255,255,0.02)',
+        backgroundColor: 'var(--surface-subtle)',
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
@@ -55,7 +55,7 @@ function AwardCard({ award, index }) {
           </div>
           <h3 style={{
             margin: 0,
-            fontFamily: "'Space Grotesk', sans-serif",
+            fontFamily: 'var(--font-display)',
             fontSize: '18px',
             fontWeight: 700,
             color: 'var(--text-primary)',
@@ -69,7 +69,7 @@ function AwardCard({ award, index }) {
         <div style={{ padding: '18px 24px 22px', flex: 1 }}>
           <p style={{
             margin: 0,
-            fontFamily: "'Inter', system-ui, sans-serif",
+            fontFamily: 'var(--font-body)',
             fontSize: '14px',
             lineHeight: 1.7,
             color: 'var(--text-muted)',
@@ -116,7 +116,7 @@ export default function Awards() {
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
           border: '1px solid var(--divider)',
-          borderRadius: '16px',
+          borderRadius: 'var(--radius-card)',
           overflow: 'hidden',
           marginBottom: '40px',
         }}
@@ -130,11 +130,11 @@ export default function Awards() {
               display: 'flex',
               flexDirection: 'column',
               gap: '6px',
-              backgroundColor: 'rgba(255,255,255,0.02)',
+              backgroundColor: 'var(--surface-subtle)',
             }}
           >
             <span style={{
-              fontFamily: "'Space Grotesk', sans-serif",
+              fontFamily: 'var(--font-display)',
               fontSize: '40px',
               fontWeight: 700,
               color: 'var(--accent)',
@@ -143,7 +143,7 @@ export default function Awards() {
               {s.value}
             </span>
             <span style={{
-              fontFamily: "'Inter', system-ui, sans-serif",
+              fontFamily: 'var(--font-body)',
               fontSize: '13px',
               color: 'var(--text-muted)',
             }}>

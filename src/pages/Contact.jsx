@@ -18,7 +18,11 @@ export default function Contact() {
         <h2 className="section-heading mb-6">Let&apos;s build something together.</h2>
         <p
           className="text-base mb-10"
-          style={{ color: 'var(--text-muted)', lineHeight: 1.75, fontFamily: "'Inter', system-ui, sans-serif" }}
+          style={{
+            color: 'var(--text-muted)',
+            lineHeight: 1.75,
+            fontFamily: 'var(--font-body)',
+          }}
         >
           Open to internships and full-time roles in data science, ML engineering, and data engineering.
         </p>
@@ -27,10 +31,10 @@ export default function Contact() {
             href={`mailto:${personalInfo.email}`}
             className="inline-flex items-center justify-center rounded-full px-8 py-3.5 text-sm font-semibold transition-opacity duration-200 hover:opacity-90"
             style={{
-              backgroundColor: '#818cf8',
-              color: '#0d0d0d',
+              backgroundColor: 'var(--accent)',
+              color: 'var(--accent-fg)',
               textDecoration: 'none',
-              fontFamily: "'Inter', system-ui, sans-serif",
+              fontFamily: 'var(--font-body)',
             }}
           >
             Email
@@ -41,10 +45,10 @@ export default function Contact() {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-full px-8 py-3.5 text-sm font-semibold border transition-colors duration-200"
             style={{
-              borderColor: '#2a2a2a',
+              borderColor: 'var(--border)',
               color: 'var(--text-primary)',
               textDecoration: 'none',
-              fontFamily: "'Inter', system-ui, sans-serif",
+              fontFamily: 'var(--font-body)',
               backgroundColor: 'transparent',
             }}
           >
@@ -53,7 +57,7 @@ export default function Contact() {
         </div>
         <p
           className="text-xs mt-10"
-          style={{ color: 'var(--text-muted)', fontFamily: "'JetBrains Mono', monospace" }}
+          style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}
         >
           {personalInfo.email} · Based in {personalInfo.education.location}
         </p>

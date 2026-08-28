@@ -18,7 +18,7 @@ export default function SkillsSection() {
       }}>
         <h2 className="section-heading" style={{ margin: 0 }}>What I work with.</h2>
         <span style={{
-          fontFamily: "'JetBrains Mono', monospace",
+          fontFamily: 'var(--font-mono)',
           fontSize: '11px',
           color: 'var(--text-muted)',
           letterSpacing: '0.08em',
@@ -34,14 +34,14 @@ export default function SkillsSection() {
           <div
             key={idx}
             style={{
-              backgroundColor: 'var(--bg-primary)',
+              backgroundColor: 'var(--bg-card)',
               padding: '32px',
             }}
           >
             {/* Category header */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
               <span style={{
-                fontFamily: "'JetBrains Mono', monospace",
+                fontFamily: 'var(--font-mono)',
                 fontSize: '10px',
                 color: 'var(--accent)',
                 opacity: 0.7,
@@ -49,7 +49,7 @@ export default function SkillsSection() {
                 {String(idx + 1).padStart(2, '0')}
               </span>
               <span style={{
-                fontFamily: "'JetBrains Mono', monospace",
+                fontFamily: 'var(--font-mono)',
                 fontSize: '10px',
                 textTransform: 'uppercase',
                 letterSpacing: '0.12em',
@@ -68,10 +68,10 @@ export default function SkillsSection() {
                     display: 'inline-flex',
                     alignItems: 'center',
                     padding: '8px 16px',
-                    borderRadius: '9999px',
+                    borderRadius: 'var(--radius-control)',
                     border: '1px solid var(--divider)',
-                    backgroundColor: 'rgba(255,255,255,0.03)',
-                    fontFamily: "'Inter', system-ui, sans-serif",
+                    backgroundColor: 'var(--surface-subtle)',
+                    fontFamily: 'var(--font-body)',
                     fontSize: '13px',
                     color: 'var(--text-primary)',
                     letterSpacing: '0.01em',
@@ -85,7 +85,7 @@ export default function SkillsSection() {
                   }}
                   onMouseLeave={e => {
                     e.currentTarget.style.borderColor = 'var(--divider)';
-                    e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.03)';
+                    e.currentTarget.style.backgroundColor = 'var(--surface-subtle)';
                     e.currentTarget.style.color = 'var(--text-primary)';
                   }}
                 >

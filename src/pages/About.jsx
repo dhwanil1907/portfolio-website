@@ -1,11 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import SkillsSection from '../components/SkillsSection';
-import { personalInfo, leadershipData } from '../data/portfolio';
+import {
+  personalInfo,
+  leadershipData,
+  projectsData,
+  awardsData,
+} from '../data/portfolio';
 import useInView from '../hooks/useInView';
+
+function useCountUp(target, isVisible, duration = 900) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!isVisible) return;
+    let start = 0;
+    const step = Math.max(1, Math.ceil(target / (duration / 16)));
+    const timer = setInterval(() => {
+      start = Math.min(start + step, target);
+      setCount(start);
+      if (start >= target) clearInterval(timer);
+    }, 16);
+    return () => clearInterval(timer);
+  }, [isVisible, target, duration]);
+  return count;
+}
 
 export default function About() {
   const [ref, visible] = useInView();
+  const [metricsRef, metricsVisible] = useInView();
   const primaryOrg = leadershipData[0];
+
+  const projectCount = useCountUp(projectsData.length, metricsVisible);
+  const awardsCount = useCountUp(awardsData.length, metricsVisible);
+  const studentsCount = useCountUp(30, metricsVisible);
 
   return (
     <div className="py-16 sm:py-24 md:py-32 px-4 sm:px-8 max-w-[1200px] mx-auto">
@@ -13,17 +39,15 @@ export default function About() {
         ref={ref}
         className={`flex flex-col lg:flex-row gap-16 lg:gap-20 items-start fade-up ${visible ? 'visible' : ''}`}
       >
-        {/* Left — text */}
+        {/* Left — profile */}
         <div className="w-full lg:w-[55%] shrink-0">
-
-          {/* Heading */}
-          <h2 className="section-heading mb-3" style={{ fontFamily: "Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif", fontWeight: 700 }}>Meet Dhwanil.</h2>
+          <h2 className="section-heading mb-3">Meet Dhwanil.</h2>
 
           {/* Subtitle — broken up */}
           <p style={{
             fontSize: '15px',
             color: 'var(--accent)',
-            fontFamily: "Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif",
+            fontFamily: 'var(--font-mono)',
             letterSpacing: '0.02em',
             marginBottom: '28px',
           }}>
@@ -36,7 +60,7 @@ export default function About() {
               fontSize: '15px',
               color: 'var(--text-muted)',
               lineHeight: 1.8,
-              fontFamily: "'Inter', system-ui, sans-serif",
+              fontFamily: 'var(--font-body)',
               margin: 0,
             }}>
               I'm a data scientist and ML practitioner based in San Jose, studying at{' '}
@@ -48,7 +72,7 @@ export default function About() {
               fontSize: '15px',
               color: 'var(--text-muted)',
               lineHeight: 1.8,
-              fontFamily: "'Inter', system-ui, sans-serif",
+              fontFamily: 'var(--font-body)',
               margin: 0,
             }}>
               Outside of shipping projects, I lead{' '}
@@ -83,7 +107,7 @@ export default function About() {
                 <span style={{
                   fontSize: '10px',
                   color: 'var(--accent)',
-                  fontFamily: "'JetBrains Mono', monospace",
+                  fontFamily: 'var(--font-mono)',
                   flexShrink: 0,
                   opacity: 0.7,
                 }}>
@@ -96,15 +120,15 @@ export default function About() {
                   textTransform: 'uppercase',
                   letterSpacing: '0.12em',
                   color: 'var(--text-primary)',
-                  fontFamily: "'JetBrains Mono', monospace",
+                  fontFamily: 'var(--font-mono)',
                 }}>
                   {row.label}
                 </span>
                 <span style={{
                   fontSize: '16px',
-                  fontWeight: 'normal',
-                  color: '#000000',
-                  fontFamily: "Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif",
+                  fontWeight: 500,
+                  color: 'var(--text-primary)',
+                  fontFamily: 'var(--font-body)',
                 }}>
                   {row.value}
                 </span>
@@ -113,35 +137,34 @@ export default function About() {
           </div>
         </div>
 
-        {/* Right — photo */}
+        {/* Right — systems snapshot */}
         <div className="w-full lg:w-[45%]">
-          <div
-            style={{
-              width: '100%',
-              maxWidth: '420px',
-              aspectRatio: '3 / 4',
-              borderRadius: '20px',
-              overflow: 'hidden',
-              border: '1px solid var(--border)',
-              margin: '0 auto',
-            }}
-          >
-            <img
-              src="/headshot.jpg"
-              alt={personalInfo.name}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                objectPosition: 'center 15%',
-                display: 'block',
-              }}
-            />
+          <div className="data-system-card" ref={metricsRef}>
+            <p className="eyebrow mb-8">How I work</p>
+            <div className="data-flow" aria-label="Data to decision workflow">
+              <div className="data-flow__node">Data</div>
+              <div className="data-flow__node data-flow__node--active">Model</div>
+              <div className="data-flow__node">Decision</div>
+            </div>
+            <div className="metric-grid">
+              <div>
+                <strong>{projectCount}</strong>
+                <span>Projects</span>
+              </div>
+              <div>
+                <strong>{awardsCount}</strong>
+                <span>Awards</span>
+              </div>
+              <div>
+                <strong>{studentsCount}+</strong>
+                <span>Students</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="mt-32 md:mt-44 lg:mt-56">
+      <div className="mt-24 md:mt-32">
         <SkillsSection />
       </div>
     </div>

@@ -20,7 +20,7 @@ export default function Footer() {
           className="text-sm order-2 sm:order-1"
           style={{
             color: 'var(--text-subtle)',
-            fontFamily: "'Space Grotesk', sans-serif",
+            fontFamily: 'var(--font-display)',
             fontWeight: 600,
           }}
         >
@@ -28,7 +28,7 @@ export default function Footer() {
         </span>
         <span
           className="text-xs order-1 sm:order-2"
-          style={{ color: 'var(--text-muted)', fontFamily: "'Inter', system-ui, sans-serif" }}
+          style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-body)' }}
         >
           © 2026
         </span>

@@ -10,14 +10,14 @@ export default function Certifications() {
   return (
     <div
       className="py-16 md:py-24 px-4 sm:px-8 max-w-[1200px] mx-auto"
-      style={{ backgroundColor: 'var(--bg-primary)' }}
+      style={{}}
     >
       <div ref={ref} className={`mb-14 fade-up ${visible ? 'visible' : ''}`}>
         <p className="eyebrow mb-4">Certifications</p>
         <h2 className="section-heading mb-3">Credentials.</h2>
         <p
           className="m-0 max-w-lg text-sm leading-relaxed"
-          style={{ color: 'var(--text-muted)', fontFamily: "'Inter', system-ui, sans-serif" }}
+          style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-body)' }}
         >
           Verified programs and job simulations — {count} credential{count === 1 ? '' : 's'} on file.
         </p>
@@ -34,7 +34,7 @@ export default function Certifications() {
                 className="shrink-0 font-medium md:pt-0.5"
                 style={{
                   color: 'var(--accent)',
-                  fontFamily: "'JetBrains Mono', monospace",
+                  fontFamily: 'var(--font-mono)',
                   fontSize: '12px',
                   letterSpacing: '0.02em',
                 }}
@@ -45,7 +45,7 @@ export default function Certifications() {
               <div className="min-w-0 md:pt-0.5">
                 <span
                   className="block text-[15px] font-medium leading-snug"
-                  style={{ color: 'var(--text-primary)', fontFamily: "'Inter', system-ui, sans-serif" }}
+                  style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-body)' }}
                 >
                   {cert.title}
                 </span>
@@ -56,7 +56,7 @@ export default function Certifications() {
                         key={skill}
                         className="rounded-full px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wider"
                         style={{
-                          fontFamily: "'JetBrains Mono', monospace",
+                          fontFamily: 'var(--font-mono)',
                           color: 'var(--text-muted)',
                           border: '1px solid var(--border)',
                           backgroundColor: 'var(--bg-alt)',
@@ -74,7 +74,7 @@ export default function Certifications() {
                   className="shrink-0 tabular-nums md:text-right md:pt-0.5"
                   style={{
                     color: 'var(--text-muted)',
-                    fontFamily: "'JetBrains Mono', monospace",
+                    fontFamily: 'var(--font-mono)',
                     fontSize: '12px',
                   }}
                 >
@@ -86,7 +86,7 @@ export default function Certifications() {
                   rel="noopener noreferrer"
                   className="inline-flex shrink-0 items-center gap-1.5 rounded-md py-1 text-xs font-semibold text-[var(--accent)] transition-colors duration-200 hover:text-[var(--accent-hover)] md:justify-self-end md:pt-0.5"
                   style={{
-                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontFamily: 'var(--font-body)',
                     textDecoration: 'none',
                   }}
                   aria-label={`View credential: ${cert.title}`}

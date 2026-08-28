@@ -41,8 +41,8 @@ export default function Navbar() {
   };
 
   const logoStyle = {
-    fontFamily: "'Space Grotesk', sans-serif",
-    fontWeight: 800,
+    fontFamily: 'var(--font-display)',
+    fontWeight: 700,
     fontSize: '16px',
     color: 'var(--nav-logo)',
     textDecoration: 'none',
@@ -134,7 +134,7 @@ export default function Navbar() {
                     alignItems: 'center',
                     padding: '6px 14px',
                     borderRadius: '9999px',
-                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontFamily: 'var(--font-body)',
                     fontSize: '14px',
                     fontWeight: isActive ? 500 : 400,
                     color: isActive ? 'var(--nav-link-active)' : 'var(--nav-link)',
@@ -193,7 +193,7 @@ export default function Navbar() {
               display: 'inline-flex', alignItems: 'center', gap: '5px',
               padding: '7px 16px', borderRadius: '9999px',
               border: '1px solid var(--nav-resume-border)',
-              fontFamily: "'Inter', system-ui, sans-serif",
+              fontFamily: 'var(--font-body)',
               fontSize: '13px', fontWeight: 500,
               color: 'var(--nav-logo)',
               textDecoration: 'none', marginRight: '4px',
@@ -238,7 +238,7 @@ export default function Navbar() {
               style={{
                 padding: '14px 4px', fontSize: '22px', fontWeight: 600,
                 color: 'var(--text-primary)', textDecoration: 'none',
-                fontFamily: "'Space Grotesk', sans-serif",
+                fontFamily: 'var(--font-display)',
                 borderBottom: '1px solid var(--divider)',
               }}
             >
@@ -258,7 +258,7 @@ export default function Navbar() {
             justifyContent: 'center', gap: '6px',
             padding: '14px 24px', borderRadius: '9999px',
             border: '1px solid var(--border)',
-            fontFamily: "'Inter', system-ui, sans-serif",
+            fontFamily: 'var(--font-body)',
             fontSize: '15px', fontWeight: 500,
             color: 'var(--text-primary)', textDecoration: 'none',
           }}
