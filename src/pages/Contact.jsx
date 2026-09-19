@@ -34,9 +34,7 @@ export default function Contact() {
         <div className={`section-header fade-up ${visible ? 'visible' : ''}`} ref={ref}>
           <h2 className="section-title">Get In Touch</h2>
           <p className="section-subtitle">
-            I&apos;m always interested in new opportunities and collaborations.
-            Open to internships and full-time roles in data science, ML
-            engineering, and data engineering.
+            Whether you&apos;re hiring, have a project, or just want to talk data — I&apos;m here.
           </p>
         </div>
 
@@ -77,8 +75,7 @@ export default function Contact() {
                 Let&apos;s Connect
               </h3>
               <p style={{ margin: '0 0 12px', fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.65 }}>
-                Whether you have a project in mind or just want to chat about data
-                science, feel free to reach out.
+                I read every message and reply within 24 hours. No recruiters who ghost, I promise.
               </p>
               <ul className="m-0 pl-5 text-sm" style={{ color: 'var(--text-muted)' }}>
                 <li>Available for internships &amp; full-time roles</li>

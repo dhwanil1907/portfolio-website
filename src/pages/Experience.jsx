@@ -84,7 +84,9 @@ export default function Experience() {
       <section id="experience" className="section section--muted">
         <div className="page-container">
           <div className={`section-header fade-up ${visible ? 'visible' : ''}`} ref={ref}>
-            <h2 className="section-title">Experience &amp; Education</h2>
+            <h2 className="section-title">
+              Experience <span style={{ fontFamily: 'var(--font-body)', fontWeight: 400 }}>&amp;</span> Education
+            </h2>
             <p className="section-subtitle">
               My professional journey in data science — from internships and
               volunteer work to campus leadership and continuous learning.
@@ -146,7 +148,8 @@ export default function Experience() {
                   org={org.organization}
                   date={org.roles[0].date}
                   location={org.location}
-                  bullets={org.bullets}
+                  summary={org.description}
+                  bullets={org.bullets?.length ? org.bullets : undefined}
                   tags={['Leadership', 'Python', 'SQL', 'Workshops']}
                 />
               ))}
@@ -157,7 +160,9 @@ export default function Experience() {
       <section id="awards" className="section">
         <div className="page-container">
           <div className="section-header">
-            <h2 className="section-title">Awards &amp; Recognition</h2>
+            <h2 className="section-title">
+              Awards <span style={{ fontFamily: 'var(--font-body)', fontWeight: 400 }}>&amp;</span> Recognition
+            </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {awardsData.map(award => (

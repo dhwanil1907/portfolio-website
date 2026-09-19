@@ -1,5 +1,6 @@
 import React from 'react';
 import { Github, ExternalLink } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { MotionButton } from '../components/MotionButton';
 import { projectsData } from '../data/portfolio';
 import useInView from '../hooks/useInView';
@@ -17,8 +18,12 @@ function ProjectImage({ project }) {
   }
   return (
     <div
-      className="w-full h-full flex items-center justify-center text-sm"
-      style={{ backgroundColor: 'var(--surface-subtle)', color: 'var(--text-muted)' }}
+      className="w-full h-full flex items-center justify-center text-sm font-medium"
+      style={{
+        background: 'linear-gradient(135deg, var(--surface-subtle) 0%, var(--bg-alt) 100%)',
+        color: 'var(--accent)',
+        letterSpacing: '0.03em',
+      }}
     >
       {project.categories?.join(' · ')}
     </div>
@@ -27,6 +32,7 @@ function ProjectImage({ project }) {
 
 function ProjectCard({ project, index }) {
   const [ref, visible] = useInView();
+  const [hovered, setHovered] = React.useState(false);
   const metrics = project.impact.split('·').map(s => s.trim()).filter(Boolean);
   const visibleTech = project.tech.slice(0, 3);
   const extraTech = project.tech.length - visibleTech.length;
@@ -35,7 +41,15 @@ function ProjectCard({ project, index }) {
     <article
       ref={ref}
       className={`card overflow-hidden flex flex-col fade-up ${visible ? 'visible' : ''}`}
-      style={{ transitionDelay: `${index * 0.05}s` }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        transitionDelay: `${index * 0.05}s`,
+        transform: hovered ? 'translateY(-3px)' : 'translateY(0)',
+        boxShadow: hovered
+          ? '0 8px 24px rgba(0,0,0,0.13)'
+          : 'var(--shadow-card)',
+      }}
     >
       <div className="aspect-video w-full overflow-hidden" style={{ borderBottom: '1px solid var(--border)' }}>
         <ProjectImage project={project} />
@@ -43,7 +57,14 @@ function ProjectCard({ project, index }) {
       <div className="p-5 flex flex-col flex-1">
         <div className="flex flex-wrap items-center gap-2 mb-2">
           <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 600 }}>
-            {project.title}
+            <Link
+              to={`/projects/${project.slug}`}
+              style={{ color: 'inherit', textDecoration: 'none' }}
+              onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
+              onMouseLeave={e => e.currentTarget.style.color = 'inherit'}
+            >
+              {project.title}
+            </Link>
           </h3>
           {project.status && (
             <span
@@ -134,8 +155,7 @@ export default function Projects() {
         <div className={`section-header fade-up ${visible ? 'visible' : ''}`} ref={ref}>
           <h2 className="section-title">Featured Projects</h2>
           <p className="section-subtitle">
-            A selection of impactful data science projects showcasing machine
-            learning, analytics, and full-stack development.
+            Financial data, ML systems, and full-stack tools — built to solve real problems.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

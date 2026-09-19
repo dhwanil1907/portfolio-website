@@ -13,8 +13,8 @@ export default function Footer() {
               {personalInfo.name}
             </p>
             <p style={{ margin: '0 0 16px', fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.6 }}>
-              {personalInfo.tagline} building pipelines, models, and dashboards
-              for production.
+              I find what the numbers are hiding. Mostly financial ones — building
+              models, pipelines, and dashboards that mean something.
             </p>
             <div className="flex gap-4">
               <MotionIconLink href={personalInfo.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" style={{ color: 'var(--text-muted)' }}>
@@ -49,10 +49,15 @@ export default function Footer() {
 
           <div>
             <p style={{ margin: '0 0 12px', fontWeight: 600, fontSize: '14px' }}>
-              Focus Areas
+              Currently
             </p>
             <ul className="m-0 p-0 list-none flex flex-col gap-2">
-              {['Machine Learning', 'Data Engineering', 'Analytics & Dashboards', 'Full-Stack Development'].map(item => (
+              {[
+                'Leading Spartan Analytics @ SJSU',
+                'Building StockSage (ML + paper trading)',
+                'Open to internships & full-time roles',
+                'Obsessed with financial datasets',
+              ].map(item => (
                 <li key={item} style={{ fontSize: '14px', color: 'var(--text-muted)' }}>
                   {item}
                 </li>

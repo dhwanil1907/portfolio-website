@@ -1,64 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
 @import "tailwindcss";
 
 /* ── Figma-style design tokens (light default) ─────── */
 :root,
 [data-theme="light"] {
-  --bg-primary: #ffffff;
-  --bg-alt: #fafafa;
-  --bg-card: #ffffff;
-  --bg-card-hover: #f5f5f5;
-  --border: #e5e5e5;
-  --divider: #e5e5e5;
-  --text-primary: #171717;
-  --text-muted: #737373;
-  --text-subtle: #a3a3a3;
-  --accent: #171717;
-  --accent-hover: #404040;
-  --accent-fg: #ffffff;
-  --accent-ring: #d4d4d4;
-  --accent-glow: transparent;
-  --surface-subtle: #f5f5f5;
-  --font-display: 'Inter', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, sans-serif;
-  --font-mono: 'Inter', system-ui, sans-serif;
+  --bg-primary: #F8F5F0;
+  --bg-alt: #F2EDE6;
+  --bg-card: #FDFAF6;
+  --bg-card-hover: #F2EDE6;
+  --border: #E8E0D5;
+  --divider: #E8E0D5;
+  --text-primary: #1C1714;
+  --text-muted: #6B5E52;
+  --text-subtle: #9C8E84;
+  --accent: #C9892A;
+  --accent-hover: #A8711F;
+  --accent-fg: #FDFAF6;
+  --accent-ring: #E8D5B0;
+  --accent-glow: rgba(201, 137, 42, 0.15);
+  --surface-subtle: #EDE8E1;
+  --dot-color: rgba(108, 92, 72, 0.18);
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'DM Sans', system-ui, sans-serif;
   --radius-card: 12px;
   --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06);
-  --nav-bg: rgba(255, 255, 255, 0.95);
-  --nav-border: #e5e5e5;
-  --nav-link: #737373;
-  --nav-link-active: #171717;
-  --btn-primary-bg: #171717;
-  --btn-primary-fg: #ffffff;
-  --btn-outline-border: #e5e5e5;
-  --tag-bg: #f5f5f5;
-  --tag-border: #e5e5e5;
+  --nav-bg: rgba(248, 245, 240, 0.95);
+  --nav-border: #E8E0D5;
+  --nav-link: #6B5E52;
+  --nav-link-active: #1C1714;
+  --btn-primary-bg: #1C1714;
+  --btn-primary-fg: #FDFAF6;
+  --btn-outline-border: #E8E0D5;
+  --tag-bg: #EDE8E1;
+  --tag-border: #E8E0D5;
 }
 
 [data-theme="dark"] {
-  --bg-primary: #0a0a0a;
-  --bg-alt: #141414;
-  --bg-card: #171717;
-  --bg-card-hover: #1f1f1f;
-  --border: #262626;
-  --divider: #262626;
-  --text-primary: #fafafa;
-  --text-muted: #a3a3a3;
-  --text-subtle: #737373;
-  --accent: #fafafa;
-  --accent-hover: #e5e5e5;
-  --accent-fg: #171717;
-  --accent-ring: #404040;
-  --surface-subtle: #1f1f1f;
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --nav-bg: rgba(10, 10, 10, 0.95);
-  --nav-border: #262626;
-  --nav-link: #a3a3a3;
-  --nav-link-active: #fafafa;
-  --btn-primary-bg: #fafafa;
-  --btn-primary-fg: #171717;
-  --btn-outline-border: #404040;
-  --tag-bg: #262626;
-  --tag-border: #404040;
+  --bg-primary: #0D0B09;
+  --bg-alt: #141009;
+  --bg-card: #1A1410;
+  --bg-card-hover: #211A13;
+  --border: #2A2218;
+  --divider: #2A2218;
+  --text-primary: #F5F0E8;
+  --text-muted: #A89880;
+  --text-subtle: #6B5E52;
+  --accent: #C9892A;
+  --accent-hover: #D99B38;
+  --accent-fg: #0D0B09;
+  --accent-ring: #3D2E1A;
+  --accent-glow: rgba(201, 137, 42, 0.2);
+  --surface-subtle: #211A13;
+  --dot-color: rgba(201, 137, 42, 0.12);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.25);
+  --nav-bg: rgba(13, 11, 9, 0.95);
+  --nav-border: #2A2218;
+  --nav-link: #A89880;
+  --nav-link-active: #F5F0E8;
+  --btn-primary-bg: #C9892A;
+  --btn-primary-fg: #0D0B09;
+  --btn-outline-border: #3D2E1A;
+  --tag-bg: #2A2218;
+  --tag-border: #3D2E1A;
 }
 
 html {
@@ -103,10 +107,10 @@ body {
 .section-title {
   font-family: var(--font-display);
   font-size: clamp(1.75rem, 4vw, 2.25rem);
-  font-weight: 700;
+  font-weight: 400;
   color: var(--text-primary);
   margin: 0 0 12px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .section-subtitle {
@@ -121,6 +125,7 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .btn {
@@ -166,6 +171,8 @@ body {
   background: var(--tag-bg);
   border: 1px solid var(--tag-border);
   border-radius: 9999px;
+  transition: border-color 0.15s, color 0.15s;
+  cursor: default;
 }
 
 .fade-up {
@@ -250,4 +257,29 @@ body {
 ::-webkit-scrollbar-thumb {
   background: var(--border);
   border-radius: 4px;
+}
+
+.tag:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+h1, h2 {
+  font-family: var(--font-display);
+}
+
+@media (max-width: 768px) {
+  .hero-photo {
+    display: none;
+  }
+}
+
+.skill-item {
+  transition: color 0.15s, padding-left 0.15s, border-left 0.15s;
+}
+
+.skill-item:hover {
+  color: var(--text-primary) !important;
+  padding-left: 8px;
+  border-left: 2px solid var(--accent);
 }

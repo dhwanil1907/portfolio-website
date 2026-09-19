@@ -58,11 +58,14 @@ export default function Navbar() {
                 href={link.path}
                 style={{
                   padding: '8px 14px',
+                  paddingBottom: '6px',
                   fontSize: '14px',
                   fontWeight: active ? 500 : 400,
                   color: active ? 'var(--nav-link-active)' : 'var(--nav-link)',
                   textDecoration: 'none',
                   borderRadius: '6px',
+                  borderBottom: active ? '2px solid var(--accent)' : '2px solid transparent',
+                  transition: 'border-color 0.2s, color 0.2s',
                 }}
               >
                 {link.name}
