@@ -1,271 +1,138 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X, Download, Sun, Moon } from 'lucide-react';
+import { MotionButton, MotionButtonEl } from '../MotionButton';
 import { navLinks, personalInfo } from '../../data/portfolio';
 import useTheme from '../../hooks/useTheme';
 
 export default function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const { theme, toggle } = useTheme();
 
   useEffect(() => {
-    const sectionIds = navLinks.map(l => l.path.replace('#', ''));
-    const observers = [];
-    sectionIds.forEach(id => {
+    const ids = ['home', ...navLinks.map(l => l.path.replace('#', ''))];
+    const observers = ids.map(id => {
       const el = document.getElementById(id);
-      if (!el) return;
+      if (!el) return null;
       const obs = new IntersectionObserver(
         ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
         { rootMargin: '-40% 0px -55% 0px' }
       );
       obs.observe(el);
-      observers.push(obs);
+      return obs;
     });
-    return () => observers.forEach(o => o.disconnect());
+    return () => observers.forEach(o => o?.disconnect());
   }, []);
 
-  const closeMobile = () => setMobileMenuOpen(false);
-
-  const pillStyle = {
-    pointerEvents: 'auto',
-    alignItems: 'center',
-    gap: '0',
-    height: '52px',
-    padding: '0 8px',
-    borderRadius: '9999px',
-    border: '1px solid var(--nav-border)',
-    backgroundColor: 'var(--nav-bg)',
-    backdropFilter: 'blur(20px)',
-    WebkitBackdropFilter: 'blur(20px)',
-    boxShadow: 'var(--nav-shadow)',
-  };
-
-  const logoStyle = {
-    fontFamily: 'var(--font-display)',
-    fontWeight: 700,
-    fontSize: '16px',
-    color: 'var(--nav-logo)',
-    textDecoration: 'none',
-    letterSpacing: '-0.01em',
-    flexShrink: 0,
-    marginLeft: '8px',
-    marginRight: '12px',
-  };
-
-  const dividerStyle = {
-    width: '1px',
-    height: '18px',
-    backgroundColor: 'var(--nav-divider)',
-  };
-
   return (
-    <>
-      <div
-        style={{
-          position: 'fixed',
-          top: '20px',
-          left: 0,
-          right: 0,
-          zIndex: 50,
-          display: 'flex',
-          justifyContent: 'center',
-          padding: '0 16px',
-          pointerEvents: 'none',
-        }}
-      >
-        {/* Mobile pill */}
-        <nav className="flex lg:hidden" style={pillStyle}>
-          <a href="#home" style={logoStyle}>DR</a>
-          <div style={{ ...dividerStyle, marginRight: '8px' }} />
+    <header
+      style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 50,
+        backgroundColor: 'var(--nav-bg)',
+        borderBottom: '1px solid var(--nav-border)',
+        backdropFilter: 'blur(12px)',
+      }}
+    >
+      <div className="page-container flex items-center justify-between h-16">
+        <a
+          href="#home"
+          style={{
+            fontWeight: 700,
+            fontSize: '15px',
+            color: 'var(--text-primary)',
+            textDecoration: 'none',
+          }}
+        >
+          {personalInfo.name}
+        </a>
 
-          {/* Theme toggle — mobile */}
-          <button
-            type="button"
-            onClick={toggle}
-            aria-label="Toggle theme"
-            style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              width: '36px', height: '36px', marginRight: '4px',
-              background: 'none', border: 'none', cursor: 'pointer',
-              color: 'var(--nav-link)', padding: 0, borderRadius: '9999px',
-            }}
-          >
-            {theme === 'dark'
-              ? <Sun style={{ width: '16px', height: '16px' }} strokeWidth={1.5} />
-              : <Moon style={{ width: '16px', height: '16px' }} strokeWidth={1.5} />
-            }
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(o => !o)}
-            aria-label={mobileMenuOpen ? 'Close navigation' : 'Open navigation'}
-            style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              width: '40px', height: '40px', marginRight: '4px',
-              background: 'none', border: 'none', cursor: 'pointer',
-              color: 'var(--nav-link)', padding: 0, borderRadius: '9999px',
-            }}
-          >
-            {mobileMenuOpen
-              ? <X style={{ width: '20px', height: '20px' }} strokeWidth={1.5} />
-              : <Menu style={{ width: '20px', height: '20px' }} strokeWidth={1.5} />
-            }
-          </button>
+        <nav className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
+          {navLinks.map(link => {
+            const id = link.path.replace('#', '');
+            const active = activeSection === id;
+            return (
+              <a
+                key={link.name}
+                href={link.path}
+                style={{
+                  padding: '8px 14px',
+                  fontSize: '14px',
+                  fontWeight: active ? 500 : 400,
+                  color: active ? 'var(--nav-link-active)' : 'var(--nav-link)',
+                  textDecoration: 'none',
+                  borderRadius: '6px',
+                }}
+              >
+                {link.name}
+              </a>
+            );
+          })}
         </nav>
 
-        {/* Desktop pill */}
-        <nav className="hidden lg:flex" style={pillStyle}>
-          <a href="#home" style={logoStyle}>DR</a>
-
-          <div style={{ ...dividerStyle, marginRight: '12px' }} />
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
-            {navLinks.map(link => {
-              const id = link.path.replace('#', '');
-              const isActive = activeSection === id;
-              return (
-                <a
-                  key={link.name}
-                  href={link.path}
-                  style={{
-                    position: 'relative',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    padding: '6px 14px',
-                    borderRadius: '9999px',
-                    fontFamily: 'var(--font-body)',
-                    fontSize: '14px',
-                    fontWeight: isActive ? 500 : 400,
-                    color: isActive ? 'var(--nav-link-active)' : 'var(--nav-link)',
-                    textDecoration: 'none',
-                    backgroundColor: isActive ? 'var(--nav-link-active-bg)' : 'transparent',
-                    transition: 'color 0.2s, background-color 0.2s',
-                  }}
-                  onMouseEnter={e => {
-                    if (!isActive) {
-                      e.currentTarget.style.color = 'var(--nav-link-active)';
-                      e.currentTarget.style.backgroundColor = 'var(--nav-link-hover-bg)';
-                    }
-                  }}
-                  onMouseLeave={e => {
-                    if (!isActive) {
-                      e.currentTarget.style.color = 'var(--nav-link)';
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                    }
-                  }}
-                >
-                  {link.name}
-                </a>
-              );
-            })}
-          </div>
-
-          <div style={{ ...dividerStyle, marginLeft: '12px', marginRight: '12px' }} />
-
-          {/* Theme toggle — desktop */}
-          <button
+        <div className="flex items-center gap-2">
+          <MotionButtonEl
             type="button"
             onClick={toggle}
             aria-label="Toggle theme"
-            style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              width: '34px', height: '34px', marginRight: '6px',
-              background: 'none', border: 'none', cursor: 'pointer',
-              color: 'var(--nav-link)', padding: 0, borderRadius: '9999px',
-              transition: 'color 0.2s',
-              flexShrink: 0,
-            }}
-            onMouseEnter={e => { e.currentTarget.style.color = 'var(--nav-link-active)'; }}
-            onMouseLeave={e => { e.currentTarget.style.color = 'var(--nav-link)'; }}
+            className="hidden lg:flex items-center justify-center w-9 h-9 rounded-md border-0 bg-transparent cursor-pointer"
+            style={{ color: 'var(--text-muted)' }}
           >
-            {theme === 'dark'
-              ? <Sun style={{ width: '15px', height: '15px' }} strokeWidth={1.5} />
-              : <Moon style={{ width: '15px', height: '15px' }} strokeWidth={1.5} />
-            }
-          </button>
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          </MotionButtonEl>
 
-          <a
+          <MotionButton
             href={personalInfo.resume}
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: '5px',
-              padding: '7px 16px', borderRadius: '9999px',
-              border: '1px solid var(--nav-resume-border)',
-              fontFamily: 'var(--font-body)',
-              fontSize: '13px', fontWeight: 500,
-              color: 'var(--nav-logo)',
-              textDecoration: 'none', marginRight: '4px',
-              transition: 'background-color 0.2s, border-color 0.2s',
-              backgroundColor: 'var(--nav-resume-bg)',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.backgroundColor = 'var(--nav-resume-hover-bg)';
-              e.currentTarget.style.borderColor = 'var(--nav-resume-hover-border)';
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.backgroundColor = 'var(--nav-resume-bg)';
-              e.currentTarget.style.borderColor = 'var(--nav-resume-border)';
-            }}
+            className="btn btn-outline hidden lg:inline-flex"
+            style={{ padding: '8px 16px', fontSize: '13px' }}
           >
+            <Download size={14} />
             Resume
-            <span style={{ fontSize: '11px', opacity: 0.7 }}>↗</span>
-          </a>
-        </nav>
+          </MotionButton>
+
+          <MotionButtonEl
+            type="button"
+            className="lg:hidden flex items-center justify-center w-10 h-10 border-0 bg-transparent cursor-pointer"
+            style={{ color: 'var(--text-primary)' }}
+            onClick={() => setMobileOpen(o => !o)}
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+          >
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          </MotionButtonEl>
+        </div>
       </div>
 
-      {/* Mobile drawer */}
-      <div
-        className="lg:hidden"
-        style={{
-          position: 'fixed', inset: 0, zIndex: 40,
-          backgroundColor: 'var(--bg-primary)',
-          display: 'flex', flexDirection: 'column',
-          paddingTop: '88px', paddingLeft: '24px',
-          paddingRight: '24px', paddingBottom: '32px',
-          transform: mobileMenuOpen ? 'translateX(0)' : 'translateX(100%)',
-          transition: 'transform 0.3s ease',
-          overflowY: 'auto',
-        }}
-      >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+      {mobileOpen && (
+        <div
+          className="lg:hidden border-t px-6 py-4"
+          style={{ borderColor: 'var(--border)', backgroundColor: 'var(--bg-primary)' }}
+        >
           {navLinks.map(link => (
             <a
               key={link.name}
               href={link.path}
-              onClick={closeMobile}
-              style={{
-                padding: '14px 4px', fontSize: '22px', fontWeight: 600,
-                color: 'var(--text-primary)', textDecoration: 'none',
-                fontFamily: 'var(--font-display)',
-                borderBottom: '1px solid var(--divider)',
-              }}
+              onClick={() => setMobileOpen(false)}
+              className="block py-3 text-base font-medium no-underline"
+              style={{ color: 'var(--text-primary)', borderBottom: '1px solid var(--divider)' }}
             >
               {link.name}
             </a>
           ))}
+          <MotionButton
+            href={personalInfo.resume}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-outline mt-4 w-full"
+            onClick={() => setMobileOpen(false)}
+          >
+            <Download size={14} />
+            Resume
+          </MotionButton>
         </div>
-
-        <a
-          href={personalInfo.resume}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={closeMobile}
-          style={{
-            marginTop: '32px',
-            display: 'inline-flex', alignItems: 'center',
-            justifyContent: 'center', gap: '6px',
-            padding: '14px 24px', borderRadius: '9999px',
-            border: '1px solid var(--border)',
-            fontFamily: 'var(--font-body)',
-            fontSize: '15px', fontWeight: 500,
-            color: 'var(--text-primary)', textDecoration: 'none',
-          }}
-        >
-          Resume ↗
-        </a>
-      </div>
-    </>
+      )}
+    </header>
   );
 }

@@ -1,321 +1,224 @@
-import React from 'react';
-import { experienceData, leadershipData } from '../data/portfolio';
+import React, { useState } from 'react';
+import { Briefcase, GraduationCap, Users } from 'lucide-react';
+import { MotionButton, MotionButtonEl } from '../components/MotionButton';
+import {
+  experienceData,
+  leadershipData,
+  personalInfo,
+  awardsData,
+  certificationsData,
+} from '../data/portfolio';
 import useInView from '../hooks/useInView';
 
-const mono = (size = '12px', color = 'var(--text-muted)') => ({
-  fontFamily: 'var(--font-mono)',
-  fontSize: size,
-  color,
-  lineHeight: 1.5,
-  fontWeight: 400,
-});
+const tabs = [
+  { id: 'experience', label: 'Experience', icon: Briefcase },
+  { id: 'education', label: 'Education', icon: GraduationCap },
+  { id: 'leadership', label: 'Leadership', icon: Users },
+];
 
-function BulletList({ items }) {
+function ExperienceCard({ title, org, date, location, summary, bullets, tags }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-      {items.map((text, i) => (
-        <div key={i} style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
-          <span
-            aria-hidden
-            style={{
-              width: '5px',
-              height: '5px',
-              borderRadius: '50%',
-              backgroundColor: 'var(--accent)',
-              flexShrink: 0,
-              marginTop: '10px',
-            }}
-          />
-          <span style={{
-            fontSize: '15px',
-            lineHeight: 1.75,
-            color: 'var(--text-primary)',
-            fontFamily: 'var(--font-body)',
-          }}>
-            {text}
-          </span>
+    <div className="card p-6 mb-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+        <div>
+          <h3 style={{ margin: '0 0 4px', fontSize: '17px', fontWeight: 600 }}>
+            {title}
+          </h3>
+          <p style={{ margin: 0, fontSize: '14px', fontWeight: 500 }}>
+            {org}
+          </p>
         </div>
-      ))}
-    </div>
-  );
-}
-
-function ExperienceJobEntry({ exp, index, isLast }) {
-  const [ref, visible] = useInView();
-
-  return (
-    <div
-      ref={ref}
-      className={`fade-up ${visible ? 'visible' : ''}`}
-      style={{ transitionDelay: `${index * 0.1}s`, position: 'relative' }}
-    >
-      {/* Desktop */}
-      <div className="hidden md:grid" style={{ gridTemplateColumns: '180px 1fr', gap: '0 40px' }}>
-        {/* Left — timeline column */}
-        <div style={{ position: 'relative', paddingRight: '28px' }}>
-          <div
-            className={`timeline-line ${visible ? 'visible' : ''}`}
-            style={{
-              position: 'absolute',
-              right: 0,
-              top: '10px',
-              bottom: isLast ? 'auto' : '-48px',
-              width: '1px',
-              backgroundColor: 'var(--border)',
-              animationDelay: `${index * 0.15}s`,
-            }}
-          />
-          <div style={{
-            position: 'absolute',
-            right: '-5px',
-            top: '8px',
-            width: '10px',
-            height: '10px',
-            borderRadius: '50%',
-            backgroundColor: 'var(--accent)',
-            border: '2px solid var(--bg-primary)',
-          }} />
-
-          <div style={{ paddingRight: '12px' }}>
-            <div style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '15px',
-              color: 'var(--text-muted)',
-              lineHeight: 1.5,
-            }}>{exp.date}</div>
-            <div style={{
-              marginTop: '12px',
-              fontFamily: 'var(--font-display)',
-              fontSize: '17px',
-              fontWeight: 700,
-              color: 'var(--text-primary)',
-              lineHeight: 1.4,
-            }}>
-              {exp.company}
-            </div>
-            <div style={{
-              marginTop: '5px',
-              fontFamily: 'var(--font-body)',
-              fontSize: '15px',
-              fontWeight: 400,
-              color: 'var(--text-muted)',
-              lineHeight: 1.5,
-            }}>
-              {exp.location}
-            </div>
-          </div>
+        <div className="text-left sm:text-right shrink-0">
+          <p style={{ margin: '0 0 2px', fontSize: '13px', color: 'var(--text-muted)' }}>
+            {date}
+          </p>
+          <p style={{ margin: 0, fontSize: '13px', color: 'var(--text-muted)' }}>
+            {location}
+          </p>
         </div>
-
-        {/* Right — content */}
-        <div style={{ paddingBottom: isLast ? 0 : '48px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', flexWrap: 'wrap' }}>
-            <h3 style={{
-              margin: 0,
-              fontFamily: 'var(--font-display)',
-              fontSize: '22px',
-              fontWeight: 700,
-              color: 'var(--text-primary)',
-              letterSpacing: '-0.01em',
-            }}>
-              {exp.role}
-            </h3>
-            <span style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '11px',
-              color: 'var(--accent)',
-              border: '1px solid var(--accent-ring)',
-              borderRadius: '9999px',
-              padding: '3px 11px',
-              letterSpacing: '0.06em',
-              textTransform: 'uppercase',
-            }}>
-              {exp.type}
+      </div>
+      {summary && (
+        <p style={{ margin: '0 0 12px', fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.65 }}>
+          {summary}
+        </p>
+      )}
+      {bullets?.length > 0 && (
+        <>
+          <p style={{ margin: '0 0 8px', fontSize: '13px', fontWeight: 600 }}>
+            Key Achievements:
+          </p>
+          <ul className="m-0 mb-4 pl-5" style={{ fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.65 }}>
+            {bullets.map(b => (
+              <li key={b} className="mb-1">
+                {b}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+      {tags?.length > 0 && (
+        <div className="flex flex-wrap gap-1.5">
+          {tags.map(t => (
+            <span key={t} className="tag" style={{ fontSize: '11px', padding: '4px 10px' }}>
+              {t}
             </span>
-          </div>
-          <BulletList items={exp.bullets} />
+          ))}
         </div>
-      </div>
-
-      {/* Mobile */}
-      <div className="md:hidden" style={{ paddingBottom: isLast ? 0 : '40px', borderBottom: isLast ? 'none' : '1px solid var(--divider)', marginBottom: isLast ? 0 : '40px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px', flexWrap: 'wrap' }}>
-          <span style={mono('12px', 'var(--text-muted)')}>{exp.date}</span>
-          <span style={{
-            ...mono('10px', 'var(--accent)'),
-            border: '1px solid var(--accent-ring)',
-            borderRadius: '9999px',
-            padding: '2px 8px',
-          }}>
-            {exp.type}
-          </span>
-        </div>
-        <h3 style={{
-          margin: '8px 0 2px',
-          fontFamily: 'var(--font-display)',
-          fontSize: '20px',
-          fontWeight: 700,
-          color: 'var(--text-primary)',
-          letterSpacing: '-0.01em',
-        }}>
-          {exp.role}
-        </h3>
-        <div style={{
-          marginBottom: '14px',
-          fontFamily: 'var(--font-body)',
-          fontSize: '13px',
-          color: 'var(--text-muted)',
-          lineHeight: 1.5,
-        }}>
-          <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{exp.company}</span>
-          <span style={{ color: 'var(--text-muted)' }}> · {exp.location}</span>
-        </div>
-        <BulletList items={exp.bullets} />
-      </div>
+      )}
     </div>
   );
 }
 
 export function LeadershipSection() {
-  const [ref, visible] = useInView();
-
-  return (
-    <div className="py-16 md:py-24 px-4 sm:px-8 max-w-[1200px] mx-auto">
-      <div style={{
-        display: 'flex',
-        alignItems: 'baseline',
-        justifyContent: 'space-between',
-        borderBottom: '1px solid var(--divider)',
-        paddingBottom: '20px',
-        marginBottom: '48px',
-      }}>
-        <h2 className="section-heading" style={{ margin: 0 }}>How I give back.</h2>
-        <span
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '12px',
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
-            color: 'var(--text-muted)',
-          }}
-        >
-          Leadership
-        </span>
-      </div>
-
-      <div
-        ref={ref}
-        className={`grid grid-cols-1 md:grid-cols-2 gap-6 fade-up ${visible ? 'visible' : ''}`}
-      >
-        {leadershipData.map((org, i) => {
-          const current = org.roles[0];
-          const isCurrent = /present/i.test(current.date);
-          return (
-            <div
-              key={i}
-              style={{
-                border: '1px solid var(--border)',
-                borderRadius: 'var(--radius-card)',
-                overflow: 'hidden',
-                backgroundColor: 'var(--bg-card)',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <div style={{
-                padding: '24px 28px 20px',
-                borderBottom: '1px solid var(--divider)',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '12px',
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap', width: '100%' }}>
-                  {isCurrent && (
-                    <span style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '11px',
-                      fontWeight: 500,
-                      color: 'var(--accent)',
-                      border: '1px solid var(--accent-ring)',
-                      borderRadius: '9999px',
-                      padding: '4px 12px',
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                      whiteSpace: 'nowrap',
-                    }}>
-                      Current
-                    </span>
-                  )}
-                  <span
-                    style={{
-                      marginLeft: isCurrent ? 'auto' : 0,
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '13px',
-                      fontWeight: 400,
-                      color: 'var(--text-muted)',
-                      lineHeight: 1.4,
-                    }}
-                  >
-                    {current.date}
-                  </span>
-                </div>
-
-                <div style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: '22px',
-                  fontWeight: 700,
-                  color: 'var(--text-primary)',
-                  lineHeight: 1.2,
-                }}>
-                  {current.title}
-                </div>
-
-                <div style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  alignItems: 'center',
-                  gap: '8px',
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '14px',
-                  lineHeight: 1.45,
-                }}>
-                  <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
-                    {org.organization}
-                  </span>
-                  <span style={{ color: 'var(--text-muted)' }}>·</span>
-                  <span style={{ fontWeight: 400, color: 'var(--text-muted)' }}>
-                    {org.location}
-                  </span>
-                </div>
-              </div>
-
-              <div style={{ padding: '22px 28px 26px' }}>
-                <BulletList items={org.bullets} />
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
+  return null;
 }
 
 export default function Experience() {
+  const [activeTab, setActiveTab] = useState('experience');
+  const [ref, visible] = useInView();
+
+  const edu = personalInfo.education;
+
   return (
-    <div className="py-16 md:py-24 px-4 sm:px-8 max-w-[1200px] mx-auto">
-      <div style={{
-        display: 'flex',
-        alignItems: 'baseline',
-        justifyContent: 'space-between',
-        borderBottom: '1px solid var(--divider)',
-        paddingBottom: '20px',
-        marginBottom: '48px',
-      }}>
-        <h2 className="section-heading" style={{ margin: 0 }}>Where I&apos;ve worked.</h2>
-        <span style={mono('11px', 'var(--text-muted)')}>Experience</span>
-      </div>
-      {experienceData.map((exp, i) => (
-        <ExperienceJobEntry key={i} exp={exp} index={i} isLast={i === experienceData.length - 1} />
-      ))}
-    </div>
+    <>
+      <section id="experience" className="section section--muted">
+        <div className="page-container">
+          <div className={`section-header fade-up ${visible ? 'visible' : ''}`} ref={ref}>
+            <h2 className="section-title">Experience &amp; Education</h2>
+            <p className="section-subtitle">
+              My professional journey in data science — from internships and
+              volunteer work to campus leadership and continuous learning.
+            </p>
+          </div>
+
+          <div
+            className="flex justify-center mb-8 p-1 rounded-full mx-auto"
+            style={{ backgroundColor: 'var(--surface-subtle)', maxWidth: '420px' }}
+          >
+            {tabs.map(({ id, label, icon: Icon }) => (
+              <MotionButtonEl
+                key={id}
+                type="button"
+                onClick={() => setActiveTab(id)}
+                className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-full border-0 cursor-pointer text-sm font-medium transition-colors"
+                style={{
+                  backgroundColor: activeTab === id ? 'var(--bg-card)' : 'transparent',
+                  color: activeTab === id ? 'var(--text-primary)' : 'var(--text-muted)',
+                  boxShadow: activeTab === id ? 'var(--shadow-card)' : 'none',
+                }}
+              >
+                <Icon size={15} />
+                {label}
+              </MotionButtonEl>
+            ))}
+          </div>
+
+          <div className={`fade-up ${visible ? 'visible' : ''}`}>
+            {activeTab === 'experience' &&
+              experienceData.map(exp => (
+                <ExperienceCard
+                  key={exp.role + exp.company}
+                  title={exp.role}
+                  org={exp.company}
+                  date={exp.date}
+                  location={exp.location}
+                  bullets={exp.bullets}
+                  tags={[exp.type]}
+                />
+              ))}
+
+            {activeTab === 'education' && (
+              <ExperienceCard
+                title={edu.degree}
+                org={edu.university}
+                date={edu.graduation}
+                location={edu.location}
+                bullets={[]}
+                tags={['Machine Learning', 'Statistics', 'Data Engineering', 'Python']}
+              />
+            )}
+
+            {activeTab === 'leadership' &&
+              leadershipData.map(org => (
+                <ExperienceCard
+                  key={org.organization}
+                  title={org.roles[0].title}
+                  org={org.organization}
+                  date={org.roles[0].date}
+                  location={org.location}
+                  bullets={org.bullets}
+                  tags={['Leadership', 'Python', 'SQL', 'Workshops']}
+                />
+              ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="awards" className="section">
+        <div className="page-container">
+          <div className="section-header">
+            <h2 className="section-title">Awards &amp; Recognition</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {awardsData.map(award => (
+              <div key={award.title} className="card p-6">
+                <div className="flex justify-between gap-4 mb-2">
+                  <span className="tag" style={{ fontSize: '11px' }}>
+                    {award.issuer}
+                  </span>
+                  <span style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
+                    {award.date}
+                  </span>
+                </div>
+                <h3 style={{ margin: '0 0 10px', fontSize: '16px', fontWeight: 600 }}>
+                  {award.title}
+                </h3>
+                <p style={{ margin: 0, fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.65 }}>
+                  {award.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="certifications" className="section section--muted">
+        <div className="page-container">
+          <div className="section-header">
+            <h2 className="section-title">Certifications</h2>
+            <p className="section-subtitle">
+              Verified programs and job simulations — {certificationsData.length}{' '}
+              credentials on file.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3">
+            {certificationsData.map(cert => (
+              <div
+                key={cert.credentialId}
+                className="card p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+              >
+                <div>
+                  <p style={{ margin: '0 0 4px', fontSize: '12px', color: 'var(--text-muted)' }}>
+                    {cert.issuer} · {cert.date}
+                  </p>
+                  <p style={{ margin: 0, fontSize: '15px', fontWeight: 500 }}>
+                    {cert.title}
+                  </p>
+                </div>
+                <MotionButton
+                  href={cert.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-outline shrink-0"
+                  style={{ padding: '8px 16px', fontSize: '13px' }}
+                >
+                  View
+                </MotionButton>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

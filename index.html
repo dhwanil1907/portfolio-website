@@ -5,9 +5,9 @@
       (function () {
         try {
           var saved = localStorage.getItem('theme');
-          document.documentElement.dataset.theme = saved === 'light' ? 'light' : 'dark';
+          document.documentElement.dataset.theme = saved === 'dark' ? 'dark' : 'light';
         } catch (e) {
-          document.documentElement.dataset.theme = 'dark';
+          document.documentElement.dataset.theme = 'light';
         }
       })();
     </script>
@@ -15,20 +15,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dhwanil Ranpura — Data Engineer & ML Practitioner</title>
     <meta name="description" content="Dhwanil Ranpura — Data Engineer & ML Practitioner building pipelines, models, and dashboards for production." />
-    <!-- OG Meta Tags -->
     <meta property="og:title" content="Dhwanil Ranpura — Data Engineer & ML Practitioner" />
     <meta property="og:description" content="Pipelines, models, and dashboards built for production." />
-    <meta property="og:image" content="TODO: add og:image URL" />
     <meta property="og:type" content="website" />
-    <!-- Fontshare: Clash Display -->
-    <link rel="preconnect" href="https://api.fontshare.com" />
-    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet" />
-    <!-- Google Fonts: IBM Plex Mono + Source Sans 3 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <!-- SVG Favicon using initials DR -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230B0E17'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='13' fill='%2300C9A7'>DR</text></svg>" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23171717'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Inter,sans-serif' font-weight='700' font-size='13' fill='white'>DR</text></svg>" />
   </head>
   <body>
     <div id="root"></div>

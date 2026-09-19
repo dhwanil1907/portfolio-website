@@ -15,13 +15,11 @@ export const personalInfo = {
 };
 
 export const navLinks = [
-  { name: 'About',      path: '#about' },
+  { name: 'About', path: '#about' },
+  { name: 'Skills', path: '#skills' },
+  { name: 'Projects', path: '#work' },
   { name: 'Experience', path: '#experience' },
-  { name: 'Work',       path: '#work' },
-  { name: 'Leadership', path: '#leadership' },
-  { name: 'Awards',     path: '#awards' },
-  { name: 'Certificates', path: '#certifications' },
-  { name: 'Contact',    path: '#contact' },
+  { name: 'Contact', path: '#contact' },
 ];
 
 export const experienceData = [
@@ -91,7 +89,44 @@ export const projectsData = [
     gradient: 'from-emerald-500 via-teal-500 to-cyan-600',
     github: 'https://github.com/dhwanil1907/Verdict-HackHayward-2026',
     demo: 'https://verdict-hackhayward-2026.vercel.app/',
-    image: '/verdict.webp',
+    image: '/Verdict.png',
+  },
+  {
+    title: 'Financial Data Warehouse Pipeline',
+    subtitle: 'Lending Club ETL & Analytics',
+    year: '2026',
+    impact: '2.26M+ loans loaded · star schema · 28 pytest tests passing',
+    description: 'End-to-end Lending Club loan data pipeline with Python, DuckDB, and PySpark. Validates and loads ~2.26M loans into a dimensional warehouse (dim/fact tables), includes 13 SQL analytics queries, optional Spark → Parquet transforms, and a Streamlit dashboard for exploration.',
+    tech: ['Python', 'DuckDB', 'PySpark', 'Streamlit', 'Plotly', 'pandas', 'pytest'],
+    categories: ['Data Engineering', 'Data Science'],
+    gradient: 'from-slate-500 via-zinc-500 to-neutral-600',
+    github: 'https://github.com/dhwanil1907/financial-data-warehouse-pipeline',
+    image: '/Financial Data Warehouse Pipeline.png',
+  },
+  {
+    title: 'StockSage',
+    subtitle: 'Paper Trading Platform with ML Forecasts',
+    year: '2026',
+    status: 'In Progress',
+    impact: '$100K simulated portfolio · ARIMA + NN forecasts · strategy backtesting',
+    description: 'Full-stack paper trading platform with live market data, blended ARIMA and neural-network price forecasts (7–90 day horizon), and technical strategy backtesting. React + Express + SQLite for auth and portfolio state; FastAPI + scikit-learn for ML workloads — all orchestrated via Docker Compose.',
+    tech: ['React', 'TypeScript', 'FastAPI', 'scikit-learn', 'SQLite', 'Docker'],
+    categories: ['Full-Stack', 'AI/ML'],
+    gradient: 'from-green-500 via-emerald-500 to-teal-600',
+    github: 'https://github.com/dhwanil1907/stock-market-dashboard',
+    image: '/StockSage.png',
+  },
+  {
+    title: 'Financial Document RAG',
+    subtitle: 'Retrieval-Augmented Q&A over SEC Filings',
+    year: '2025',
+    impact: 'Metadata-filtered retrieval · cross-encoder rerank · cited Gemini answers',
+    description: 'RAG system over financial PDFs (10-K, 10-Q, earnings transcripts). Chunks embedded in ChromaDB with rich metadata, then retrieval narrows the corpus with filters before vector search, re-ranks with a cross-encoder, and generates cited answers via Gemini. Exposed through FastAPI and a Streamlit UI.',
+    tech: ['Python', 'FastAPI', 'Streamlit', 'ChromaDB', 'Gemini', 'LangChain'],
+    categories: ['AI/ML', 'Data Engineering'],
+    gradient: 'from-indigo-500 via-blue-500 to-cyan-600',
+    github: 'https://github.com/dhwanil1907/rag-finance',
+    image: '/Financial Document RAG.png',
   },
   {
     title: 'Breast Cancer Relapse Prediction',
@@ -103,7 +138,7 @@ export const projectsData = [
     categories: ['Machine Learning', 'Research'],
     gradient: 'from-rose-500 via-pink-500 to-fuchsia-600',
     github: 'https://github.com/dhwanil1907/CS-123A-Predicting-Breast-Cancer-Relapse-Using-Gene-Expression-and-Machine-Learning',
-    image: '/breastcancer .webp',
+    image: '/Breast Cancer Relapse Prediction.png',
   },
   {
     title: 'KPI Anomaly Detection System',
@@ -115,6 +150,7 @@ export const projectsData = [
     categories: ['Machine Learning', 'Data Science'],
     gradient: 'from-cyan-500 via-teal-500 to-emerald-600',
     github: 'https://github.com/dhwanil1907/kpi-anomaly-detector',
+    image: '/KPI Anomaly Detection System.png',
   },
   {
     title: 'Commercial Lease Market Forecasting',
@@ -125,6 +161,7 @@ export const projectsData = [
     tech: ['Python', 'R', 'ARIMA', 'Regression'],
     categories: ['Data Science'],
     gradient: 'from-blue-500 via-indigo-500 to-violet-600',
+    image: '/Commercial Lease Market Forecasting.png',
   },
   {
     title: 'SafeRoute',
@@ -136,7 +173,7 @@ export const projectsData = [
     categories: ['Full-Stack', 'Machine Learning'],
     gradient: 'from-violet-600 via-purple-500 to-indigo-600',
     github: 'https://github.com/dhwanil1907/SafeRoute_SJHacks-2025',
-    image: '/saferoute.webp',
+    image: '/SafeRoute.png',
   },
   {
     title: 'SBA Loan Default Prediction',
@@ -148,6 +185,7 @@ export const projectsData = [
     categories: ['Data Science', 'Machine Learning'],
     gradient: 'from-amber-500 via-orange-500 to-red-500',
     github: 'https://github.com/dhwanil1907/sba-loan-approval-and-default-risk',
+    image: '/SBA Loan Default Prediction.png',
   },
   {
     title: 'Credit Risk Scorer',
@@ -159,6 +197,7 @@ export const projectsData = [
     categories: ['Machine Learning', 'Data Science'],
     gradient: 'from-sky-500 via-blue-500 to-indigo-600',
     github: 'https://github.com/dhwanil1907/credit-risk-scorer',
+    image: '/Credit Risk Scorer.png',
   },
 ];
 
