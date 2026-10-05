@@ -56,7 +56,7 @@ function ProjectCard({ project, index }) {
       </div>
       <div className="p-5 flex flex-col flex-1">
         <div className="flex flex-wrap items-center gap-2 mb-2">
-          <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 600 }}>
+          <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 600, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
             <Link
               to={`/projects/${project.slug}`}
               style={{ color: 'inherit', textDecoration: 'none' }}
@@ -87,12 +87,13 @@ function ProjectCard({ project, index }) {
             fontSize: '13px',
             color: 'var(--text-muted)',
             lineHeight: 1.6,
-            flex: 1,
+            display: '-webkit-box',
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
           }}
         >
-          {project.description.length > 140
-            ? `${project.description.slice(0, 140)}…`
-            : project.description}
+          {project.description}
         </p>
         <div className="flex flex-wrap gap-1.5 mb-3">
           {visibleTech.map(t => (
@@ -113,8 +114,9 @@ function ProjectCard({ project, index }) {
             </li>
           ))}
         </ul>
+        <div style={{ flex: 1 }} />
         {(project.github || project.demo) && (
-          <div className="flex gap-2 mt-auto">
+          <div className="flex gap-2 mt-2">
             {project.github && (
               <MotionButton
                 href={project.github}
@@ -146,20 +148,63 @@ function ProjectCard({ project, index }) {
   );
 }
 
+const ALL_CATEGORIES = ['All', 'Data Science', 'Machine Learning', 'Data Engineering', 'Full-Stack', 'AI/ML'];
+
 export default function Projects() {
   const [ref, visible] = useInView();
+  const [activeCategory, setActiveCategory] = React.useState('All');
+
+  const featuredProjects = projectsData.slice(0, 3);
+  const moreProjects = projectsData.slice(3).filter(p =>
+    activeCategory === 'All' || p.categories?.includes(activeCategory)
+  );
 
   return (
     <section id="work" className="section">
       <div className="page-container">
         <div className={`section-header fade-up ${visible ? 'visible' : ''}`} ref={ref}>
-          <h2 className="section-title">Featured Projects</h2>
+          <h2 className="section-title">Projects</h2>
           <p className="section-subtitle">
             Financial data, ML systems, and full-stack tools — built to solve real problems.
           </p>
         </div>
+
+        {/* Featured row — top 3 always visible */}
+        <p style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)', marginBottom: '16px' }}>
+          Featured
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" style={{ marginBottom: '48px' }}>
+          {featuredProjects.map((project, idx) => (
+            <ProjectCard key={project.title} project={project} index={idx} />
+          ))}
+        </div>
+
+        {/* Divider */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+          <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} />
+          <span style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
+            More projects
+          </span>
+          <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} />
+        </div>
+
+        {/* Category tabs */}
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '24px' }}>
+          {ALL_CATEGORIES.map(cat => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={activeCategory === cat ? 'btn btn-primary' : 'btn btn-outline'}
+              style={{ padding: '6px 16px', fontSize: '12px', fontWeight: 500, borderRadius: '20px' }}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Filtered grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projectsData.map((project, idx) => (
+          {moreProjects.map((project, idx) => (
             <ProjectCard key={project.title} project={project} index={idx} />
           ))}
         </div>
