@@ -124,7 +124,32 @@ export default function ProjectDetail() {
               {project.description}
             </p>
 
-            {/* TODO next session: Problem, Approach, Results, Key Decisions sections */}
+            {project.results && (
+              <section style={{ marginBottom: '48px' }}>
+                <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: '1.5rem', margin: '0 0 16px' }}>
+                  Metrics &amp; Results
+                </h2>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '16px', marginBottom: '20px' }}>
+                  {project.results.metrics.map(metric => (
+                    <div key={metric.label} className="card p-5">
+                      <p style={{ margin: '0 0 6px', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '1.6rem', color: 'var(--accent)', lineHeight: 1.1, fontVariantNumeric: 'lining-nums tabular-nums', letterSpacing: '-0.01em' }}>
+                        {metric.value}
+                      </p>
+                      <p style={{ margin: 0, fontSize: '13px', color: 'var(--text-muted)', lineHeight: 1.5 }}>
+                        {metric.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                {project.results.note && (
+                  <p style={{ margin: 0, fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.7 }}>
+                    {project.results.note}
+                  </p>
+                )}
+              </section>
+            )}
+
+            {/* TODO next session: Problem, Approach, Key Decisions sections */}
           </div>
 
           {/* Sidebar */}
