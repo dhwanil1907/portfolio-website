@@ -54,7 +54,6 @@ export default function Footer() {
             <ul className="m-0 p-0 list-none flex flex-col gap-2">
               {[
                 'Leading Spartan Analytics @ SJSU',
-                'Building StockSage (ML + paper trading)',
                 'Open to internships & full-time roles',
                 'Obsessed with financial datasets',
               ].map(item => (
