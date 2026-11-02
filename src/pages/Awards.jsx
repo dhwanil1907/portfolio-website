@@ -3,7 +3,7 @@ import { awardsData, projectsData, leadershipData } from '../data/portfolio';
 import useInView from '../hooks/useInView';
 
 const mono = (size = '11px', color = 'var(--text-muted)') => ({
-  fontFamily: 'var(--font-mono)',
+  fontFamily: 'var(--font-body)',
   fontSize: size,
   color,
 });
@@ -42,7 +42,7 @@ function AwardCard({ award, index }) {
         }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
             <span style={{
-              ...mono('10px', 'var(--accent)'),
+              ...mono('10px', 'var(--accent-text)'),
               border: '1px solid var(--accent-ring)',
               borderRadius: '9999px',
               padding: '3px 10px',
@@ -51,12 +51,12 @@ function AwardCard({ award, index }) {
             }}>
               {award.issuer}
             </span>
-            <span style={mono('11px', 'var(--text-subtle)')}>{award.date}</span>
+            <span style={mono('11px', 'var(--text-muted)')}>{award.date}</span>
           </div>
           <h3 style={{
             margin: 0,
             fontFamily: 'var(--font-display)',
-            fontSize: '18px',
+            fontSize: 'var(--text-md)',
             fontWeight: 700,
             color: 'var(--text-primary)',
             lineHeight: 1.3,
@@ -70,7 +70,7 @@ function AwardCard({ award, index }) {
           <p style={{
             margin: 0,
             fontFamily: 'var(--font-body)',
-            fontSize: '14px',
+            fontSize: 'var(--text-sm)',
             lineHeight: 1.7,
             color: 'var(--text-muted)',
           }}>
@@ -125,7 +125,7 @@ export default function Awards() {
           <div
             key={s.label}
             style={{
-              padding: '28px 24px',
+              padding: 'clamp(16px, 4vw, 28px) clamp(12px, 3vw, 24px)',
               borderRight: i < stats.length - 1 ? '1px solid var(--divider)' : 'none',
               display: 'flex',
               flexDirection: 'column',
@@ -137,14 +137,14 @@ export default function Awards() {
               fontFamily: 'var(--font-display)',
               fontSize: '40px',
               fontWeight: 700,
-              color: 'var(--accent)',
+              color: 'var(--accent-text)',
               lineHeight: 1,
             }}>
               {s.value}
             </span>
             <span style={{
               fontFamily: 'var(--font-body)',
-              fontSize: '13px',
+              fontSize: 'var(--text-sm)',
               color: 'var(--text-muted)',
             }}>
               {s.label}

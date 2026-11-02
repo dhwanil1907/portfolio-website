@@ -1,5 +1,4 @@
-import { ChevronDown, Github, Linkedin, Mail } from 'lucide-react';
-import { MotionButton, MotionIconLink } from '../components/MotionButton';
+import { MotionButton } from '../components/MotionButton';
 import { personalInfo } from '../data/portfolio';
 
 export default function Home() {
@@ -9,26 +8,8 @@ export default function Home() {
       className="section flex flex-col min-h-[calc(100vh-64px)]"
       style={{ position: 'relative' }}
     >
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          backgroundImage: 'radial-gradient(circle, var(--dot-color, rgba(108,92,72,0.2)) 1.5px, transparent 1.5px)',
-          backgroundSize: '32px 32px',
-          pointerEvents: 'none',
-          zIndex: 0,
-        }}
-      />
-
-      <div
-        className="page-container flex flex-row items-center justify-between flex-1 gap-12"
-        style={{ position: 'relative', zIndex: 1 }}
-      >
-        <div style={{ maxWidth: '560px' }}>
+      <div className="page-container hero-grid" style={{ position: 'relative', zIndex: 1 }}>
+        <div style={{ maxWidth: '620px' }}>
         <h1
           className="hero-enter hero-enter-1"
           style={{
@@ -47,11 +28,11 @@ export default function Home() {
         <p
           className="hero-enter hero-enter-2"
           style={{
-            fontFamily: "'Spectral', Georgia, serif",
+            fontFamily: 'var(--font-display)',
             fontStyle: 'italic',
-            fontWeight: 500,
+            fontWeight: 400,
             fontSize: 'clamp(1.25rem, 3vw, 1.75rem)',
-            color: 'var(--accent)',
+            color: 'var(--accent-text)',
             margin: '0 0 24px',
           }}
         >
@@ -71,7 +52,7 @@ export default function Home() {
           {personalInfo.description}
         </p>
 
-        <div className="hero-enter hero-enter-4 flex flex-wrap items-center gap-3 mb-10">
+        <div className="hero-enter hero-enter-4 flex flex-wrap items-center gap-x-6 gap-y-4">
           <MotionButton href="#work" className="btn btn-primary">
             View My Work
           </MotionButton>
@@ -83,65 +64,26 @@ export default function Home() {
           >
             Download Resume
           </MotionButton>
+          <nav className="hero-links" aria-label="Profiles and contact">
+            <a href={personalInfo.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href={`mailto:${personalInfo.email}`}>Email</a>
+          </nav>
         </div>
 
-        <div className="hero-enter hero-enter-5 flex items-center gap-5">
-          <MotionIconLink
-            href={personalInfo.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            style={{ color: 'var(--text-muted)' }}
-          >
-            <Github size={20} strokeWidth={1.5} />
-          </MotionIconLink>
-          <MotionIconLink
-            href={personalInfo.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            style={{ color: 'var(--text-muted)' }}
-          >
-            <Linkedin size={20} strokeWidth={1.5} />
-          </MotionIconLink>
-          <MotionIconLink
-            href={`mailto:${personalInfo.email}`}
-            aria-label="Email"
-            style={{ color: 'var(--text-muted)' }}
-          >
-            <Mail size={20} strokeWidth={1.5} />
-          </MotionIconLink>
-        </div>
+        <ul className="hero-proof hero-enter hero-enter-5">
+          <li><strong>ASA DataFest 2025 Best Overall Winner</strong> · Commercial lease forecasting, 8% MAPE</li>
+          <li><strong>0.779 ROC-AUC on 307K loan applications</strong> · Home Credit Risk Scorer, served via FastAPI</li>
+          <li><strong>President, Spartan Analytics</strong> · San Jose State University</li>
+        </ul>
         </div>
 
-        <div
-          className="hero-enter hero-enter-3 shrink-0"
-          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-        >
-          <img
-            src="/Headshot.png"
-            alt="Dhwanil Ranpura"
-            style={{
-              width: '300px',
-              height: '300px',
-              borderRadius: '50%',
-              objectFit: 'cover',
-              objectPosition: 'center 25%',
-              border: '3px solid var(--accent-ring)',
-              boxShadow: '0 0 0 6px var(--bg-primary), 0 0 0 7px var(--border)',
-            }}
-          />
-        </div>
+        <img
+          src="/Headshot.png"
+          alt="Dhwanil Ranpura"
+          className="hero-portrait hero-enter hero-enter-3"
+        />
       </div>
-
-      <a
-        href="#about"
-        aria-label="Scroll to about"
-        className="hero-chevron hero-enter hero-enter-6 mt-12"
-        style={{ color: 'var(--text-subtle)', position: 'relative', zIndex: 1 }}
-      >
-        <ChevronDown size={24} />
-      </a>
     </section>
   );
 }

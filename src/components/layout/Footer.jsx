@@ -9,10 +9,10 @@ export default function Footer() {
       <div className="page-container py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
           <div>
-            <p style={{ margin: '0 0 8px', fontWeight: 700, fontSize: '15px' }}>
+            <p style={{ margin: '0 0 8px', fontWeight: 700, fontSize: 'var(--text-base)' }}>
               {personalInfo.name}
             </p>
-            <p style={{ margin: '0 0 16px', fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.6 }}>
+            <p style={{ margin: '0 0 16px', fontSize: 'var(--text-sm)', color: 'var(--text-muted)', lineHeight: 1.6 }}>
               I find what the numbers are hiding. Mostly financial ones — building
               models, pipelines, and dashboards that mean something.
             </p>
@@ -30,7 +30,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <p style={{ margin: '0 0 12px', fontWeight: 600, fontSize: '14px' }}>
+            <p style={{ margin: '0 0 12px', fontWeight: 600, fontSize: 'var(--text-sm)' }}>
               Quick Links
             </p>
             <ul className="m-0 p-0 list-none flex flex-col gap-2">
@@ -38,7 +38,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <a
                     href={link.path}
-                    style={{ fontSize: '14px', color: 'var(--text-muted)', textDecoration: 'none' }}
+                    style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)', textDecoration: 'none' }}
                   >
                     {link.name}
                   </a>
@@ -48,7 +48,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <p style={{ margin: '0 0 12px', fontWeight: 600, fontSize: '14px' }}>
+            <p style={{ margin: '0 0 12px', fontWeight: 600, fontSize: 'var(--text-sm)' }}>
               Currently
             </p>
             <ul className="m-0 p-0 list-none flex flex-col gap-2">
@@ -57,7 +57,7 @@ export default function Footer() {
                 'Open to internships & full-time roles',
                 'Obsessed with financial datasets',
               ].map(item => (
-                <li key={item} style={{ fontSize: '14px', color: 'var(--text-muted)' }}>
+                <li key={item} style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>
                   {item}
                 </li>
               ))}
@@ -69,7 +69,7 @@ export default function Footer() {
           className="text-center m-0 pt-6 text-sm"
           style={{ color: 'var(--text-muted)', borderTop: '1px solid var(--divider)' }}
         >
-          © 2026 {personalInfo.name}. All rights reserved.
+          © {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
         </p>
       </div>
     </footer>

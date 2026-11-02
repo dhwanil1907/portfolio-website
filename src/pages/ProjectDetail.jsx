@@ -29,10 +29,10 @@ export default function ProjectDetail() {
             display: 'inline-flex',
             alignItems: 'center',
             gap: '6px',
-            fontSize: '14px',
+            fontSize: 'var(--text-sm)',
             color: 'var(--text-muted)',
             textDecoration: 'none',
-            marginBottom: '48px',
+            marginBottom: 'clamp(32px, 5vw, 48px)',
           }}
         >
           <ArrowLeft size={15} />
@@ -40,16 +40,16 @@ export default function ProjectDetail() {
         </Link>
 
         {/* Header */}
-        <div style={{ maxWidth: '720px', marginBottom: '48px' }}>
+        <div style={{ maxWidth: '720px', marginBottom: 'clamp(32px, 5vw, 48px)' }}>
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '16px' }}>
-            {project.categories.map(cat => (
-              <span key={cat} className="tag" style={{ fontSize: '12px' }}>{cat}</span>
+            {(project.categories || []).map(cat => (
+              <span key={cat} className="tag" style={{ fontSize: 'var(--text-xs)' }}>{cat}</span>
             ))}
-            <span style={{ fontSize: '13px', color: 'var(--text-subtle)', alignSelf: 'center', marginLeft: '4px' }}>
+            <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-subtle)', alignSelf: 'center', marginLeft: '4px' }}>
               {project.year}
             </span>
             {project.status && (
-              <span className="tag" style={{ fontSize: '12px', color: 'var(--accent)', borderColor: 'var(--accent)' }}>
+              <span className="tag" style={{ fontSize: 'var(--text-xs)', color: 'var(--accent-text)', borderColor: 'var(--accent)' }}>
                 {project.status}
               </span>
             )}
@@ -66,33 +66,38 @@ export default function ProjectDetail() {
             {project.title}
           </h1>
 
-          <p style={{
-            fontSize: '1.1rem',
-            color: 'var(--accent)',
-            fontStyle: 'italic',
-            fontFamily: "'Spectral', Georgia, serif",
-            margin: '0 0 24px',
-          }}>
-            {project.subtitle}
-          </p>
+          {project.subtitle && (
+            <p style={{
+              fontSize: 'var(--text-md)',
+              color: 'var(--accent-text)',
+              fontStyle: 'italic',
+              fontFamily: 'var(--font-display)',
+              margin: '0 0 20px',
+            }}>
+              {project.subtitle}
+            </p>
+          )}
 
-          <p style={{ fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.7, margin: '0 0 32px' }}>
-            {project.impact}
-          </p>
+          {project.impact && (
+            <p style={{ fontSize: 'var(--text-base)', color: 'var(--text-muted)', lineHeight: 1.7, margin: '0 0 28px' }}>
+              {project.impact}
+            </p>
+          )}
 
-          {/* Action buttons */}
-          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-            {project.github && (
-              <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ gap: '8px' }}>
-                <Github size={16} /> View Code
-              </a>
-            )}
-            {project.demo && (
-              <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ gap: '8px' }}>
-                <ExternalLink size={16} /> Live Demo
-              </a>
-            )}
-          </div>
+          {(project.github || project.demo) && (
+            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+              {project.github && (
+                <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ gap: '8px' }}>
+                  <Github size={16} /> View Code
+                </a>
+              )}
+              {project.demo && (
+                <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ gap: '8px' }}>
+                  <ExternalLink size={16} /> Live Demo
+                </a>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Project image */}
@@ -102,82 +107,69 @@ export default function ProjectDetail() {
             borderRadius: 'var(--radius-card)',
             overflow: 'hidden',
             border: '1px solid var(--border)',
-            marginBottom: '64px',
+            marginBottom: 'clamp(40px, 6vw, 64px)',
           }}>
             <img
               src={project.image}
-              alt={project.title}
-              style={{ width: '100%', display: 'block', objectFit: 'cover' }}
+              alt={`${project.title} screenshot`}
+              width="1672"
+              height="941"
+              style={{ width: '100%', height: 'auto', display: 'block' }}
             />
           </div>
         )}
 
-        {/* Content grid — fill in next session */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: '48px', alignItems: 'start' }}>
-
-          {/* Main content — TO BE FILLED */}
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_320px] gap-10 lg:gap-12 items-start">
           <div>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: '1.5rem', margin: '0 0 16px' }}>
-              Overview
-            </h2>
-            <p style={{ color: 'var(--text-muted)', lineHeight: 1.75, margin: '0 0 48px' }}>
-              {project.description}
-            </p>
+            {project.description && (
+              <section className="mb-12 last:mb-0">
+                <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 'var(--text-xl)', margin: '0 0 16px' }}>
+                  Overview
+                </h2>
+                <p style={{ color: 'var(--text-muted)', lineHeight: 1.75, margin: 0, maxWidth: '68ch' }}>
+                  {project.description}
+                </p>
+              </section>
+            )}
 
-            {project.results && (
-              <section style={{ marginBottom: '48px' }}>
-                <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: '1.5rem', margin: '0 0 16px' }}>
+            {project.results?.metrics?.length > 0 && (
+              <section className="mb-12 last:mb-0">
+                <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 'var(--text-xl)', margin: '0 0 16px' }}>
                   Metrics &amp; Results
                 </h2>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '16px', marginBottom: '20px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 200px), 1fr))', gap: '16px', marginBottom: '20px' }}>
                   {project.results.metrics.map(metric => (
                     <div key={metric.label} className="card p-5">
-                      <p style={{ margin: '0 0 6px', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '1.6rem', color: 'var(--accent)', lineHeight: 1.1, fontVariantNumeric: 'lining-nums tabular-nums', letterSpacing: '-0.01em' }}>
+                      <p style={{ margin: '0 0 6px', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: 'var(--text-xl)', color: 'var(--accent-text)', lineHeight: 1.1, fontVariantNumeric: 'lining-nums tabular-nums', letterSpacing: '-0.01em' }}>
                         {metric.value}
                       </p>
-                      <p style={{ margin: 0, fontSize: '13px', color: 'var(--text-muted)', lineHeight: 1.5 }}>
+                      <p style={{ margin: 0, fontSize: 'var(--text-sm)', color: 'var(--text-muted)', lineHeight: 1.5 }}>
                         {metric.label}
                       </p>
                     </div>
                   ))}
                 </div>
                 {project.results.note && (
-                  <p style={{ margin: 0, fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.7 }}>
+                  <p style={{ margin: 0, fontSize: 'var(--text-sm)', color: 'var(--text-muted)', lineHeight: 1.7, maxWidth: '68ch' }}>
                     {project.results.note}
                   </p>
                 )}
               </section>
             )}
-
-            {/* TODO next session: Problem, Approach, Key Decisions sections */}
           </div>
 
-          {/* Sidebar */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-
-            {/* Tech stack */}
-            <div className="card p-5">
-              <p style={{ margin: '0 0 12px', fontSize: '12px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--accent)' }}>
+          {project.tech?.length > 0 && (
+            <aside className="card p-5">
+              <h2 style={{ margin: '0 0 12px', fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--text-primary)' }}>
                 Stack
-              </p>
+              </h2>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                 {project.tech.map(t => (
-                  <span key={t} className="tag" style={{ fontSize: '12px' }}>{t}</span>
+                  <span key={t} className="tag" style={{ fontSize: 'var(--text-xs)' }}>{t}</span>
                 ))}
               </div>
-            </div>
-
-            {/* Quick stats — TODO: add per-project stats next session */}
-            <div className="card p-5">
-              <p style={{ margin: '0 0 12px', fontSize: '12px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--accent)' }}>
-                Impact
-              </p>
-              <p style={{ margin: 0, fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.65 }}>
-                {project.impact}
-              </p>
-            </div>
-
-          </div>
+            </aside>
+          )}
         </div>
       </div>
     </main>

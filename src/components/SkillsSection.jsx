@@ -30,18 +30,19 @@ function StatItem({ value, label, visible }) {
   return (
     <div>
       <div
+        className="tabular-nums"
         style={{
           fontFamily: 'var(--font-display)',
           fontSize: '3.5rem',
           fontWeight: 400,
-          color: 'var(--accent)',
+          color: 'var(--accent-text)',
           lineHeight: 1,
           marginBottom: '8px',
         }}
       >
         {count}+
       </div>
-      <div style={{ fontSize: '14px', color: 'var(--text-muted)' }}>
+      <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>
         {label}
       </div>
     </div>
@@ -96,7 +97,7 @@ export default function SkillsSection() {
               <h3
                 style={{
                   margin: '0 0 16px',
-                  fontSize: '14px',
+                  fontSize: 'var(--text-sm)',
                   fontWeight: 600,
                 }}
               >
@@ -108,7 +109,7 @@ export default function SkillsSection() {
                     key={skill}
                     className="skill-item"
                     style={{
-                      fontSize: '13px',
+                      fontSize: 'var(--text-sm)',
                       color: 'var(--text-muted)',
                       paddingBottom: '8px',
                       borderBottom: '1px solid var(--divider)',

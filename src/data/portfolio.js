@@ -87,7 +87,6 @@ export const projectsData = [
     description: 'End-to-end credit default system on the Home Credit dataset (307,511 applications, 5 joined tables). Compares XGBoost, Random Forest and Logistic Regression with F1-tuned thresholds for the ~8% default rate (XGBoost: 0.779 ROC-AUC, catches ~41% of defaulters). Every prediction gets a SHAP waterfall, and a rules engine caps scores on high debt-to-income, as real lenders do, after the base model rated a 267% DTI borrower Low Risk. Served via Streamlit and FastAPI, with CI and a 30-test pytest suite.',
     tech: ['Python', 'XGBoost', 'SHAP', 'Scikit-learn', 'Streamlit', 'FastAPI', 'GitHub Actions', 'Pytest'],
     categories: ['Machine Learning', 'Data Science'],
-    gradient: 'from-sky-500 via-blue-500 to-indigo-600',
     results: {
       metrics: [
         { value: '0.7789', label: 'XGBoost ROC-AUC' },
@@ -113,7 +112,6 @@ export const projectsData = [
     description: 'Analyzed 194K+ commercial lease records to uncover macroeconomic drivers of rent trends. Built ARIMA and regression forecasting models achieving 8% MAPE. Earned Best Overall Winner at ASA DataFest 2025.',
     tech: ['Python', 'R', 'ARIMA', 'Regression'],
     categories: ['Data Science'],
-    gradient: 'from-blue-500 via-indigo-500 to-violet-600',
     image: '/Commercial Lease Market Forecasting.png',
   },
   {
@@ -127,7 +125,6 @@ export const projectsData = [
     description: 'End-to-end Lending Club pipeline: raw CSV → schema-validated extract → star schema (1 fact + 4 dimensions, surrogate keys, idempotent INSERT OR IGNORE loads) in DuckDB, plus an optional PySpark → Parquet path. 13 CTE and window-function SQL queries show default risk rising monotonically from 3.28% (grade A) to 37.48% (grade G). Streamlit dashboard with 4 Plotly charts and a 28-test pytest suite.',
     tech: ['Python', 'DuckDB', 'PySpark', 'Streamlit', 'Plotly', 'pandas', 'pytest'],
     categories: ['Data Engineering', 'Data Science'],
-    gradient: 'from-slate-500 via-zinc-500 to-neutral-600',
     results: {
       metrics: [
         { value: '2,260,668', label: 'Loans loaded into fact_loans' },
@@ -153,7 +150,6 @@ export const projectsData = [
     description: 'Team project (3) built at the YC hackathon Make Something Agents Want. Proxy is an MCP server that compares the receipts and Stripe charges an AI agent produces against what the human asked for, flags mismatches, and undoes the whole chain by negotiating refunds with merchant agents over Inkbox before the refund window closes. My part: the eval harness and scoreboard (scripted and live-agent layers) and the Northwind store-return scenario. On a live eval with Claude Haiku 4.5, Proxy caught 6 of 6 mistakes with 0 false alarms, versus 3 of 8 noticed by the agent checking its own work. The sample is small, merchants are mocks, and Stripe runs in test mode.',
     tech: ['TypeScript', 'MCP', 'Stripe', 'Inkbox', 'Claude'],
     categories: ['AI/ML', 'Software Engineering', 'Hackathon'],
-    gradient: 'from-fuchsia-600 via-purple-600 to-indigo-700',
     github: 'https://github.com/karan6705/proxy',
   },
   {
@@ -167,7 +163,6 @@ export const projectsData = [
     description: 'AI startup validation platform built at HackHayward 2026. Describe your idea, answer a quick profile survey — Verdict runs 6 parallel live web searches to return market sizing, competitor intel, a 4-dimension entry strategy score, and a Go/No-Go verdict with real failure patterns. Full PDF export and Dossier AI chatbot included.',
     tech: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'Perplexity Sonar Pro', 'Vercel'],
     categories: ['Full-Stack', 'AI/ML', 'Hackathon'],
-    gradient: 'from-emerald-500 via-teal-500 to-cyan-600',
     github: 'https://github.com/dhwanil1907/Verdict-HackHayward-2026',
     image: '/Verdict.png',
   },
@@ -182,7 +177,6 @@ export const projectsData = [
     description: 'Full-stack safety navigation app built at SJ Hacks 2025. Visualizes police-call crime data on an interactive Mapbox map, with a Flask/Firestore API for incident reporting, turn-by-turn route search with downloadable directions, and Firebase auth with saved routes. Placed 3rd out of 91 teams.',
     tech: ['React', 'Firebase', 'Mapbox GL', 'Flask', 'Python'],
     categories: ['Full-Stack', 'Machine Learning', 'Hackathon'],
-    gradient: 'from-violet-600 via-purple-500 to-indigo-600',
     github: 'https://github.com/dhwanil1907/SafeRoute_SJHacks-2025',
     image: '/SafeRoute.png',
   },
@@ -197,7 +191,6 @@ export const projectsData = [
     description: 'End-to-end e-commerce analytics pipeline — from 885K raw events to an interactive dashboard with funnel, cohort, retention, and revenue analysis. 4-table star schema across 407K users, 53K products, and 490K sessions.',
     tech: ['Python', 'PostgreSQL', 'Streamlit', 'Plotly'],
     categories: ['Data Engineering', 'Data Science'],
-    gradient: 'from-orange-500 via-amber-500 to-yellow-600',
     github: 'https://github.com/dhwanil1907/Product-Analytics-and-Experimentation',
     demo: 'https://ecommerce--analytics.streamlit.app/',
     image: '/Product Analytics pipeline.png',
@@ -213,7 +206,6 @@ export const projectsData = [
     description: 'Credit-risk model predicting SBA loan outcomes (Paid in Full vs Charged-Off) from 899K+ historical loans (1987–2014). Compared Logistic Regression, Random Forest, kNN, Decision Tree and a Keras neural network with class weighting for the imbalanced charge-off class. Random Forest performed best: ~93% accuracy, ~0.97 ROC-AUC, 0.84 precision and 0.77 recall on charged-offs. Built for the CSU Sacramento Business Analytics Competition 2024.',
     tech: ['Python', 'Scikit-learn', 'TensorFlow/Keras', 'Random Forest', 'Pandas'],
     categories: ['Data Science', 'Machine Learning'],
-    gradient: 'from-amber-500 via-orange-500 to-red-500',
     github: 'https://github.com/dhwanil1907/sba-loan-approval-and-default-risk',
     image: '/SBA Loan Default Prediction.png',
   },
@@ -228,7 +220,6 @@ export const projectsData = [
     description: 'RAG system over financial PDFs — 10-K filings, 10-Q reports, earnings transcripts. Chunks embedded in ChromaDB with rich metadata, metadata-filtered retrieval narrows the corpus before vector search, a cross-encoder reranks results, and Gemini generates cited answers. FastAPI + Streamlit frontend.',
     tech: ['Python', 'FastAPI', 'Streamlit', 'ChromaDB', 'Gemini', 'LangChain'],
     categories: ['AI/ML', 'Data Engineering'],
-    gradient: 'from-indigo-500 via-blue-500 to-cyan-600',
     github: 'https://github.com/dhwanil1907/rag-finance',
     image: '/Financial Document RAG.png',
   },
@@ -243,7 +234,6 @@ export const projectsData = [
     description: 'Unsupervised anomaly detection on 1,950 days of live AAPL data with no labels. Five detectors (Isolation Forest, One-Class SVM, LOF, Z-score, IQR) vote with configurable consensus, flagging 20 anomalous days (1.04%). Validated against 15 documented market events, including the COVID crash and the 2022 Fed hikes: 3 of the top 5 flags matched. Log-return features chosen via ADF stationarity tests, SHAP breakdown for every flagged day, and a Streamlit dashboard.',
     tech: ['Python', 'Scikit-learn', 'SHAP', 'statsmodels', 'yfinance', 'Streamlit', 'Plotly'],
     categories: ['Machine Learning', 'Data Science'],
-    gradient: 'from-cyan-500 via-teal-500 to-emerald-600',
     results: {
       metrics: [
         { value: '20 / 1,922', label: 'Consensus anomalies (1.04% of days)' },
@@ -269,7 +259,6 @@ export const projectsData = [
     description: 'End-to-end ML pipeline on the GSE2034 dataset (286 patients, ~22K genes) predicting breast cancer relapse from gene expression. Compared Logistic Regression, Random Forest, RBF SVM and Linear SVM on a 217/69 imbalanced cohort: Logistic Regression and Linear SVM performed best (Linear SVM: ~0.86 recall, ~0.70 AUC), while Random Forest and RBF SVM scored high accuracy but missed relapse entirely. Cross-model importance analysis surfaced 5 candidate biomarker genes. Built on a modular OOP preprocessing pipeline.',
     tech: ['Python', 'Bioinformatics', 'Scikit-learn', 'Pipelines'],
     categories: ['Machine Learning', 'Research'],
-    gradient: 'from-rose-500 via-pink-500 to-fuchsia-600',
     github: 'https://github.com/dhwanil1907/CS-123A-Predicting-Breast-Cancer-Relapse-Using-Gene-Expression-and-Machine-Learning',
     image: '/Breast Cancer Relapse Prediction.png',
   },
@@ -284,7 +273,6 @@ export const projectsData = [
     description: 'Native macOS menu bar app that shows how much usage is left on Claude and Cursor. The menu bar item displays the highest usage percentage across providers, with a per-provider breakdown and lifetime Claude Code token totals read locally. Built in SwiftUI with a pluggable provider architecture, in-app sign-in, and credentials stored in the macOS Keychain.',
     tech: ['Swift', 'SwiftUI', 'macOS', 'Keychain', 'Swift Package Manager'],
     categories: ['Software Engineering'],
-    gradient: 'from-slate-600 via-gray-600 to-zinc-700',
     github: 'https://github.com/dhwanil1907/headroom',
   },
   {
@@ -299,7 +287,6 @@ export const projectsData = [
     description: 'Walk-forward test of whether logistic regression and XGBoost can predict MSFT next-day direction after transaction costs. 12 leakage-checked features, 25 expanding-window folds (2013–2026), 5 bps costs, bootstrap confidence intervals, and shuffled-target and timing-shift null tests. Finding: no detectable edge. Pooled AUC is 0.506 / 0.516 with intervals that include 0.5, and neither model beats buy-and-hold on net Sharpe (0.93 / 0.84 vs 0.94), though both cut max drawdown (−31% / −33% vs −37%).',
     tech: ['Python', 'XGBoost', 'Scikit-learn', 'Pandas', 'yfinance', 'Jupyter'],
     categories: ['Machine Learning', 'Data Science'],
-    gradient: 'from-lime-500 via-green-500 to-emerald-600',
     github: 'https://github.com/dhwanil1907/stock-market-price-prediction',
   },
 ];

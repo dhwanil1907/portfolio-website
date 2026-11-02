@@ -21,33 +21,36 @@ function ExperienceCard({ title, org, date, location, summary, bullets, tags }) 
     <div className="card p-6 mb-4">
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
         <div>
-          <h3 style={{ margin: '0 0 4px', fontSize: '17px', fontWeight: 600 }}>
+          <h3 style={{ margin: '0 0 4px', fontSize: 'var(--text-md)', fontWeight: 600 }}>
             {title}
           </h3>
-          <p style={{ margin: 0, fontSize: '14px', fontWeight: 500 }}>
+          <p style={{ margin: 0, fontSize: 'var(--text-sm)', fontWeight: 500 }}>
             {org}
           </p>
         </div>
         <div className="text-left sm:text-right shrink-0">
-          <p style={{ margin: '0 0 2px', fontSize: '13px', color: 'var(--text-muted)' }}>
+          <p
+            className="tabular-nums"
+            style={{ margin: '0 0 2px', fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}
+          >
             {date}
           </p>
-          <p style={{ margin: 0, fontSize: '13px', color: 'var(--text-muted)' }}>
+          <p style={{ margin: 0, fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>
             {location}
           </p>
         </div>
       </div>
       {summary && (
-        <p style={{ margin: '0 0 12px', fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.65 }}>
+        <p style={{ margin: '0 0 12px', fontSize: 'var(--text-sm)', color: 'var(--text-muted)', lineHeight: 1.65 }}>
           {summary}
         </p>
       )}
       {bullets?.length > 0 && (
         <>
-          <p style={{ margin: '0 0 8px', fontSize: '13px', fontWeight: 600 }}>
+          <p style={{ margin: '0 0 8px', fontSize: 'var(--text-sm)', fontWeight: 600 }}>
             Key Achievements:
           </p>
-          <ul className="m-0 mb-4 pl-5" style={{ fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.65 }}>
+          <ul className="m-0 mb-4 pl-5" style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)', lineHeight: 1.65 }}>
             {bullets.map(b => (
               <li key={b} className="mb-1">
                 {b}
@@ -59,7 +62,7 @@ function ExperienceCard({ title, org, date, location, summary, bullets, tags }) 
       {tags?.length > 0 && (
         <div className="flex flex-wrap gap-1.5">
           {tags.map(t => (
-            <span key={t} className="tag" style={{ fontSize: '11px', padding: '4px 10px' }}>
+            <span key={t} className="tag" style={{ fontSize: 'var(--text-xs)', padding: '4px 10px' }}>
               {t}
             </span>
           ))}
@@ -102,14 +105,15 @@ export default function Experience() {
                 key={id}
                 type="button"
                 onClick={() => setActiveTab(id)}
-                className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-full border-0 cursor-pointer text-sm font-medium transition-colors"
+                aria-pressed={activeTab === id}
+                className="flex-1 flex items-center justify-center gap-2 py-2.5 px-3 sm:px-4 rounded-full border-0 cursor-pointer text-sm font-medium transition-colors"
                 style={{
                   backgroundColor: activeTab === id ? 'var(--bg-card)' : 'transparent',
                   color: activeTab === id ? 'var(--text-primary)' : 'var(--text-muted)',
                   boxShadow: activeTab === id ? 'var(--shadow-card)' : 'none',
                 }}
               >
-                <Icon size={15} />
+                <Icon size={15} className="hidden sm:block" />
                 {label}
               </MotionButtonEl>
             ))}
@@ -150,7 +154,11 @@ export default function Experience() {
                   location={org.location}
                   summary={org.description}
                   bullets={org.bullets?.length ? org.bullets : undefined}
-                  tags={['Leadership', 'Python', 'SQL', 'Workshops']}
+                  tags={
+                    org.organization === 'Spartan Analytics'
+                      ? ['Leadership', 'Python', 'SQL', 'Workshops']
+                      : ['Leadership']
+                  }
                 />
               ))}
           </div>
@@ -168,17 +176,17 @@ export default function Experience() {
             {awardsData.map(award => (
               <div key={award.title} className="card p-6">
                 <div className="flex justify-between gap-4 mb-2">
-                  <span className="tag" style={{ fontSize: '11px' }}>
+                  <span className="tag" style={{ fontSize: 'var(--text-xs)' }}>
                     {award.issuer}
                   </span>
-                  <span style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
+                  <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>
                     {award.date}
                   </span>
                 </div>
-                <h3 style={{ margin: '0 0 10px', fontSize: '16px', fontWeight: 600 }}>
+                <h3 style={{ margin: '0 0 10px', fontSize: 'var(--text-base)', fontWeight: 600 }}>
                   {award.title}
                 </h3>
-                <p style={{ margin: 0, fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.65 }}>
+                <p style={{ margin: 0, fontSize: 'var(--text-sm)', color: 'var(--text-muted)', lineHeight: 1.65 }}>
                   {award.description}
                 </p>
               </div>
@@ -203,10 +211,10 @@ export default function Experience() {
                 className="card p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
               >
                 <div>
-                  <p style={{ margin: '0 0 4px', fontSize: '12px', color: 'var(--text-muted)' }}>
+                  <p style={{ margin: '0 0 4px', fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>
                     {cert.issuer} · {cert.date}
                   </p>
-                  <p style={{ margin: 0, fontSize: '15px', fontWeight: 500 }}>
+                  <p style={{ margin: 0, fontSize: 'var(--text-base)', fontWeight: 500 }}>
                     {cert.title}
                   </p>
                 </div>
@@ -215,7 +223,8 @@ export default function Experience() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-outline shrink-0"
-                  style={{ padding: '8px 16px', fontSize: '13px' }}
+                  style={{ padding: '8px 16px', fontSize: 'var(--text-sm)' }}
+                  aria-label={`View credential: ${cert.title}`}
                 >
                   View
                 </MotionButton>

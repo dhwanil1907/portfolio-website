@@ -10,10 +10,8 @@ export default function Certifications() {
   return (
     <div
       className="py-16 md:py-24 px-4 sm:px-8 max-w-[1200px] mx-auto"
-      style={{}}
     >
       <div ref={ref} className={`mb-14 fade-up ${visible ? 'visible' : ''}`}>
-        <p className="eyebrow mb-4">Certifications</p>
         <h2 className="section-heading mb-3">Credentials.</h2>
         <p
           className="m-0 max-w-lg text-sm leading-relaxed"
@@ -27,15 +25,15 @@ export default function Certifications() {
         {certificationsData.map((cert, idx) => (
           <li
             key={`${cert.credentialId}-${idx}`}
-            className="-mx-2 rounded-sm border-b border-[var(--divider)] px-2 transition-[background-color,box-shadow] duration-200 last:border-b-0 md:hover:bg-[var(--bg-card)] md:hover:shadow-[inset_3px_0_0_var(--accent)]"
+            className="-mx-2 rounded-sm border-b border-[var(--divider)] px-2 transition-[background-color,box-shadow] duration-200 last:border-b-0 md:hover:bg-[var(--bg-card)]"
           >
             <div className="flex flex-col gap-4 py-6 pl-5 pr-4 sm:pl-6 sm:pr-5 md:grid md:grid-cols-[minmax(5.5rem,7rem)_minmax(0,1fr)_auto_auto] md:items-start md:gap-x-8 md:gap-y-3 md:py-6">
               <span
                 className="shrink-0 font-medium md:pt-0.5"
                 style={{
-                  color: 'var(--accent)',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '12px',
+                  color: 'var(--accent-text)',
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 'var(--text-xs)',
                   letterSpacing: '0.02em',
                 }}
               >
@@ -44,7 +42,7 @@ export default function Certifications() {
 
               <div className="min-w-0 md:pt-0.5">
                 <span
-                  className="block text-[15px] font-medium leading-snug"
+                  className="block text-base font-medium leading-snug"
                   style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-body)' }}
                 >
                   {cert.title}
@@ -54,9 +52,9 @@ export default function Certifications() {
                     {cert.skills.map(skill => (
                       <span
                         key={skill}
-                        className="rounded-full px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wider"
+                        className="rounded-full px-2.5 py-0.5 text-xs font-medium uppercase tracking-wider"
                         style={{
-                          fontFamily: 'var(--font-mono)',
+                          fontFamily: 'var(--font-body)',
                           color: 'var(--text-muted)',
                           border: '1px solid var(--border)',
                           backgroundColor: 'var(--bg-alt)',
@@ -74,8 +72,8 @@ export default function Certifications() {
                   className="shrink-0 tabular-nums md:text-right md:pt-0.5"
                   style={{
                     color: 'var(--text-muted)',
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '12px',
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 'var(--text-xs)',
                   }}
                 >
                   {cert.date}
@@ -84,7 +82,7 @@ export default function Certifications() {
                   href={cert.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex shrink-0 items-center gap-1.5 rounded-md py-1 text-xs font-semibold text-[var(--accent)] transition-colors duration-200 hover:text-[var(--accent-hover)] md:justify-self-end md:pt-0.5"
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-md py-1 text-xs font-semibold text-[var(--accent-text)] transition-colors duration-200 hover:text-[var(--text-primary)] md:justify-self-end md:pt-0.5"
                   style={{
                     fontFamily: 'var(--font-body)',
                     textDecoration: 'none',

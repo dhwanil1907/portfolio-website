@@ -1,29 +1,8 @@
 import React from 'react';
-import { Mail, MapPin, Github, Linkedin } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { MotionButton } from '../components/MotionButton';
 import { personalInfo } from '../data/portfolio';
 import useInView from '../hooks/useInView';
-
-const contactItems = [
-  {
-    icon: Mail,
-    label: 'Email',
-    value: personalInfo.email,
-    href: `mailto:${personalInfo.email}`,
-  },
-  {
-    icon: Linkedin,
-    label: 'LinkedIn',
-    value: 'linkedin.com/in/dhwanil-ranpura',
-    href: personalInfo.linkedin,
-  },
-  {
-    icon: MapPin,
-    label: 'Location',
-    value: personalInfo.education.location,
-    href: null,
-  },
-];
 
 export default function Contact() {
   const [ref, visible] = useInView();
@@ -36,77 +15,19 @@ export default function Contact() {
           <p className="section-subtitle">
             Whether you&apos;re hiring, have a project, or just want to talk data — I&apos;m here.
           </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-4xl mx-auto">
-          <div className="flex flex-col gap-3">
-            {contactItems.map(({ icon: Icon, label, value, href }) => (
-              <div key={label} className="card p-5 flex items-center gap-4">
-                <div
-                  className="shrink-0 w-10 h-10 rounded-lg flex items-center justify-center"
-                  style={{ backgroundColor: 'var(--surface-subtle)' }}
-                >
-                  <Icon size={18} />
-                </div>
-                <div>
-                  <p style={{ margin: '0 0 2px', fontSize: '13px', fontWeight: 600 }}>
-                    {label}
-                  </p>
-                  {href ? (
-                    <a
-                      href={href}
-                      target={href.startsWith('http') ? '_blank' : undefined}
-                      rel="noopener noreferrer"
-                      style={{ fontSize: '14px', color: 'var(--text-muted)', textDecoration: 'none' }}
-                    >
-                      {value}
-                    </a>
-                  ) : (
-                    <p style={{ margin: 0, fontSize: '14px', color: 'var(--text-muted)' }}>
-                      {value}
-                    </p>
-                  )}
-                </div>
-              </div>
-            ))}
-
-            <div className="mt-4">
-              <h3 style={{ margin: '0 0 8px', fontSize: '16px', fontWeight: 600 }}>
-                Let&apos;s Connect
-              </h3>
-              <p style={{ margin: '0 0 12px', fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.65 }}>
-                I read every message and reply within 24 hours. No recruiters who ghost, I promise.
-              </p>
-              <ul className="m-0 pl-5 text-sm" style={{ color: 'var(--text-muted)' }}>
-                <li>Available for internships &amp; full-time roles</li>
-                <li>Open to freelance &amp; consulting</li>
-                <li>Response within 24 hours</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="card p-8 flex flex-col justify-center text-center">
-            <h3 style={{ margin: '0 0 12px', fontSize: '18px', fontWeight: 600 }}>
-              Ready to work together?
-            </h3>
-            <p style={{ margin: '0 0 24px', fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.65 }}>
-              Send me an email or connect on LinkedIn — I&apos;d love to hear from you.
-            </p>
-            <div className="flex flex-col gap-3">
-              <MotionButton href={`mailto:${personalInfo.email}`} className="btn btn-primary">
-                <Mail size={16} />
-                Send Email
-              </MotionButton>
-              <MotionButton
-                href={personalInfo.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-outline"
-              >
-                <Github size={16} />
+          <div className="flex flex-col items-center gap-5 mt-8">
+            <MotionButton href={`mailto:${personalInfo.email}`} className="btn btn-primary">
+              <Mail size={16} />
+              Send Email
+            </MotionButton>
+            <p className="hero-links justify-center">
+              <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer">
+                LinkedIn
+              </a>
+              <a href={personalInfo.github} target="_blank" rel="noopener noreferrer">
                 GitHub
-              </MotionButton>
-            </div>
+              </a>
+            </p>
           </div>
         </div>
       </div>

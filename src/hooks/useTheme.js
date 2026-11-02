@@ -13,7 +13,9 @@ export default function useTheme() {
     document.documentElement.dataset.theme = theme;
     try {
       localStorage.setItem('theme', theme);
-    } catch {}
+    } catch (error) {
+      console.warn('Could not persist theme preference:', error);
+    }
   }, [theme]);
 
   const toggle = () => setTheme(t => t === 'dark' ? 'light' : 'dark');

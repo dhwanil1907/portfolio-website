@@ -40,7 +40,7 @@ export default function Navbar() {
           href="#home"
           style={{
             fontWeight: 700,
-            fontSize: '15px',
+            fontSize: 'var(--text-base)',
             color: 'var(--text-primary)',
             textDecoration: 'none',
           }}
@@ -48,7 +48,10 @@ export default function Navbar() {
           {personalInfo.name}
         </a>
 
-        <nav className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
+        <nav
+          aria-label="Primary"
+          className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2"
+        >
           {navLinks.map(link => {
             const id = link.path.replace('#', '');
             const active = activeSection === id;
@@ -59,7 +62,7 @@ export default function Navbar() {
                 style={{
                   padding: '8px 14px',
                   paddingBottom: '6px',
-                  fontSize: '14px',
+                  fontSize: 'var(--text-sm)',
                   fontWeight: active ? 500 : 400,
                   color: active ? 'var(--nav-link-active)' : 'var(--nav-link)',
                   textDecoration: 'none',
@@ -78,8 +81,8 @@ export default function Navbar() {
           <MotionButtonEl
             type="button"
             onClick={toggle}
-            aria-label="Toggle theme"
-            className="hidden lg:flex items-center justify-center w-9 h-9 rounded-md border-0 bg-transparent cursor-pointer"
+            aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+            className="flex items-center justify-center w-10 h-10 lg:w-9 lg:h-9 rounded-md border-0 bg-transparent cursor-pointer"
             style={{ color: 'var(--text-muted)' }}
           >
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
@@ -90,7 +93,7 @@ export default function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-outline hidden lg:inline-flex"
-            style={{ padding: '8px 16px', fontSize: '13px' }}
+            style={{ padding: '8px 16px', fontSize: 'var(--text-sm)' }}
           >
             <Download size={14} />
             Resume
@@ -102,6 +105,8 @@ export default function Navbar() {
             style={{ color: 'var(--text-primary)' }}
             onClick={() => setMobileOpen(o => !o)}
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </MotionButtonEl>
@@ -109,7 +114,9 @@ export default function Navbar() {
       </div>
 
       {mobileOpen && (
-        <div
+        <nav
+          id="mobile-menu"
+          aria-label="Mobile"
           className="lg:hidden border-t px-6 py-4"
           style={{ borderColor: 'var(--border)', backgroundColor: 'var(--bg-primary)' }}
         >
@@ -134,7 +141,7 @@ export default function Navbar() {
             <Download size={14} />
             Resume
           </MotionButton>
-        </div>
+        </nav>
       )}
     </header>
   );
