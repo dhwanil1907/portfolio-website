@@ -73,7 +73,7 @@ export default function Home() {
 
         <ul className="hero-proof hero-enter hero-enter-5">
           <li><strong>ASA DataFest 2025 Best Overall Winner</strong> · Commercial lease forecasting, 8% MAPE</li>
-          <li><strong>0.779 ROC-AUC on 307K loan applications</strong> · Home Credit Risk Scorer, served via FastAPI</li>
+          <li><strong>0.758 ROC-AUC on 307K loan applications</strong> · Home Credit Risk Scorer, served via FastAPI</li>
           <li><strong>President, Spartan Analytics</strong> · San Jose State University</li>
         </ul>
         </div>
